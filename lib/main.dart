@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../widgets/custom_error_widget.dart';
-import 'core/app_export.dart';
+import './controllers/api_config_controller.dart';
+import './controllers/audio_controller.dart';
+import './routes/app_routes.dart';
+import './theme/app_theme.dart';
 
 void main() async {
-  await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
-  ErrorWidget.builder = (FlutterErrorDetails details) {
-    return CustomErrorWidget(
-      errorDetails: details,
-    );
-  };
-  Future.wait([
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-  ]).then((value) {
-    runApp(MyApp());
-  });
+  await dotenv.load(fileName: ".env");
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -26,24 +19,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientation, screenType) {
-      return MaterialApp(
-        title: 'drivechat_ai',
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.light,
-        builder: (context, child) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(
-              textScaler: TextScaler.linear(1.0),
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => ApiConfigController()),
+            ChangeNotifierProxyProvider<ApiConfigController, AudioController>(
+              create: (context) => AudioController(
+                Provider.of<ApiConfigController>(context, listen: false),
+              ),
+              update: (context, apiConfigController, previous) =>
+                  previous ?? AudioController(apiConfigController),
             ),
-            child: child!,
-          );
-        },
-        debugShowCheckedModeBanner: false,
-        routes: AppRoutes.routes,
-        initialRoute: AppRoutes.initial,
-      );
-    });
+          ],
+          child: MaterialApp(
+            title: 'DriveChat AI',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.light,
+            initialRoute: AppRoutes.splashScreen,
+            routes: AppRoutes.routes,
+            debugShowCheckedModeBanner: false,
+          ),
+        );
+      },
+    );
   }
 }
