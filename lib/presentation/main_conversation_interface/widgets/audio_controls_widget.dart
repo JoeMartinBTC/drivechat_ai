@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../../../core/app_export.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
@@ -43,10 +41,9 @@ class AudioControlsWidget extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Theme.of(context)
-                    .colorScheme
-                    .primary
-                    .withValues(alpha: 0.1),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: CustomIconWidget(
@@ -67,10 +64,9 @@ class AudioControlsWidget extends StatelessWidget {
                   children: [
                     CustomIconWidget(
                       iconName: 'volume_down',
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withValues(alpha: 0.6),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
                       size: 16,
                     ),
                     Expanded(
@@ -81,18 +77,16 @@ class AudioControlsWidget extends StatelessWidget {
                         max: 1.0,
                         divisions: 10,
                         activeColor: Theme.of(context).colorScheme.primary,
-                        inactiveColor: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withValues(alpha: 0.3),
+                        inactiveColor: Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.3),
                       ),
                     ),
                     CustomIconWidget(
                       iconName: 'volume_up',
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withValues(alpha: 0.6),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
                       size: 16,
                     ),
                   ],
@@ -100,11 +94,10 @@ class AudioControlsWidget extends StatelessWidget {
                 Text(
                   isMuted ? 'Stumm' : '${(volume * 100).round()}%',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withValues(alpha: 0.7),
-                      ),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.7),
+                  ),
                 ),
               ],
             ),
@@ -118,19 +111,22 @@ class AudioControlsWidget extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: isMuted
-                    ? Theme.of(context).colorScheme.error.withValues(alpha: 0.1)
-                    : Theme.of(context)
-                        .colorScheme
-                        .primary
-                        .withValues(alpha: 0.1),
+                color:
+                    isMuted
+                        ? Theme.of(
+                          context,
+                        ).colorScheme.error.withValues(alpha: 0.1)
+                        : Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: CustomIconWidget(
                 iconName: isMuted ? 'volume_off' : 'volume_up',
-                color: isMuted
-                    ? Theme.of(context).colorScheme.error
-                    : Theme.of(context).colorScheme.primary,
+                color:
+                    isMuted
+                        ? Theme.of(context).colorScheme.error
+                        : Theme.of(context).colorScheme.primary,
                 size: 20,
               ),
             ),

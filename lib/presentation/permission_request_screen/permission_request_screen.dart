@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/custom_icon_widget.dart';
 import './widgets/permission_actions_widget.dart';
 import './widgets/permission_benefits_widget.dart';
 import './widgets/permission_illustration_widget.dart';
@@ -68,11 +69,11 @@ class _PermissionRequestScreenState extends State<PermissionRequestScreen> {
                   // Headline
                   Text(
                     'Mikrofon für Sprachlernen',
-                    style:
-                        AppTheme.lightTheme.textTheme.headlineMedium?.copyWith(
-                      color: AppTheme.lightTheme.colorScheme.onSurface,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: AppTheme.lightTheme.textTheme.headlineMedium
+                        ?.copyWith(
+                          color: AppTheme.lightTheme.colorScheme.onSurface,
+                          fontWeight: FontWeight.w700,
+                        ),
                     textAlign: TextAlign.center,
                   ),
 
@@ -80,7 +81,7 @@ class _PermissionRequestScreenState extends State<PermissionRequestScreen> {
 
                   // Description
                   Text(
-                    'Für die beste Lernerfahrung benötigt DriveChat AI Zugriff auf Ihr Mikrofon. Sprechen Sie natürlich mit Ihrem KI-Fahrlehrer und erhalten Sie sofortiges Feedback.',
+                    'Für die beste Lernerfahrung benötigt GetMyLappen Zugriff auf Ihr Mikrofon. Sprechen Sie natürlich mit Ihrem KI-Fahrlehrer und erhalten Sie sofortiges Feedback.',
                     style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
                       color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                       height: 1.5,
@@ -124,8 +125,9 @@ class _PermissionRequestScreenState extends State<PermissionRequestScreen> {
                   child: Container(
                     padding: EdgeInsets.all(2.w),
                     decoration: BoxDecoration(
-                      color: AppTheme.lightTheme.colorScheme.surface
-                          .withValues(alpha: 0.9),
+                      color: AppTheme.lightTheme.colorScheme.surface.withValues(
+                        alpha: 0.9,
+                      ),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(

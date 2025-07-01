@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/advanced_settings_widget.dart
 
@@ -76,10 +77,7 @@ class AdvancedSettingsWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.surfaceLight,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppTheme.borderLight,
-          width: 1,
-        ),
+        border: Border.all(color: AppTheme.borderLight, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,40 +124,38 @@ class AdvancedSettingsWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 3.w),
             decoration: BoxDecoration(
-              border: Border.all(
-                color: AppTheme.borderLight,
-                width: 1,
-              ),
+              border: Border.all(color: AppTheme.borderLight, width: 1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: DropdownButton<String>(
               value: selectedVoiceModel,
               isExpanded: true,
               underline: const SizedBox(),
-              items: voiceModels.map((model) {
-                return DropdownMenuItem<String>(
-                  value: model,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        _getVoiceModelDisplayName(model),
-                        style: AppTheme.lightTheme.textTheme.bodyMedium,
-                      ),
-                      if (model == 'eleven_multilingual_v2')
-                        Text(
-                          'Best for German driving education',
-                          style:
-                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                            color: AppTheme.successLight,
-                            fontSize: 10,
+              items:
+                  voiceModels.map((model) {
+                    return DropdownMenuItem<String>(
+                      value: model,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            _getVoiceModelDisplayName(model),
+                            style: AppTheme.lightTheme.textTheme.bodyMedium,
                           ),
-                        ),
-                    ],
-                  ),
-                );
-              }).toList(),
+                          if (model == 'eleven_multilingual_v2')
+                            Text(
+                              'Best for German driving education',
+                              style: AppTheme.lightTheme.textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: AppTheme.successLight,
+                                    fontSize: 10,
+                                  ),
+                            ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
               onChanged: (value) {
                 if (value != null) {
                   onVoiceModelChanged(value);
@@ -191,10 +187,7 @@ class AdvancedSettingsWidget extends StatelessWidget {
 
           Row(
             children: [
-              Text(
-                'Fast',
-                style: AppTheme.lightTheme.textTheme.bodySmall,
-              ),
+              Text('Fast', style: AppTheme.lightTheme.textTheme.bodySmall),
               Expanded(
                 child: Slider(
                   value: responseSpeed,
@@ -207,10 +200,7 @@ class AdvancedSettingsWidget extends StatelessWidget {
                   inactiveColor: AppTheme.primaryLight.withValues(alpha: 0.3),
                 ),
               ),
-              Text(
-                'Slow',
-                style: AppTheme.lightTheme.textTheme.bodySmall,
-              ),
+              Text('Slow', style: AppTheme.lightTheme.textTheme.bodySmall),
             ],
           ),
 
@@ -229,40 +219,38 @@ class AdvancedSettingsWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 3.w),
             decoration: BoxDecoration(
-              border: Border.all(
-                color: AppTheme.borderLight,
-                width: 1,
-              ),
+              border: Border.all(color: AppTheme.borderLight, width: 1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: DropdownButton<String>(
               value: audioQuality,
               isExpanded: true,
               underline: const SizedBox(),
-              items: audioQualities.map((quality) {
-                return DropdownMenuItem<String>(
-                  value: quality,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        _getAudioQualityDisplayName(quality),
-                        style: AppTheme.lightTheme.textTheme.bodyMedium,
-                      ),
-                      if (quality == 'high')
-                        Text(
-                          'Optimal balance of quality and speed',
-                          style:
-                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                            color: AppTheme.successLight,
-                            fontSize: 10,
+              items:
+                  audioQualities.map((quality) {
+                    return DropdownMenuItem<String>(
+                      value: quality,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            _getAudioQualityDisplayName(quality),
+                            style: AppTheme.lightTheme.textTheme.bodyMedium,
                           ),
-                        ),
-                    ],
-                  ),
-                );
-              }).toList(),
+                          if (quality == 'high')
+                            Text(
+                              'Optimal balance of quality and speed',
+                              style: AppTheme.lightTheme.textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: AppTheme.successLight,
+                                    fontSize: 10,
+                                  ),
+                            ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
               onChanged: (value) {
                 if (value != null) {
                   onAudioQualityChanged(value);
@@ -306,13 +294,17 @@ class AdvancedSettingsWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 1.h),
                 _buildPerformanceTip(
-                    'Use Multilingual V2 for best German pronunciation'),
+                  'Use Multilingual V2 for best German pronunciation',
+                ),
                 _buildPerformanceTip(
-                    'Normal speed (50%) provides optimal quality/speed balance'),
+                  'Normal speed (50%) provides optimal quality/speed balance',
+                ),
                 _buildPerformanceTip(
-                    'High quality recommended for driving education'),
+                  'High quality recommended for driving education',
+                ),
                 _buildPerformanceTip(
-                    'Consider your network speed when choosing quality'),
+                  'Consider your network speed when choosing quality',
+                ),
               ],
             ),
           ),

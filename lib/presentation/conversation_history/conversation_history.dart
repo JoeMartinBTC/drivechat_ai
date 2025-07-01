@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/custom_icon_widget.dart';
 import './widgets/conversation_session_card_widget.dart';
 import './widgets/empty_state_widget.dart';
 import './widgets/search_bar_widget.dart';
@@ -175,128 +176,138 @@ class _ConversationHistoryState extends State<ConversationHistory> {
   }
 
   void _showSessionDetails(String sessionId) {
-    final session =
-        _conversationSessions.firstWhere((s) => s["id"] == sessionId);
+    final session = _conversationSessions.firstWhere(
+      (s) => s["id"] == sessionId,
+    );
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        height: 90.h,
-        decoration: BoxDecoration(
-          color: AppTheme.lightTheme.scaffoldBackgroundColor,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: Column(
-          children: [
-            Container(
-              width: 40,
-              height: 4,
-              margin: const EdgeInsets.symmetric(vertical: 12),
-              decoration: BoxDecoration(
-                color: AppTheme.lightTheme.colorScheme.outline,
-                borderRadius: BorderRadius.circular(2),
+      builder:
+          (context) => Container(
+            height: 90.h,
+            decoration: BoxDecoration(
+              color: AppTheme.lightTheme.scaffoldBackgroundColor,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Unterhaltung Details',
-                      style: AppTheme.lightTheme.textTheme.headlineSmall,
-                    ),
+            child: Column(
+              children: [
+                Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: BoxDecoration(
+                    color: AppTheme.lightTheme.colorScheme.outline,
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: CustomIconWidget(
-                      iconName: 'close',
-                      color: AppTheme.lightTheme.colorScheme.onSurface,
-                      size: 24,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildDetailItem('Datum', _formatDate(session["date"])),
-                    const SizedBox(height: 16),
-                    _buildDetailItem('Dauer', session["duration"]),
-                    const SizedBox(height: 16),
-                    _buildDetailItem(
-                        'Themen', (session["topics"] as List).join(", ")),
-                    const SizedBox(height: 16),
-                    _buildDetailItem(
-                        'Status', _getStatusText(session["completionStatus"])),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Unterhaltung',
-                      style: AppTheme.lightTheme.textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 12),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: AppTheme.lightTheme.colorScheme.surface,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: AppTheme.lightTheme.colorScheme.outline,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Unterhaltung Details',
+                          style: AppTheme.lightTheme.textTheme.headlineSmall,
                         ),
                       ),
-                      child: Text(
-                        session["firstExchange"],
-                        style: AppTheme.lightTheme.textTheme.bodyMedium,
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: CustomIconWidget(
+                          iconName: 'close',
+                          color: AppTheme.lightTheme.colorScheme.onSurface,
+                          size: 24,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 24),
-                    Row(
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              // Resume conversation logic
-                            },
-                            icon: CustomIconWidget(
-                              iconName: 'play_arrow',
-                              color: AppTheme.lightTheme.colorScheme.onPrimary,
-                              size: 20,
+                        _buildDetailItem('Datum', _formatDate(session["date"])),
+                        const SizedBox(height: 16),
+                        _buildDetailItem('Dauer', session["duration"]),
+                        const SizedBox(height: 16),
+                        _buildDetailItem(
+                          'Themen',
+                          (session["topics"] as List).join(", "),
+                        ),
+                        const SizedBox(height: 16),
+                        _buildDetailItem(
+                          'Status',
+                          _getStatusText(session["completionStatus"]),
+                        ),
+                        const SizedBox(height: 24),
+                        Text(
+                          'Unterhaltung',
+                          style: AppTheme.lightTheme.textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 12),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: AppTheme.lightTheme.colorScheme.surface,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: AppTheme.lightTheme.colorScheme.outline,
                             ),
-                            label: const Text('Fortsetzen'),
+                          ),
+                          child: Text(
+                            session["firstExchange"],
+                            style: AppTheme.lightTheme.textTheme.bodyMedium,
                           ),
                         ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              // Export conversation logic
-                            },
-                            icon: CustomIconWidget(
-                              iconName: 'share',
-                              color: AppTheme.lightTheme.colorScheme.primary,
-                              size: 20,
+                        const SizedBox(height: 24),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ElevatedButton.icon(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  // Resume conversation logic
+                                },
+                                icon: CustomIconWidget(
+                                  iconName: 'play_arrow',
+                                  color:
+                                      AppTheme.lightTheme.colorScheme.onPrimary,
+                                  size: 20,
+                                ),
+                                label: const Text('Fortsetzen'),
+                              ),
                             ),
-                            label: const Text('Teilen'),
-                          ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: OutlinedButton.icon(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  // Export conversation logic
+                                },
+                                icon: CustomIconWidget(
+                                  iconName: 'share',
+                                  color:
+                                      AppTheme.lightTheme.colorScheme.primary,
+                                  size: 20,
+                                ),
+                                label: const Text('Teilen'),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 
@@ -311,10 +322,7 @@ class _ConversationHistoryState extends State<ConversationHistory> {
           ),
         ),
         const SizedBox(height: 4),
-        Text(
-          value,
-          style: AppTheme.lightTheme.textTheme.bodyMedium,
-        ),
+        Text(value, style: AppTheme.lightTheme.textTheme.bodyMedium),
       ],
     );
   }
@@ -337,37 +345,41 @@ class _ConversationHistoryState extends State<ConversationHistory> {
   void _bulkDelete() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Unterhaltungen löschen'),
-        content: Text(
-            'Möchten Sie ${_selectedSessions.length} Unterhaltung(en) wirklich löschen?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Abbrechen'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Unterhaltungen löschen'),
+            content: Text(
+              'Möchten Sie ${_selectedSessions.length} Unterhaltung(en) wirklich löschen?',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Abbrechen'),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _conversationSessions.removeWhere(
+                      (session) => _selectedSessions.contains(session["id"]),
+                    );
+                    _selectedSessions.clear();
+                    _isSelectionMode = false;
+                  });
+                  Navigator.pop(context);
+                },
+                child: const Text('Löschen'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                _conversationSessions.removeWhere(
-                    (session) => _selectedSessions.contains(session["id"]));
-                _selectedSessions.clear();
-                _isSelectionMode = false;
-              });
-              Navigator.pop(context);
-            },
-            child: const Text('Löschen'),
-          ),
-        ],
-      ),
     );
   }
 
   void _bulkArchive() {
     setState(() {
       for (final sessionId in _selectedSessions) {
-        final sessionIndex =
-            _conversationSessions.indexWhere((s) => s["id"] == sessionId);
+        final sessionIndex = _conversationSessions.indexWhere(
+          (s) => s["id"] == sessionId,
+        );
         if (sessionIndex != -1) {
           _conversationSessions[sessionIndex]["isArchived"] = true;
         }
@@ -382,49 +394,52 @@ class _ConversationHistoryState extends State<ConversationHistory> {
     return Scaffold(
       backgroundColor: AppTheme.lightTheme.scaffoldBackgroundColor,
       appBar: AppBar(
-        title: _isSelectionMode
-            ? Text('${_selectedSessions.length} ausgewählt')
-            : const Text('Unterhaltungsverlauf'),
-        leading: _isSelectionMode
-            ? IconButton(
-                onPressed: _toggleSelectionMode,
-                icon: CustomIconWidget(
-                  iconName: 'close',
-                  color: AppTheme.lightTheme.colorScheme.onSurface,
-                  size: 24,
-                ),
-              )
-            : null,
-        actions: _isSelectionMode
-            ? [
-                IconButton(
-                  onPressed: _bulkArchive,
+        title:
+            _isSelectionMode
+                ? Text('${_selectedSessions.length} ausgewählt')
+                : const Text('Unterhaltungsverlauf'),
+        leading:
+            _isSelectionMode
+                ? IconButton(
+                  onPressed: _toggleSelectionMode,
                   icon: CustomIconWidget(
-                    iconName: 'archive',
+                    iconName: 'close',
                     color: AppTheme.lightTheme.colorScheme.onSurface,
                     size: 24,
                   ),
-                ),
-                IconButton(
-                  onPressed: _bulkDelete,
-                  icon: CustomIconWidget(
-                    iconName: 'delete',
-                    color: AppTheme.lightTheme.colorScheme.error,
-                    size: 24,
+                )
+                : null,
+        actions:
+            _isSelectionMode
+                ? [
+                  IconButton(
+                    onPressed: _bulkArchive,
+                    icon: CustomIconWidget(
+                      iconName: 'archive',
+                      color: AppTheme.lightTheme.colorScheme.onSurface,
+                      size: 24,
+                    ),
                   ),
-                ),
-              ]
-            : [
-                IconButton(
-                  onPressed: () =>
-                      Navigator.pushNamed(context, '/settings-screen'),
-                  icon: CustomIconWidget(
-                    iconName: 'settings',
-                    color: AppTheme.lightTheme.colorScheme.onSurface,
-                    size: 24,
+                  IconButton(
+                    onPressed: _bulkDelete,
+                    icon: CustomIconWidget(
+                      iconName: 'delete',
+                      color: AppTheme.lightTheme.colorScheme.error,
+                      size: 24,
+                    ),
                   ),
-                ),
-              ],
+                ]
+                : [
+                  IconButton(
+                    onPressed:
+                        () => Navigator.pushNamed(context, '/settings-screen'),
+                    icon: CustomIconWidget(
+                      iconName: 'settings',
+                      color: AppTheme.lightTheme.colorScheme.onSurface,
+                      size: 24,
+                    ),
+                  ),
+                ],
       ),
       body: RefreshIndicator(
         onRefresh: _onRefresh,
@@ -442,87 +457,106 @@ class _ConversationHistoryState extends State<ConversationHistory> {
               },
             ),
             Expanded(
-              child: _filteredSessions.isEmpty
-                  ? EmptyStateWidget(
-                      isSearching: _isSearching,
-                      onStartConversation: () => Navigator.pushNamed(
-                          context, '/main-conversation-interface'),
-                    )
-                  : ListView.builder(
-                      controller: _scrollController,
-                      padding: const EdgeInsets.all(16),
-                      itemCount: _filteredSessions.length,
-                      itemBuilder: (context, index) {
-                        final session = _filteredSessions[index];
-                        final isSelected =
-                            _selectedSessions.contains(session["id"]);
+              child:
+                  _filteredSessions.isEmpty
+                      ? EmptyStateWidget(
+                        isSearching: _isSearching,
+                        onStartConversation:
+                            () => Navigator.pushNamed(
+                              context,
+                              '/main-conversation-interface',
+                            ),
+                      )
+                      : ListView.builder(
+                        controller: _scrollController,
+                        padding: const EdgeInsets.all(16),
+                        itemCount: _filteredSessions.length,
+                        itemBuilder: (context, index) {
+                          final session = _filteredSessions[index];
+                          final isSelected = _selectedSessions.contains(
+                            session["id"],
+                          );
 
-                        return ConversationSessionCardWidget(
-                          session: session,
-                          isSelected: isSelected,
-                          isSelectionMode: _isSelectionMode,
-                          onTap: () => _onSessionTap(session["id"]),
-                          onLongPress: () => _onSessionLongPress(session["id"]),
-                          onResume: () => Navigator.pushNamed(
-                              context, '/main-conversation-interface'),
-                          onShare: () {
-                            // Share functionality
-                          },
-                          onDelete: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: const Text('Unterhaltung löschen'),
-                                content: const Text(
-                                    'Möchten Sie diese Unterhaltung wirklich löschen?'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: const Text('Abbrechen'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _conversationSessions.removeWhere(
-                                            (s) => s["id"] == session["id"]);
-                                      });
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Löschen'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                          onArchive: () {
-                            setState(() {
-                              final sessionIndex = _conversationSessions
-                                  .indexWhere((s) => s["id"] == session["id"]);
-                              if (sessionIndex != -1) {
-                                _conversationSessions[sessionIndex]
-                                    ["isArchived"] = true;
-                              }
-                            });
-                          },
-                        );
-                      },
-                    ),
+                          return ConversationSessionCardWidget(
+                            session: session,
+                            isSelected: isSelected,
+                            isSelectionMode: _isSelectionMode,
+                            onTap: () => _onSessionTap(session["id"]),
+                            onLongPress:
+                                () => _onSessionLongPress(session["id"]),
+                            onResume:
+                                () => Navigator.pushNamed(
+                                  context,
+                                  '/main-conversation-interface',
+                                ),
+                            onShare: () {
+                              // Share functionality
+                            },
+                            onDelete: () {
+                              showDialog(
+                                context: context,
+                                builder:
+                                    (context) => AlertDialog(
+                                      title: const Text('Unterhaltung löschen'),
+                                      content: const Text(
+                                        'Möchten Sie diese Unterhaltung wirklich löschen?',
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed:
+                                              () => Navigator.pop(context),
+                                          child: const Text('Abbrechen'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              _conversationSessions.removeWhere(
+                                                (s) => s["id"] == session["id"],
+                                              );
+                                            });
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('Löschen'),
+                                        ),
+                                      ],
+                                    ),
+                              );
+                            },
+                            onArchive: () {
+                              setState(() {
+                                final sessionIndex = _conversationSessions
+                                    .indexWhere(
+                                      (s) => s["id"] == session["id"],
+                                    );
+                                if (sessionIndex != -1) {
+                                  _conversationSessions[sessionIndex]["isArchived"] =
+                                      true;
+                                }
+                              });
+                            },
+                          );
+                        },
+                      ),
             ),
           ],
         ),
       ),
-      floatingActionButton: _isSelectionMode
-          ? null
-          : FloatingActionButton.extended(
-              onPressed: () =>
-                  Navigator.pushNamed(context, '/main-conversation-interface'),
-              icon: CustomIconWidget(
-                iconName: 'add',
-                color: AppTheme.lightTheme.colorScheme.onPrimary,
-                size: 24,
+      floatingActionButton:
+          _isSelectionMode
+              ? null
+              : FloatingActionButton.extended(
+                onPressed:
+                    () => Navigator.pushNamed(
+                      context,
+                      '/main-conversation-interface',
+                    ),
+                icon: CustomIconWidget(
+                  iconName: 'add',
+                  color: AppTheme.lightTheme.colorScheme.onPrimary,
+                  size: 24,
+                ),
+                label: const Text('Neue Unterhaltung'),
               ),
-              label: const Text('Neue Unterhaltung'),
-            ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: 1,

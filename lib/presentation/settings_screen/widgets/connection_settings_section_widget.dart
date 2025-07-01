@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../routes/app_routes.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import './settings_item_widget.dart';
 import './settings_section_widget.dart';
 
@@ -182,10 +184,11 @@ class ConnectionSettingsSectionWidget extends StatelessWidget {
         // API Key Configuration (Simplified)
         SettingsItemWidget(
           title: 'ElevenLabs API-Schlüssel',
-          subtitle: settingsData['apiKey'] != null &&
-                  (settingsData['apiKey'] as String).isNotEmpty
-              ? '••••••••${(settingsData['apiKey'] as String).substring((settingsData['apiKey'] as String).length - 4)}'
-              : 'Nicht konfiguriert',
+          subtitle:
+              settingsData['apiKey'] != null &&
+                      (settingsData['apiKey'] as String).isNotEmpty
+                  ? '••••••••${(settingsData['apiKey'] as String).substring((settingsData['apiKey'] as String).length - 4)}'
+                  : 'Nicht konfiguriert',
           leadingIcon: CustomIconWidget(
             iconName: 'key',
             color: AppTheme.primaryLight,
@@ -266,9 +269,7 @@ class ConnectionSettingsSectionWidget extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Verbindung wird getestet...'),
-                    ),
+                    SnackBar(content: Text('Verbindung wird getestet...')),
                   );
                 },
                 child: Text('Testen'),
@@ -299,8 +300,10 @@ class ConnectionSettingsSectionWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Ping:'),
-                          Text('23 ms',
-                              style: TextStyle(color: AppTheme.successLight)),
+                          Text(
+                            '23 ms',
+                            style: TextStyle(color: AppTheme.successLight),
+                          ),
                         ],
                       ),
                       SizedBox(height: 1.h),
@@ -308,8 +311,10 @@ class ConnectionSettingsSectionWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Download:'),
-                          Text('45.2 Mbps',
-                              style: TextStyle(color: AppTheme.successLight)),
+                          Text(
+                            '45.2 Mbps',
+                            style: TextStyle(color: AppTheme.successLight),
+                          ),
                         ],
                       ),
                       SizedBox(height: 1.h),
@@ -317,8 +322,10 @@ class ConnectionSettingsSectionWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Upload:'),
-                          Text('12.8 Mbps',
-                              style: TextStyle(color: AppTheme.successLight)),
+                          Text(
+                            '12.8 Mbps',
+                            style: TextStyle(color: AppTheme.successLight),
+                          ),
                         ],
                       ),
                     ],

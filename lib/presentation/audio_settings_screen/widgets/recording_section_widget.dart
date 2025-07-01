@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import '../../settings_screen/widgets/settings_item_widget.dart';
 import '../../settings_screen/widgets/settings_section_widget.dart';
 
@@ -34,13 +35,12 @@ class _RecordingSectionWidgetState extends State<RecordingSectionWidget>
       duration: Duration(milliseconds: 300),
       vsync: this,
     );
-    _levelAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _levelAnimationController,
-      curve: Curves.easeInOut,
-    ));
+    _levelAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _levelAnimationController,
+        curve: Curves.easeInOut,
+      ),
+    );
   }
 
   @override
@@ -75,13 +75,14 @@ class _RecordingSectionWidgetState extends State<RecordingSectionWidget>
                 ),
                 title: Text('Kontinuierlich'),
                 subtitle: Text('Ständige Aufnahme (höherer Akkuverbrauch)'),
-                trailing: widget.settingsData['recordingMode'] == 'continuous'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    widget.settingsData['recordingMode'] == 'continuous'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   widget.onSettingChanged('recordingMode', 'continuous');
                   Navigator.pop(context);
@@ -95,13 +96,14 @@ class _RecordingSectionWidgetState extends State<RecordingSectionWidget>
                 ),
                 title: Text('Push-to-Talk'),
                 subtitle: Text('Aufnahme nur bei gehaltener Taste (sparsamer)'),
-                trailing: widget.settingsData['recordingMode'] == 'push-to-talk'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    widget.settingsData['recordingMode'] == 'push-to-talk'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   widget.onSettingChanged('recordingMode', 'push-to-talk');
                   Navigator.pop(context);
@@ -224,16 +226,20 @@ class _RecordingSectionWidgetState extends State<RecordingSectionWidget>
                         ),
                         child: FractionallySizedBox(
                           alignment: Alignment.centerLeft,
-                          widthFactor: _isRecording
-                              ? _levelAnimation.value *
-                                  widget.settingsData['microphoneSensitivity']
-                              : widget.settingsData['microphoneSensitivity'],
+                          widthFactor:
+                              _isRecording
+                                  ? _levelAnimation.value *
+                                      widget
+                                          .settingsData['microphoneSensitivity']
+                                  : widget
+                                      .settingsData['microphoneSensitivity'],
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(3),
-                              color: _isRecording
-                                  ? AppTheme.successLight
-                                  : AppTheme.primaryLight,
+                              color:
+                                  _isRecording
+                                      ? AppTheme.successLight
+                                      : AppTheme.primaryLight,
                             ),
                           ),
                         ),
@@ -258,14 +264,12 @@ class _RecordingSectionWidgetState extends State<RecordingSectionWidget>
                         widget.onSettingChanged('microphoneSensitivity', value);
                       },
                       activeColor: AppTheme.primaryLight,
-                      inactiveColor:
-                          AppTheme.primaryLight.withValues(alpha: 0.3),
+                      inactiveColor: AppTheme.primaryLight.withValues(
+                        alpha: 0.3,
+                      ),
                     ),
                   ),
-                  Text(
-                    'Hoch',
-                    style: AppTheme.lightTheme.textTheme.bodySmall,
-                  ),
+                  Text('Hoch', style: AppTheme.lightTheme.textTheme.bodySmall),
                 ],
               ),
               Row(
@@ -281,17 +285,19 @@ class _RecordingSectionWidgetState extends State<RecordingSectionWidget>
                     onPressed: _testMicrophone,
                     icon: CustomIconWidget(
                       iconName: _isRecording ? 'stop' : 'mic',
-                      color: _isRecording
-                          ? AppTheme.errorLight
-                          : AppTheme.successLight,
+                      color:
+                          _isRecording
+                              ? AppTheme.errorLight
+                              : AppTheme.successLight,
                       size: 16,
                     ),
                     label: Text(
                       _isRecording ? 'Stoppen' : 'Testen',
                       style: TextStyle(
-                        color: _isRecording
-                            ? AppTheme.errorLight
-                            : AppTheme.successLight,
+                        color:
+                            _isRecording
+                                ? AppTheme.errorLight
+                                : AppTheme.successLight,
                       ),
                     ),
                   ),
@@ -377,11 +383,14 @@ class _RecordingSectionWidgetState extends State<RecordingSectionWidget>
                               .clamp(0.0, 1.0),
                           onChanged: (value) {
                             widget.onSettingChanged(
-                                'noiseCancellationLevel', value);
+                              'noiseCancellationLevel',
+                              value,
+                            );
                           },
                           activeColor: AppTheme.primaryLight,
-                          inactiveColor:
-                              AppTheme.primaryLight.withValues(alpha: 0.3),
+                          inactiveColor: AppTheme.primaryLight.withValues(
+                            alpha: 0.3,
+                          ),
                         ),
                       ),
                       Text(
@@ -408,11 +417,13 @@ class _RecordingSectionWidgetState extends State<RecordingSectionWidget>
         SettingsItemWidget(
           title: 'Aufnahmemodus',
           subtitle: _getRecordingModeDisplayName(
-              widget.settingsData['recordingMode'] as String),
+            widget.settingsData['recordingMode'] as String,
+          ),
           leadingIcon: CustomIconWidget(
-            iconName: widget.settingsData['recordingMode'] == 'continuous'
-                ? 'radio_button_checked'
-                : 'push_pin',
+            iconName:
+                widget.settingsData['recordingMode'] == 'continuous'
+                    ? 'radio_button_checked'
+                    : 'push_pin',
             color: AppTheme.primaryLight,
             size: 24,
           ),
@@ -452,17 +463,20 @@ class _RecordingSectionWidgetState extends State<RecordingSectionWidget>
                       ),
                       Expanded(
                         child: Slider(
-                          value:
-                              (widget.settingsData['voiceActivationThreshold']
-                                      as double)
-                                  .clamp(0.0, 1.0),
+                          value: (widget
+                                      .settingsData['voiceActivationThreshold']
+                                  as double)
+                              .clamp(0.0, 1.0),
                           onChanged: (value) {
                             widget.onSettingChanged(
-                                'voiceActivationThreshold', value);
+                              'voiceActivationThreshold',
+                              value,
+                            );
                           },
                           activeColor: AppTheme.primaryLight,
-                          inactiveColor:
-                              AppTheme.primaryLight.withValues(alpha: 0.3),
+                          inactiveColor: AppTheme.primaryLight.withValues(
+                            alpha: 0.3,
+                          ),
                         ),
                       ),
                       Text(

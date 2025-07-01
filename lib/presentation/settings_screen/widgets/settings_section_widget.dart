@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
@@ -24,10 +23,7 @@ class SettingsSectionWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.surfaceLight,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppTheme.borderLight,
-          width: 1,
-        ),
+        border: Border.all(color: AppTheme.borderLight, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,10 +36,10 @@ class SettingsSectionWidget extends StatelessWidget {
             ),
           ),
           SizedBox(height: 2.h),
-          ...children.map((child) => Padding(
-                padding: EdgeInsets.only(bottom: 1.h),
-                child: child,
-              )),
+          ...children.map(
+            (child) =>
+                Padding(padding: EdgeInsets.only(bottom: 1.h), child: child),
+          ),
         ],
       ),
     );

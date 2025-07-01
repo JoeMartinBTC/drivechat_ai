@@ -28,13 +28,12 @@ class AudioController extends ChangeNotifier {
   AudioController(this._apiConfigController);
 
   /// Process text to speech with the ElevenLabs API
-  Future<Map<String, dynamic>> processTextToSpeech(String text,
-      {String? voiceId}) async {
+  Future<Map<String, dynamic>> processTextToSpeech(
+    String text, {
+    String? voiceId,
+  }) async {
     if (text.isEmpty) {
-      return {
-        'success': false,
-        'message': 'Text cannot be empty',
-      };
+      return {'success': false, 'message': 'Text cannot be empty'};
     }
 
     try {
@@ -45,21 +44,11 @@ class AudioController extends ChangeNotifier {
 
       Map<String, dynamic> result;
       if (_apiConfigController.useMockServices) {
-        if (kDebugMode) {
-          print(
-              'Warning: Using mock TTS service - Switch to Live API for production use');
-        }
-        result =
-            await _mockElevenlabsService.textToSpeech(text, voiceId: voiceId);
-        // Add a warning to the result when using mock services
-        if (result['success']) {
-          result['message'] =
-              '${result['message']} (Mock Mode - Switch to Live API for production)';
-        }
+        result = await _mockElevenlabsService.textToSpeech(
+          text,
+          voiceId: voiceId,
+        );
       } else {
-        if (kDebugMode) {
-          print('Using live ElevenLabs API for TTS');
-        }
         result = await _elevenlabsService.textToSpeech(text, voiceId: voiceId);
       }
 
@@ -67,18 +56,8 @@ class AudioController extends ChangeNotifier {
         _lastAudioData = result['audioData'];
         // In a real app, you would now play the audio data
         // This would involve using a plugin like just_audio or audioplayers
-
-        if (kDebugMode && !_apiConfigController.useMockServices) {
-          print('Successfully generated audio using live ElevenLabs API');
-        }
       } else {
         _errorMessage = result['message'] ?? 'Text-to-speech conversion failed';
-
-        // If using mock services and it fails, suggest switching to live API
-        if (_apiConfigController.useMockServices) {
-          _errorMessage +=
-              ' (Consider switching to Live API for production use)';
-        }
       }
 
       return result;
@@ -87,16 +66,9 @@ class AudioController extends ChangeNotifier {
         print('Error processing text to speech: $e');
       }
       _errorMessage = 'Error processing text to speech: $e';
-
-      // Provide helpful error message based on service type
-      if (_apiConfigController.useMockServices) {
-        _errorMessage +=
-            ' (Currently using mock service - switch to Live API for production)';
-      }
-
       return {
         'success': false,
-        'message': _errorMessage,
+        'message': 'Error processing text to speech: $e',
       };
     } finally {
       _isProcessing = false;
@@ -119,7 +91,8 @@ class AudioController extends ChangeNotifier {
       // Simulate audio playback with a delay based on text length
       // In a real app, you would use an audio plugin to play the actual data
       await Future.delayed(
-          Duration(milliseconds: 500 + (_lastProcessedText.length * 30)));
+        Duration(milliseconds: 500 + (_lastProcessedText.length * 30)),
+      );
 
       if (kDebugMode) {
         print('Playing audio for: $_lastProcessedText');

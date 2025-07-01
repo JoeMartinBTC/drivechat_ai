@@ -31,7 +31,7 @@ class _CustomWidgetInspectorState extends State<CustomWidgetInspector> {
 
     if (event is PointerDownEvent) {
       _updateSelection(event.position);
-      _handleTap();
+      //_handleTap();
     }
   }
 
@@ -41,7 +41,7 @@ class _CustomWidgetInspectorState extends State<CustomWidgetInspector> {
 
     final RenderObject? target = _findRenderObjectAtPosition(position, userRender);
 
-    if (target != null && target != userRender) { // <-- Add this condition
+    if (target != null && target != userRender) {
       if (_selectedRenderObject != target) {
         final Element? element = _findElementForRenderObject(target);
         setState(() {
@@ -94,9 +94,13 @@ class _CustomWidgetInspectorState extends State<CustomWidgetInspector> {
           try {
             final messageEvent = event as web.MessageEvent;
             if (messageEvent.data != null) {
-              final inspectToggle = messageEvent.data.dartify();
-              if (inspectToggle is Map) {
-                isInspectorEnabled = inspectToggle['inspectToggle'];
+              final eventData = messageEvent.data.dartify();
+              if (eventData is Map) {
+                if (eventData.containsKey('inspectToggle')) {
+                  isInspectorEnabled = eventData['inspectToggle'];
+                } else if (eventData.containsKey('outsideEventEnabled')) {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                }
                 setState(() {});
               }
             }
@@ -442,7 +446,7 @@ Map<String, dynamic> _extractWidgetProperties(Element element) {
     properties['type'] = effectiveWidget.runtimeType.toString();
     properties['key'] = effectiveWidget.key?.toString() ?? 'null';
     properties['text'] = effectiveWidget.data;
-    properties['style'] = getTextStyle(effectiveWidget.style);
+    properties['style'] = getTextStyle(effectiveWidget.style, element);
     properties['textAlign'] = effectiveWidget.textAlign?.toString() ?? 'null';
     return properties;
   }
@@ -545,7 +549,7 @@ Map<String, dynamic> _extractWidgetProperties(Element element) {
       final Map<String, dynamic> spanProperties = {};
       // Add text and style
       spanProperties['text'] = textSpan.text ?? '';
-      spanProperties['style'] = getTextStyle(textSpan.style);
+      spanProperties['style'] = getTextStyle(textSpan.style, element);
       // Recursively process children
       if (textSpan.children != null && textSpan.children!.isNotEmpty) {
         spanProperties['children'] = textSpan.children!
@@ -566,7 +570,7 @@ Map<String, dynamic> _extractWidgetProperties(Element element) {
   if (textFieldWidget is TextField) {
     properties['type'] = 'TextField';
     properties['text'] = textFieldWidget.controller?.text ?? 'null';
-    properties['style'] = getTextStyle(textFieldWidget.style);
+    properties['style'] = getTextStyle(textFieldWidget.style, element);
     final decoration = {
       'border': textFieldWidget.decoration?.border.toString() ?? 'null',
       'enabledBorder':
@@ -584,9 +588,9 @@ Map<String, dynamic> _extractWidgetProperties(Element element) {
           : 'null',
       'filled': textFieldWidget.decoration?.filled.toString() ?? 'null',
       'hintText': textFieldWidget.decoration?.hintText.toString() ?? 'null',
-      'hintStyle': getTextStyle(textFieldWidget.decoration?.hintStyle),
+      'hintStyle': getTextStyle(textFieldWidget.decoration?.hintStyle, element),
       'labelText': textFieldWidget.decoration?.labelText.toString() ?? 'null',
-      'labelStyle': getTextStyle(textFieldWidget.decoration?.labelStyle),
+      'labelStyle': getTextStyle(textFieldWidget.decoration?.labelStyle, element),
       'prefixIcon': textFieldWidget.decoration?.prefixIcon.toString() ?? 'null',
       'prefixIconConstraints':
       textFieldWidget.decoration?.prefixIconConstraints.toString() ??
@@ -682,26 +686,47 @@ Widget? _findWidgetOfTypeInAncestors<T>(Element element) {
   return foundWidget;
 }
 
-Map<String, dynamic> getTextStyle(TextStyle? style) {
-  if (style == null) return {};
-  var fontFamilyVal = style.fontFamily?.toString() ?? 'null';
-  return {
-    'color': style.color != null ? colorToHex(style.color!).toString() : 'null',
-    'fontSize':
-    style.fontSize != null ? style.fontSize!.round().toString() : 'null',
-    'backgroundColor': style.backgroundColor != null
-        ? colorToHex(style.backgroundColor!).toString()
-        : 'null',
-    'fontWeight': style.fontWeight?.toString() ?? 'null',
-    'fontStyle': style.fontStyle?.toString() ?? 'null',
-    'fontFamily': fontFamilyVal == 'null' ? fontFamilyVal : "'$fontFamilyVal'",
-    'letterSpacing': style.letterSpacing?.toString() ?? 'null',
-    'wordSpacing': style.wordSpacing?.toString() ?? 'null',
-    'textBaseline': style.textBaseline?.toString() ?? 'null',
-    'height': style.height?.toString() ?? 'null',
-    'overflow': style.overflow?.toString() ?? 'null',
-  };
-}
+Map<String, dynamic> getTextStyle(TextStyle? style, BuildContext context) {
+    final defaultStyle = DefaultTextStyle.of(context).style;
+
+    return {
+      'color': style?.color != null
+          ? colorToHex(style!.color!)
+          : (defaultStyle.color != null ? colorToHex(defaultStyle.color!) : 'null'),
+      'fontSize': style?.fontSize?.round().toString() ??
+          defaultStyle.fontSize?.round().toString() ??
+          'null',
+      'backgroundColor': style?.backgroundColor != null
+          ? colorToHex(style!.backgroundColor!)
+          : (defaultStyle.backgroundColor != null
+          ? colorToHex(defaultStyle.backgroundColor!)
+          : 'null'),
+      'fontWeight': style?.fontWeight?.toString() ??
+          defaultStyle.fontWeight?.toString() ??
+          'null',
+      'fontStyle': style?.fontStyle?.toString() ??
+          defaultStyle.fontStyle?.toString() ??
+          'null',
+      'fontFamily': style?.fontFamily ??
+          defaultStyle.fontFamily ??
+          'null',
+      'letterSpacing': style?.letterSpacing?.toString() ??
+          defaultStyle.letterSpacing?.toString() ??
+          'null',
+      'wordSpacing': style?.wordSpacing?.toString() ??
+          defaultStyle.wordSpacing?.toString() ??
+          'null',
+      'textBaseline': style?.textBaseline?.toString() ??
+          defaultStyle.textBaseline?.toString() ??
+          'null',
+      'height': style?.height?.toString() ??
+          defaultStyle.height?.toString() ??
+          'null',
+      'overflow': style?.overflow?.toString() ??
+          defaultStyle.overflow?.toString() ??
+          'null',
+    };
+  }
 
 String colorToHex(Color color) {
   var alphaColor =

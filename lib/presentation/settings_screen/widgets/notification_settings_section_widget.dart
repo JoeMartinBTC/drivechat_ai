@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import './settings_item_widget.dart';
 import './settings_section_widget.dart';
 
@@ -42,7 +43,8 @@ class NotificationSettingsSectionWidget extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-                'Erinnerungszeit auf ${selectedTime.format(context)} gesetzt'),
+              'Erinnerungszeit auf ${selectedTime.format(context)} gesetzt',
+            ),
             backgroundColor: AppTheme.successLight,
           ),
         );
@@ -55,22 +57,22 @@ class NotificationSettingsSectionWidget extends StatelessWidget {
       {
         'value': 'daily',
         'label': 'Täglich',
-        'description': 'Jeden Tag zur gleichen Zeit'
+        'description': 'Jeden Tag zur gleichen Zeit',
       },
       {
         'value': 'weekdays',
         'label': 'Wochentags',
-        'description': 'Montag bis Freitag'
+        'description': 'Montag bis Freitag',
       },
       {
         'value': 'custom',
         'label': 'Benutzerdefiniert',
-        'description': 'Bestimmte Wochentage auswählen'
+        'description': 'Bestimmte Wochentage auswählen',
       },
       {
         'value': 'off',
         'label': 'Aus',
-        'description': 'Keine regelmäßigen Erinnerungen'
+        'description': 'Keine regelmäßigen Erinnerungen',
       },
     ];
 
@@ -91,25 +93,28 @@ class NotificationSettingsSectionWidget extends StatelessWidget {
                 style: AppTheme.lightTheme.textTheme.titleLarge,
               ),
               SizedBox(height: 2.h),
-              ...frequencies.map((frequency) => ListTile(
-                    title: Text(frequency['label']),
-                    subtitle: Text(frequency['description']),
-                    leading: Radio<String>(
-                      value: frequency['value'],
-                      groupValue: 'daily', // Mock current selection
-                      onChanged: (String? value) {
-                        Navigator.pop(context);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                                'Häufigkeit auf "${frequency['label']}" gesetzt'),
-                            backgroundColor: AppTheme.successLight,
+              ...frequencies.map(
+                (frequency) => ListTile(
+                  title: Text(frequency['label']),
+                  subtitle: Text(frequency['description']),
+                  leading: Radio<String>(
+                    value: frequency['value'],
+                    groupValue: 'daily', // Mock current selection
+                    onChanged: (String? value) {
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Häufigkeit auf "${frequency['label']}" gesetzt',
                           ),
-                        );
-                      },
-                      activeColor: AppTheme.primaryLight,
-                    ),
-                  )),
+                          backgroundColor: AppTheme.successLight,
+                        ),
+                      );
+                    },
+                    activeColor: AppTheme.primaryLight,
+                  ),
+                ),
+              ),
               SizedBox(height: 2.h),
             ],
           ),
@@ -201,9 +206,11 @@ class NotificationSettingsSectionWidget extends StatelessWidget {
             onChanged: (value) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(value
-                      ? 'Erfolgs-Benachrichtigungen aktiviert'
-                      : 'Erfolgs-Benachrichtigungen deaktiviert'),
+                  content: Text(
+                    value
+                        ? 'Erfolgs-Benachrichtigungen aktiviert'
+                        : 'Erfolgs-Benachrichtigungen deaktiviert',
+                  ),
                 ),
               );
             },
@@ -292,7 +299,7 @@ class NotificationSettingsSectionWidget extends StatelessWidget {
                   'Sanft',
                   'Klassisch',
                   'Modern',
-                  'Stumm'
+                  'Stumm',
                 ];
                 return Container(
                   padding: EdgeInsets.all(4.w),
@@ -305,32 +312,36 @@ class NotificationSettingsSectionWidget extends StatelessWidget {
                         style: AppTheme.lightTheme.textTheme.titleLarge,
                       ),
                       SizedBox(height: 2.h),
-                      ...sounds.map((sound) => ListTile(
-                            title: Text(sound),
-                            leading: CustomIconWidget(
-                              iconName:
-                                  sound == 'Stumm' ? 'volume_off' : 'volume_up',
-                              color: AppTheme.primaryLight,
-                              size: 20,
-                            ),
-                            trailing: sound == 'Standard'
-                                ? CustomIconWidget(
+                      ...sounds.map(
+                        (sound) => ListTile(
+                          title: Text(sound),
+                          leading: CustomIconWidget(
+                            iconName:
+                                sound == 'Stumm' ? 'volume_off' : 'volume_up',
+                            color: AppTheme.primaryLight,
+                            size: 20,
+                          ),
+                          trailing:
+                              sound == 'Standard'
+                                  ? CustomIconWidget(
                                     iconName: 'check',
                                     color: AppTheme.successLight,
                                     size: 20,
                                   )
-                                : null,
-                            onTap: () {
-                              Navigator.pop(context);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                      'Benachrichtigungston auf "$sound" gesetzt'),
-                                  backgroundColor: AppTheme.successLight,
+                                  : null,
+                          onTap: () {
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Benachrichtigungston auf "$sound" gesetzt',
                                 ),
-                              );
-                            },
-                          )),
+                                backgroundColor: AppTheme.successLight,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                       SizedBox(height: 2.h),
                     ],
                   ),

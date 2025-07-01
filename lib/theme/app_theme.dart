@@ -14,14 +14,16 @@ class AppTheme {
   static const Color errorLight = Color(0xFFEF4444); // Clear red
   static const Color backgroundLight = Color(0xFFFFFFFF); // Pure white
   static const Color surfaceLight = Color(0xFFF9FAFB); // Subtle gray
-  static const Color textPrimaryLight =
-      Color(0xFF111827); // High contrast black
+  static const Color textPrimaryLight = Color(
+    0xFF111827,
+  ); // High contrast black
   static const Color textSecondaryLight = Color(0xFF6B7280); // Medium gray
   static const Color accentLight = Color(0xFF8B5CF6); // Purple highlight
 
   // Dark theme adaptations
-  static const Color primaryDark =
-      Color(0xFF5B82F6); // Lighter blue for dark mode
+  static const Color primaryDark = Color(
+    0xFF5B82F6,
+  ); // Lighter blue for dark mode
   static const Color secondaryDark = Color(0xFF9CA3AF); // Lighter gray
   static const Color successDark = Color(0xFF34D399); // Lighter green
   static const Color warningDark = Color(0xFFFBBF24); // Lighter amber
@@ -95,9 +97,7 @@ class AppTheme {
       elevation: 2.0,
       shadowColor: shadowLight,
       surfaceTintColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     ),
 
@@ -123,9 +123,7 @@ class AppTheme {
       backgroundColor: primaryLight,
       foregroundColor: backgroundLight,
       elevation: 4.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
     ),
 
     // Button themes for clear interaction patterns
@@ -167,9 +165,7 @@ class AppTheme {
       style: TextButton.styleFrom(
         foregroundColor: primaryLight,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         textStyle: GoogleFonts.inter(
           fontSize: 16,
           fontWeight: FontWeight.w500,
@@ -245,9 +241,7 @@ class AppTheme {
       }),
       checkColor: WidgetStateProperty.all(backgroundLight),
       side: BorderSide(color: borderLight, width: 2.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
     ),
 
     radioTheme: RadioThemeData(
@@ -278,10 +272,7 @@ class AppTheme {
       unselectedLabelColor: textSecondaryLight,
       indicatorColor: primaryLight,
       indicatorSize: TabBarIndicatorSize.label,
-      labelStyle: GoogleFonts.inter(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-      ),
+      labelStyle: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600),
       unselectedLabelStyle: GoogleFonts.inter(
         fontSize: 16,
         fontWeight: FontWeight.w400,
@@ -310,9 +301,7 @@ class AppTheme {
       ),
       actionTextColor: accentLight,
       behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       elevation: 4.0,
     ),
     dialogTheme: DialogThemeData(backgroundColor: backgroundLight),
@@ -369,9 +358,7 @@ class AppTheme {
       elevation: 2.0,
       shadowColor: shadowDark,
       surfaceTintColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -393,9 +380,7 @@ class AppTheme {
       backgroundColor: primaryDark,
       foregroundColor: backgroundDark,
       elevation: 4.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -433,9 +418,7 @@ class AppTheme {
       style: TextButton.styleFrom(
         foregroundColor: primaryDark,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         textStyle: GoogleFonts.inter(
           fontSize: 16,
           fontWeight: FontWeight.w500,
@@ -504,9 +487,7 @@ class AppTheme {
       }),
       checkColor: WidgetStateProperty.all(backgroundDark),
       side: BorderSide(color: borderDark, width: 2.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
     ),
     radioTheme: RadioThemeData(
       fillColor: WidgetStateProperty.resolveWith((states) {
@@ -533,10 +514,7 @@ class AppTheme {
       unselectedLabelColor: textSecondaryDark,
       indicatorColor: primaryDark,
       indicatorSize: TabBarIndicatorSize.label,
-      labelStyle: GoogleFonts.inter(
-        fontSize: 16,
-        fontWeight: FontWeight.w600,
-      ),
+      labelStyle: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600),
       unselectedLabelStyle: GoogleFonts.inter(
         fontSize: 16,
         fontWeight: FontWeight.w400,
@@ -563,9 +541,7 @@ class AppTheme {
       ),
       actionTextColor: accentDark,
       behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       elevation: 4.0,
     ),
     dialogTheme: DialogThemeData(backgroundColor: backgroundDark),

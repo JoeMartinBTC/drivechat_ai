@@ -49,33 +49,32 @@ class ElevenLabsService {
   /// Set up Dio interceptors for authentication and error handling
   void _setupDioInterceptors() {
     _dio.interceptors.clear();
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
-        options.headers['xi-api-key'] = _apiKey;
-        options.headers['Content-Type'] = 'application/json';
-        return handler.next(options);
-      },
-      onError: (DioException e, handler) {
-        if (kDebugMode) {
-          print('API Error: ${e.message}');
-          if (e.response != null) {
-            print('Status code: ${e.response?.statusCode}');
-            print('Response data: ${e.response?.data}');
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          options.headers['xi-api-key'] = _apiKey;
+          options.headers['Content-Type'] = 'application/json';
+          return handler.next(options);
+        },
+        onError: (DioException e, handler) {
+          if (kDebugMode) {
+            print('API Error: ${e.message}');
+            if (e.response != null) {
+              print('Status code: ${e.response?.statusCode}');
+              print('Response data: ${e.response?.data}');
+            }
           }
-        }
-        return handler.next(e);
-      },
-    ));
+          return handler.next(e);
+        },
+      ),
+    );
   }
 
   /// Test the connection to the ElevenLabs API
   Future<Map<String, dynamic>> testConnection() async {
     try {
       if (_apiKey.isEmpty) {
-        return {
-          'success': false,
-          'message': 'API key is empty',
-        };
+        return {'success': false, 'message': 'API key is empty'};
       }
 
       // Get user information to verify API key
@@ -93,10 +92,7 @@ class ElevenLabsService {
         'statusCode': e.response?.statusCode,
       };
     } catch (e) {
-      return {
-        'success': false,
-        'message': 'Connection failed: $e',
-      };
+      return {'success': false, 'message': 'Connection failed: $e'};
     }
   }
 
@@ -115,8 +111,10 @@ class ElevenLabsService {
   }
 
   /// Convert text to speech
-  Future<Map<String, dynamic>> textToSpeech(String text,
-      {String? voiceId}) async {
+  Future<Map<String, dynamic>> textToSpeech(
+    String text, {
+    String? voiceId,
+  }) async {
     try {
       final usedVoiceId = voiceId ?? _selectedVoiceId ?? 'default';
 
@@ -153,9 +151,7 @@ class ElevenLabsService {
       // Set response type to arraybuffer to get binary data
       final options = Options(
         responseType: ResponseType.bytes,
-        headers: {
-          'Accept': 'audio/mpeg',
-        },
+        headers: {'Accept': 'audio/mpeg'},
       );
 
       final response = await _dio.post(
@@ -215,18 +211,12 @@ class ElevenLabsService {
   Future<Map<String, dynamic>> getUserInfo() async {
     try {
       final response = await _dio.get('$_baseUrl/user');
-      return {
-        'success': true,
-        'data': response.data,
-      };
+      return {'success': true, 'data': response.data};
     } catch (e) {
       if (kDebugMode) {
         print('Failed to get user info: $e');
       }
-      return {
-        'success': false,
-        'message': 'Failed to get user info: $e',
-      };
+      return {'success': false, 'message': 'Failed to get user info: $e'};
     }
   }
 

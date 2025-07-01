@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/help_section_widget.dart
 
@@ -15,10 +16,7 @@ class HelpSectionWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.surfaceLight,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppTheme.borderLight,
-          width: 1,
-        ),
+        border: Border.all(color: AppTheme.borderLight, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +147,11 @@ class HelpSectionWidget extends StatelessWidget {
   }
 
   Widget _buildHelpItem(
-      String title, String description, String iconName, VoidCallback onTap) {
+    String title,
+    String description,
+    String iconName,
+    VoidCallback onTap,
+  ) {
     return Padding(
       padding: EdgeInsets.only(bottom: 2.h),
       child: InkWell(
@@ -206,15 +208,15 @@ class HelpSectionWidget extends StatelessWidget {
   }
 
   void _showInformationDialog(
-      BuildContext context, String title, String content) {
+    BuildContext context,
+    String title,
+    String content,
+  ) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(
-            title,
-            style: AppTheme.lightTheme.textTheme.titleLarge,
-          ),
+          title: Text(title, style: AppTheme.lightTheme.textTheme.titleLarge),
           content: SingleChildScrollView(
             child: Text(
               content,

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import '../../settings_screen/widgets/settings_item_widget.dart';
 import '../../settings_screen/widgets/settings_section_widget.dart';
 
@@ -49,23 +50,31 @@ class QualitySectionWidget extends StatelessWidget {
                     SizedBox(height: 0.5.h),
                     Row(
                       children: [
-                        Icon(Icons.storage,
-                            size: 12, color: AppTheme.successLight),
+                        Icon(
+                          Icons.storage,
+                          size: 12,
+                          color: AppTheme.successLight,
+                        ),
                         SizedBox(width: 1.w),
-                        Text('~0.5 MB/min',
-                            style: TextStyle(
-                                fontSize: 10, color: AppTheme.successLight)),
+                        Text(
+                          '~0.5 MB/min',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: AppTheme.successLight,
+                          ),
+                        ),
                       ],
                     ),
                   ],
                 ),
-                trailing: settingsData['sampleRate'] == '16kHz'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    settingsData['sampleRate'] == '16kHz'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   onSettingChanged('sampleRate', '16kHz');
                   Navigator.pop(context);
@@ -85,23 +94,31 @@ class QualitySectionWidget extends StatelessWidget {
                     SizedBox(height: 0.5.h),
                     Row(
                       children: [
-                        Icon(Icons.storage,
-                            size: 12, color: AppTheme.warningLight),
+                        Icon(
+                          Icons.storage,
+                          size: 12,
+                          color: AppTheme.warningLight,
+                        ),
                         SizedBox(width: 1.w),
-                        Text('~1.4 MB/min',
-                            style: TextStyle(
-                                fontSize: 10, color: AppTheme.warningLight)),
+                        Text(
+                          '~1.4 MB/min',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: AppTheme.warningLight,
+                          ),
+                        ),
                       ],
                     ),
                   ],
                 ),
-                trailing: settingsData['sampleRate'] == '44.1kHz'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    settingsData['sampleRate'] == '44.1kHz'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   onSettingChanged('sampleRate', '44.1kHz');
                   Navigator.pop(context);
@@ -140,15 +157,17 @@ class QualitySectionWidget extends StatelessWidget {
                   size: 24,
                 ),
                 title: Text('Komprimiert (MP3)'),
-                subtitle:
-                    Text('Optimiert für ElevenLabs • Geringere Dateigröße'),
-                trailing: settingsData['audioFormat'] == 'compressed'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                subtitle: Text(
+                  'Optimiert für ElevenLabs • Geringere Dateigröße',
+                ),
+                trailing:
+                    settingsData['audioFormat'] == 'compressed'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   onSettingChanged('audioFormat', 'compressed');
                   Navigator.pop(context);
@@ -162,13 +181,14 @@ class QualitySectionWidget extends StatelessWidget {
                 ),
                 title: Text('Unkomprimiert (WAV)'),
                 subtitle: Text('Beste Qualität • Größere Dateien'),
-                trailing: settingsData['audioFormat'] == 'uncompressed'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    settingsData['audioFormat'] == 'uncompressed'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   onSettingChanged('audioFormat', 'uncompressed');
                   Navigator.pop(context);
@@ -232,13 +252,14 @@ class QualitySectionWidget extends StatelessWidget {
                   ),
                   title: Text(item['label'] as String),
                   subtitle: Text(item['description'] as String),
-                  trailing: settingsData['bitrateQuality'] == quality
-                      ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.successLight,
-                          size: 20,
-                        )
-                      : null,
+                  trailing:
+                      settingsData['bitrateQuality'] == quality
+                          ? CustomIconWidget(
+                            iconName: 'check',
+                            color: AppTheme.successLight,
+                            size: 20,
+                          )
+                          : null,
                   onTap: () {
                     onSettingChanged('bitrateQuality', quality);
                     Navigator.pop(context);
@@ -284,8 +305,9 @@ class QualitySectionWidget extends StatelessWidget {
         // Sample Rate Selection with Storage Impact
         SettingsItemWidget(
           title: 'Abtastrate',
-          subtitle:
-              _getSampleRateDisplayName(settingsData['sampleRate'] as String),
+          subtitle: _getSampleRateDisplayName(
+            settingsData['sampleRate'] as String,
+          ),
           leadingIcon: CustomIconWidget(
             iconName: 'graphic_eq',
             color: AppTheme.primaryLight,
@@ -297,8 +319,9 @@ class QualitySectionWidget extends StatelessWidget {
         // Audio Format for ElevenLabs Optimization
         SettingsItemWidget(
           title: 'Audio-Format',
-          subtitle:
-              _getAudioFormatDisplayName(settingsData['audioFormat'] as String),
+          subtitle: _getAudioFormatDisplayName(
+            settingsData['audioFormat'] as String,
+          ),
           leadingIcon: CustomIconWidget(
             iconName: 'audio_file',
             color: AppTheme.primaryLight,
@@ -346,8 +369,9 @@ class QualitySectionWidget extends StatelessWidget {
                             onSettingChanged('compressionLevel', value);
                           },
                           activeColor: AppTheme.primaryLight,
-                          inactiveColor:
-                              AppTheme.primaryLight.withValues(alpha: 0.3),
+                          inactiveColor: AppTheme.primaryLight.withValues(
+                            alpha: 0.3,
+                          ),
                         ),
                       ),
                       Text(
@@ -364,10 +388,8 @@ class QualitySectionWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Qualität vs. Dateigröße: ${((settingsData['compressionLevel'] as double) * 100).round()}%',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color: AppTheme.textSecondaryLight,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(color: AppTheme.textSecondaryLight),
                       ),
                       Row(
                         children: [
@@ -380,9 +402,7 @@ class QualitySectionWidget extends StatelessWidget {
                           Text(
                             'Bandbreite: ${(settingsData['compressionLevel'] as double) < 0.5 ? "Niedrig" : "Mittel"}',
                             style: AppTheme.lightTheme.textTheme.bodySmall
-                                ?.copyWith(
-                              color: AppTheme.textSecondaryLight,
-                            ),
+                                ?.copyWith(color: AppTheme.textSecondaryLight),
                           ),
                         ],
                       ),
@@ -396,8 +416,9 @@ class QualitySectionWidget extends StatelessWidget {
         // Bitrate Quality
         SettingsItemWidget(
           title: 'Bitrate-Qualität',
-          subtitle:
-              _getBitrateDisplayName(settingsData['bitrateQuality'] as String),
+          subtitle: _getBitrateDisplayName(
+            settingsData['bitrateQuality'] as String,
+          ),
           leadingIcon: CustomIconWidget(
             iconName: 'speed',
             color: AppTheme.primaryLight,
@@ -432,10 +453,7 @@ class QualitySectionWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppTheme.surfaceLight,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: AppTheme.borderLight,
-              width: 1,
-            ),
+            border: Border.all(color: AppTheme.borderLight, width: 1),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -471,13 +489,14 @@ class QualitySectionWidget extends StatelessWidget {
                           settingsData['sampleRate'] == '16kHz'
                               ? '~0.5 MB'
                               : '~1.4 MB',
-                          style:
-                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: settingsData['sampleRate'] == '16kHz'
-                                ? AppTheme.successLight
-                                : AppTheme.warningLight,
-                          ),
+                          style: AppTheme.lightTheme.textTheme.bodySmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color:
+                                    settingsData['sampleRate'] == '16kHz'
+                                        ? AppTheme.successLight
+                                        : AppTheme.warningLight,
+                              ),
                         ),
                       ],
                     ),
@@ -494,17 +513,19 @@ class QualitySectionWidget extends StatelessWidget {
                           settingsData['bitrateQuality'] == 'low'
                               ? 'Niedrig'
                               : settingsData['bitrateQuality'] == 'medium'
-                                  ? 'Mittel'
-                                  : 'Hoch',
-                          style:
-                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: settingsData['bitrateQuality'] == 'low'
-                                ? AppTheme.successLight
-                                : settingsData['bitrateQuality'] == 'medium'
-                                    ? AppTheme.primaryLight
-                                    : AppTheme.warningLight,
-                          ),
+                              ? 'Mittel'
+                              : 'Hoch',
+                          style: AppTheme.lightTheme.textTheme.bodySmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color:
+                                    settingsData['bitrateQuality'] == 'low'
+                                        ? AppTheme.successLight
+                                        : settingsData['bitrateQuality'] ==
+                                            'medium'
+                                        ? AppTheme.primaryLight
+                                        : AppTheme.warningLight,
+                              ),
                         ),
                       ],
                     ),

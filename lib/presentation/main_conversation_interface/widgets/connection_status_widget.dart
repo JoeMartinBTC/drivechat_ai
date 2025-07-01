@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class ConnectionStatusWidget extends StatefulWidget {
   final bool isConnected;
 
-  const ConnectionStatusWidget({
-    super.key,
-    required this.isConnected,
-  });
+  const ConnectionStatusWidget({super.key, required this.isConnected});
 
   @override
   State<ConnectionStatusWidget> createState() => _ConnectionStatusWidgetState();
@@ -26,13 +23,9 @@ class _ConnectionStatusWidgetState extends State<ConnectionStatusWidget>
       vsync: this,
     );
 
-    _pulseAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1.2,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+    _pulseAnimation = Tween<double>(begin: 0.8, end: 1.2).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
 
     if (!widget.isConnected) {
       _animationController.repeat(reverse: true);
@@ -70,9 +63,10 @@ class _ConnectionStatusWidgetState extends State<ConnectionStatusWidget>
             width: 12,
             height: 12,
             decoration: BoxDecoration(
-              color: widget.isConnected
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.error,
+              color:
+                  widget.isConnected
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.error,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(

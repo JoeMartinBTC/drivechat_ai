@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class ConversationSessionCardWidget extends StatelessWidget {
   final Map<String, dynamic> session;
@@ -134,20 +134,23 @@ class ConversationSessionCardWidget extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.only(bottom: 12),
           decoration: BoxDecoration(
-            color: isSelected
-                ? AppTheme.lightTheme.colorScheme.primaryContainer
-                : AppTheme.lightTheme.cardColor,
+            color:
+                isSelected
+                    ? AppTheme.lightTheme.colorScheme.primaryContainer
+                    : AppTheme.lightTheme.cardColor,
             borderRadius: BorderRadius.circular(12),
-            border: isSelected
-                ? Border.all(
-                    color: AppTheme.lightTheme.colorScheme.primary,
-                    width: 2,
-                  )
-                : Border.all(
-                    color: AppTheme.lightTheme.colorScheme.outline
-                        .withValues(alpha: 0.2),
-                    width: 1,
-                  ),
+            border:
+                isSelected
+                    ? Border.all(
+                      color: AppTheme.lightTheme.colorScheme.primary,
+                      width: 2,
+                    )
+                    : Border.all(
+                      color: AppTheme.lightTheme.colorScheme.outline.withValues(
+                        alpha: 0.2,
+                      ),
+                      width: 1,
+                    ),
             boxShadow: [
               BoxShadow(
                 color: AppTheme.lightTheme.colorScheme.shadow,
@@ -167,12 +170,14 @@ class ConversationSessionCardWidget extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(right: 12),
                         child: CustomIconWidget(
-                          iconName: isSelected
-                              ? 'check_circle'
-                              : 'radio_button_unchecked',
-                          color: isSelected
-                              ? AppTheme.lightTheme.colorScheme.primary
-                              : AppTheme.lightTheme.colorScheme.outline,
+                          iconName:
+                              isSelected
+                                  ? 'check_circle'
+                                  : 'radio_button_unchecked',
+                          color:
+                              isSelected
+                                  ? AppTheme.lightTheme.colorScheme.primary
+                                  : AppTheme.lightTheme.colorScheme.outline,
                           size: 24,
                         ),
                       ),
@@ -182,37 +187,41 @@ class ConversationSessionCardWidget extends StatelessWidget {
                           Text(
                             _formatDate(date),
                             style: AppTheme.lightTheme.textTheme.titleSmall
-                                ?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                                ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                           const SizedBox(width: 8),
                           Text(
                             _formatTime(date),
                             style: AppTheme.lightTheme.textTheme.bodySmall
                                 ?.copyWith(
-                              color: AppTheme
-                                  .lightTheme.colorScheme.onSurfaceVariant,
-                            ),
+                                  color:
+                                      AppTheme
+                                          .lightTheme
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                                ),
                           ),
                         ],
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
-                        color: _getStatusColor(completionStatus)
-                            .withValues(alpha: 0.1),
+                        color: _getStatusColor(
+                          completionStatus,
+                        ).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         _getStatusText(completionStatus),
-                        style:
-                            AppTheme.lightTheme.textTheme.labelSmall?.copyWith(
-                          color: _getStatusColor(completionStatus),
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.labelSmall
+                            ?.copyWith(
+                              color: _getStatusColor(completionStatus),
+                              fontWeight: FontWeight.w500,
+                            ),
                       ),
                     ),
                   ],
@@ -231,26 +240,39 @@ class ConversationSessionCardWidget extends StatelessWidget {
                       child: Wrap(
                         spacing: 6,
                         runSpacing: 4,
-                        children: topics
-                            .map<Widget>((topic) => Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: AppTheme.lightTheme.colorScheme
-                                        .secondaryContainer,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Text(
-                                    topic,
-                                    style: AppTheme
-                                        .lightTheme.textTheme.labelSmall
-                                        ?.copyWith(
-                                      color: AppTheme.lightTheme.colorScheme
-                                          .onSecondaryContainer,
+                        children:
+                            topics
+                                .map<Widget>(
+                                  (topic) => Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          AppTheme
+                                              .lightTheme
+                                              .colorScheme
+                                              .secondaryContainer,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Text(
+                                      topic,
+                                      style: AppTheme
+                                          .lightTheme
+                                          .textTheme
+                                          .labelSmall
+                                          ?.copyWith(
+                                            color:
+                                                AppTheme
+                                                    .lightTheme
+                                                    .colorScheme
+                                                    .onSecondaryContainer,
+                                          ),
                                     ),
                                   ),
-                                ))
-                            .toList(),
+                                )
+                                .toList(),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -269,9 +291,12 @@ class ConversationSessionCardWidget extends StatelessWidget {
                           session["duration"],
                           style: AppTheme.lightTheme.textTheme.labelSmall
                               ?.copyWith(
-                            color: AppTheme
-                                .lightTheme.colorScheme.onSurfaceVariant,
-                          ),
+                                color:
+                                    AppTheme
+                                        .lightTheme
+                                        .colorScheme
+                                        .onSurfaceVariant,
+                              ),
                         ),
                       ],
                     ),
@@ -289,18 +314,24 @@ class ConversationSessionCardWidget extends StatelessWidget {
                             'Fortschritt',
                             style: AppTheme.lightTheme.textTheme.labelSmall
                                 ?.copyWith(
-                              color: AppTheme
-                                  .lightTheme.colorScheme.onSurfaceVariant,
-                            ),
+                                  color:
+                                      AppTheme
+                                          .lightTheme
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                                ),
                           ),
                           Text(
                             '$progress%',
                             style: AppTheme.lightTheme.textTheme.labelSmall
                                 ?.copyWith(
-                              color: AppTheme
-                                  .lightTheme.colorScheme.onSurfaceVariant,
-                              fontWeight: FontWeight.w500,
-                            ),
+                                  color:
+                                      AppTheme
+                                          .lightTheme
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                                  fontWeight: FontWeight.w500,
+                                ),
                           ),
                         ],
                       ),
@@ -331,7 +362,9 @@ class ConversationSessionCardWidget extends StatelessWidget {
                           label: const Text('Fortsetzen'),
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
                           ),
                         ),
                       ),

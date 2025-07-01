@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class PermissionIllustrationWidget extends StatefulWidget {
   const PermissionIllustrationWidget({super.key});
@@ -12,7 +13,8 @@ class PermissionIllustrationWidget extends StatefulWidget {
 }
 
 class _PermissionIllustrationWidgetState
-    extends State<PermissionIllustrationWidget> with TickerProviderStateMixin {
+    extends State<PermissionIllustrationWidget>
+    with TickerProviderStateMixin {
   late AnimationController _pulseController;
   late AnimationController _waveController;
   late Animation<double> _pulseAnimation;
@@ -32,21 +34,14 @@ class _PermissionIllustrationWidgetState
       vsync: this,
     );
 
-    _pulseAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1.2,
-    ).animate(CurvedAnimation(
-      parent: _pulseController,
-      curve: Curves.easeInOut,
-    ));
+    _pulseAnimation = Tween<double>(begin: 0.8, end: 1.2).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
 
     _waveAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _waveController,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _waveController, curve: Curves.easeOut));
 
     _pulseController.repeat(reverse: true);
     _waveController.repeat();
@@ -77,10 +72,12 @@ class _PermissionIllustrationWidgetState
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  AppTheme.lightTheme.colorScheme.primary
-                      .withValues(alpha: 0.1),
-                  AppTheme.lightTheme.colorScheme.tertiary
-                      .withValues(alpha: 0.1),
+                  AppTheme.lightTheme.colorScheme.primary.withValues(
+                    alpha: 0.1,
+                  ),
+                  AppTheme.lightTheme.colorScheme.tertiary.withValues(
+                    alpha: 0.1,
+                  ),
                 ],
               ),
             ),
@@ -94,8 +91,10 @@ class _PermissionIllustrationWidgetState
                 alignment: Alignment.center,
                 children: List.generate(3, (index) {
                   final delay = index * 0.3;
-                  final animationValue =
-                      (_waveAnimation.value - delay).clamp(0.0, 1.0);
+                  final animationValue = (_waveAnimation.value - delay).clamp(
+                    0.0,
+                    1.0,
+                  );
 
                   return Container(
                     width: (20.w + (index * 8.w)) * animationValue,
@@ -103,10 +102,11 @@ class _PermissionIllustrationWidgetState
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color:
-                            AppTheme.lightTheme.colorScheme.primary.withValues(
-                          alpha: (0.6 - (index * 0.2)) * (1 - animationValue),
-                        ),
+                        color: AppTheme.lightTheme.colorScheme.primary
+                            .withValues(
+                              alpha:
+                                  (0.6 - (index * 0.2)) * (1 - animationValue),
+                            ),
                         width: 2,
                       ),
                     ),
@@ -160,8 +160,9 @@ class _PermissionIllustrationWidgetState
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.lightTheme.colorScheme.shadow
-                        .withValues(alpha: 0.1),
+                    color: AppTheme.lightTheme.colorScheme.shadow.withValues(
+                      alpha: 0.1,
+                    ),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -185,8 +186,9 @@ class _PermissionIllustrationWidgetState
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.lightTheme.colorScheme.shadow
-                        .withValues(alpha: 0.1),
+                    color: AppTheme.lightTheme.colorScheme.shadow.withValues(
+                      alpha: 0.1,
+                    ),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -209,8 +211,9 @@ class _PermissionIllustrationWidgetState
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.lightTheme.colorScheme.shadow
-                        .withValues(alpha: 0.1),
+                    color: AppTheme.lightTheme.colorScheme.shadow.withValues(
+                      alpha: 0.1,
+                    ),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../../../core/app_export.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
@@ -56,29 +54,34 @@ class ChatMessageWidget extends StatelessWidget {
             child: GestureDetector(
               onLongPress: () => onLongPress(message),
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
-                  color: isUser
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.surface,
+                  color:
+                      isUser
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(18).copyWith(
-                    bottomLeft: isUser
-                        ? const Radius.circular(18)
-                        : const Radius.circular(4),
-                    bottomRight: isUser
-                        ? const Radius.circular(4)
-                        : const Radius.circular(18),
+                    bottomLeft:
+                        isUser
+                            ? const Radius.circular(18)
+                            : const Radius.circular(4),
+                    bottomRight:
+                        isUser
+                            ? const Radius.circular(4)
+                            : const Radius.circular(18),
                   ),
-                  border: !isUser
-                      ? Border.all(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .outline
-                              .withValues(alpha: 0.2),
-                          width: 1,
-                        )
-                      : null,
+                  border:
+                      !isUser
+                          ? Border.all(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.outline.withValues(alpha: 0.2),
+                            width: 1,
+                          )
+                          : null,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,11 +92,12 @@ class ChatMessageWidget extends StatelessWidget {
                       Text(
                         message['message'],
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: isUser
+                          color:
+                              isUser
                                   ? Colors.white
                                   : Theme.of(context).colorScheme.onSurface,
-                              height: 1.4,
-                            ),
+                          height: 1.4,
+                        ),
                       ),
                     if (!isTyping) ...[
                       const SizedBox(height: 4),
@@ -102,24 +106,25 @@ class ChatMessageWidget extends StatelessWidget {
                         children: [
                           Text(
                             _formatTimestamp(message['timestamp']),
-                            style:
-                                Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: isUser
-                                          ? Colors.white.withValues(alpha: 0.8)
-                                          : Theme.of(context)
-                                              .colorScheme
-                                              .onSurface
-                                              .withValues(alpha: 0.6),
-                                      fontSize: 11,
-                                    ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodySmall?.copyWith(
+                              color:
+                                  isUser
+                                      ? Colors.white.withValues(alpha: 0.8)
+                                      : Theme.of(context).colorScheme.onSurface
+                                          .withValues(alpha: 0.6),
+                              fontSize: 11,
+                            ),
                           ),
                           if (message['hasAudio']) ...[
                             const SizedBox(width: 4),
                             CustomIconWidget(
                               iconName: 'volume_up',
-                              color: isUser
-                                  ? Colors.white.withValues(alpha: 0.8)
-                                  : Theme.of(context).colorScheme.primary,
+                              color:
+                                  isUser
+                                      ? Colors.white.withValues(alpha: 0.8)
+                                      : Theme.of(context).colorScheme.primary,
                               size: 12,
                             ),
                           ],
@@ -155,12 +160,11 @@ class ChatMessageWidget extends StatelessWidget {
         Text(
           'KI tippt',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface
-                    .withValues(alpha: 0.6),
-                fontStyle: FontStyle.italic,
-              ),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.6),
+            fontStyle: FontStyle.italic,
+          ),
         ),
         const SizedBox(width: 8),
         SizedBox(
@@ -175,10 +179,9 @@ class ChatMessageWidget extends StatelessWidget {
                 width: 4,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Theme.of(context)
-                      .colorScheme
-                      .primary
-                      .withValues(alpha: 0.6),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(alpha: 0.6),
                   shape: BoxShape.circle,
                 ),
               );

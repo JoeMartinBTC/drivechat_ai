@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import './settings_item_widget.dart';
 import './settings_section_widget.dart';
 
@@ -40,13 +41,14 @@ class AudioSettingsSectionWidget extends StatelessWidget {
                   size: 24,
                 ),
                 title: Text('Lautsprecher'),
-                trailing: settingsData['preferredAudioDevice'] == 'speaker'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    settingsData['preferredAudioDevice'] == 'speaker'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   onSettingChanged('preferredAudioDevice', 'speaker');
                   Navigator.pop(context);
@@ -59,13 +61,14 @@ class AudioSettingsSectionWidget extends StatelessWidget {
                   size: 24,
                 ),
                 title: Text('Kopfhörer'),
-                trailing: settingsData['preferredAudioDevice'] == 'headphones'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    settingsData['preferredAudioDevice'] == 'headphones'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   onSettingChanged('preferredAudioDevice', 'headphones');
                   Navigator.pop(context);
@@ -78,13 +81,14 @@ class AudioSettingsSectionWidget extends StatelessWidget {
                   size: 24,
                 ),
                 title: Text('Bluetooth-Gerät'),
-                trailing: settingsData['preferredAudioDevice'] == 'bluetooth'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    settingsData['preferredAudioDevice'] == 'bluetooth'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   onSettingChanged('preferredAudioDevice', 'bluetooth');
                   Navigator.pop(context);
@@ -153,14 +157,12 @@ class AudioSettingsSectionWidget extends StatelessWidget {
                         onSettingChanged('microphoneSensitivity', value);
                       },
                       activeColor: AppTheme.primaryLight,
-                      inactiveColor:
-                          AppTheme.primaryLight.withValues(alpha: 0.3),
+                      inactiveColor: AppTheme.primaryLight.withValues(
+                        alpha: 0.3,
+                      ),
                     ),
                   ),
-                  Text(
-                    'Hoch',
-                    style: AppTheme.lightTheme.textTheme.bodySmall,
-                  ),
+                  Text('Hoch', style: AppTheme.lightTheme.textTheme.bodySmall),
                 ],
               ),
               Text(
@@ -196,11 +198,13 @@ class AudioSettingsSectionWidget extends StatelessWidget {
         SettingsItemWidget(
           title: 'Bevorzugtes Audio-Gerät',
           subtitle: _getAudioDeviceDisplayName(
-              settingsData['preferredAudioDevice'] as String),
+            settingsData['preferredAudioDevice'] as String,
+          ),
           leadingIcon: CustomIconWidget(
-            iconName: settingsData['preferredAudioDevice'] == 'speaker'
-                ? 'speaker'
-                : settingsData['preferredAudioDevice'] == 'headphones'
+            iconName:
+                settingsData['preferredAudioDevice'] == 'speaker'
+                    ? 'speaker'
+                    : settingsData['preferredAudioDevice'] == 'headphones'
                     ? 'headphones'
                     : 'bluetooth',
             color: AppTheme.primaryLight,
@@ -241,14 +245,17 @@ class AudioSettingsSectionWidget extends StatelessWidget {
                   ),
                   Expanded(
                     child: Slider(
-                      value: (settingsData['volumeLevel'] as double)
-                          .clamp(0.0, 1.0),
+                      value: (settingsData['volumeLevel'] as double).clamp(
+                        0.0,
+                        1.0,
+                      ),
                       onChanged: (value) {
                         onSettingChanged('volumeLevel', value);
                       },
                       activeColor: AppTheme.primaryLight,
-                      inactiveColor:
-                          AppTheme.primaryLight.withValues(alpha: 0.3),
+                      inactiveColor: AppTheme.primaryLight.withValues(
+                        alpha: 0.3,
+                      ),
                     ),
                   ),
                   CustomIconWidget(

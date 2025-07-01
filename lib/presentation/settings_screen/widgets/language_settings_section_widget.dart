@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import './settings_item_widget.dart';
 import './settings_section_widget.dart';
 
@@ -41,31 +42,35 @@ class LanguageSettingsSectionWidget extends StatelessWidget {
                 style: AppTheme.lightTheme.textTheme.titleLarge,
               ),
               SizedBox(height: 2.h),
-              ...languages.map((language) => ListTile(
-                    leading: Text(
-                      language['flag']!,
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    title: Text(language['name']!),
-                    trailing: settingsData['languageCode'] == language['code']
-                        ? CustomIconWidget(
+              ...languages.map(
+                (language) => ListTile(
+                  leading: Text(
+                    language['flag']!,
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  title: Text(language['name']!),
+                  trailing:
+                      settingsData['languageCode'] == language['code']
+                          ? CustomIconWidget(
                             iconName: 'check',
                             color: AppTheme.successLight,
                             size: 20,
                           )
-                        : null,
-                    onTap: () {
-                      onSettingChanged('languageCode', language['code']);
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                              'Sprache wurde auf ${language['name']} geändert'),
-                          backgroundColor: AppTheme.successLight,
+                          : null,
+                  onTap: () {
+                    onSettingChanged('languageCode', language['code']);
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Sprache wurde auf ${language['name']} geändert',
                         ),
-                      );
-                    },
-                  )),
+                        backgroundColor: AppTheme.successLight,
+                      ),
+                    );
+                  },
+                ),
+              ),
               SizedBox(height: 2.h),
             ],
           ),
@@ -99,8 +104,9 @@ class LanguageSettingsSectionWidget extends StatelessWidget {
         // Language Selection
         SettingsItemWidget(
           title: 'App-Sprache',
-          subtitle:
-              _getLanguageDisplayName(settingsData['languageCode'] as String),
+          subtitle: _getLanguageDisplayName(
+            settingsData['languageCode'] as String,
+          ),
           leadingIcon: CustomIconWidget(
             iconName: 'language',
             color: AppTheme.primaryLight,
@@ -218,7 +224,9 @@ class LanguageSettingsSectionWidget extends StatelessWidget {
                       _buildRegionalSetting('Zeitformat:', '24-Stunden'),
                       SizedBox(height: 1.h),
                       _buildRegionalSetting(
-                          'Dezimaltrennzeichen:', 'Komma (,)'),
+                        'Dezimaltrennzeichen:',
+                        'Komma (,)',
+                      ),
                       SizedBox(height: 1.h),
                       _buildRegionalSetting('Währung:', 'Euro (€)'),
                       SizedBox(height: 1.h),
@@ -246,10 +254,7 @@ class LanguageSettingsSectionWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: AppTheme.lightTheme.textTheme.bodyMedium,
-        ),
+        Text(label, style: AppTheme.lightTheme.textTheme.bodyMedium),
         Text(
           value,
           style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(

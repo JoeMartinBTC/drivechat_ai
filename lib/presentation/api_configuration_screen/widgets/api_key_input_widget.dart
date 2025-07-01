@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
 import '../../../core/utils/api_validation_utils.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/api_key_input_widget.dart
 
@@ -43,10 +44,7 @@ class ApiKeyInputWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.surfaceLight,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppTheme.borderLight,
-          width: 1,
-        ),
+        border: Border.all(color: AppTheme.borderLight, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,9 +95,10 @@ class ApiKeyInputWidget extends StatelessWidget {
                 }),
             ],
             decoration: InputDecoration(
-              hintText: isVisible
-                  ? 'sk_1234 5678 9012 3456...'
-                  : '••••••••••••••••••••',
+              hintText:
+                  isVisible
+                      ? 'sk_1234 5678 9012 3456...'
+                      : '••••••••••••••••••••',
               hintStyle: TextStyle(
                 fontFamily: 'Courier New',
                 fontSize: isVisible ? 14 : 16,
@@ -122,12 +121,14 @@ class ApiKeyInputWidget extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 2.w),
                       child: CustomIconWidget(
-                        iconName: _validateApiKey(controller.text) == null
-                            ? 'check_circle'
-                            : 'error',
-                        color: _validateApiKey(controller.text) == null
-                            ? AppTheme.successLight
-                            : AppTheme.errorLight,
+                        iconName:
+                            _validateApiKey(controller.text) == null
+                                ? 'check_circle'
+                                : 'error',
+                        color:
+                            _validateApiKey(controller.text) == null
+                                ? AppTheme.successLight
+                                : AppTheme.errorLight,
                         size: 20,
                       ),
                     ),
@@ -145,38 +146,23 @@ class ApiKeyInputWidget extends StatelessWidget {
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: AppTheme.borderLight,
-                  width: 1,
-                ),
+                borderSide: BorderSide(color: AppTheme.borderLight, width: 1),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: AppTheme.borderLight,
-                  width: 1,
-                ),
+                borderSide: BorderSide(color: AppTheme.borderLight, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: AppTheme.primaryLight,
-                  width: 2,
-                ),
+                borderSide: BorderSide(color: AppTheme.primaryLight, width: 2),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: AppTheme.errorLight,
-                  width: 1,
-                ),
+                borderSide: BorderSide(color: AppTheme.errorLight, width: 1),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: AppTheme.errorLight,
-                  width: 2,
-                ),
+                borderSide: BorderSide(color: AppTheme.errorLight, width: 2),
               ),
               filled: true,
               fillColor: AppTheme.backgroundLight,
@@ -254,8 +240,10 @@ class ApiKeyInputWidget extends StatelessWidget {
                 ),
                 if (_validateApiKey(controller.text) == null)
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 2.w,
+                      vertical: 0.5.h,
+                    ),
                     decoration: BoxDecoration(
                       color: AppTheme.successLight.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
@@ -275,11 +263,11 @@ class ApiKeyInputWidget extends StatelessWidget {
                         SizedBox(width: 1.w),
                         Text(
                           'Valid format',
-                          style:
-                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                            color: AppTheme.successLight,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: AppTheme.lightTheme.textTheme.bodySmall
+                              ?.copyWith(
+                                color: AppTheme.successLight,
+                                fontWeight: FontWeight.w500,
+                              ),
                         ),
                       ],
                     ),

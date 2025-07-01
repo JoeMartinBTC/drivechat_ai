@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/app_export.dart';
@@ -191,67 +190,70 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 40,
-              height: 4,
-              margin: const EdgeInsets.symmetric(vertical: 12),
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(2),
+      builder:
+          (context) => Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
               ),
             ),
-            ListTile(
-              leading: CustomIconWidget(
-                iconName: 'content_copy',
-                color: Theme.of(context).colorScheme.primary,
-                size: 24,
-              ),
-              title: const Text('Text kopieren'),
-              onTap: () {
-                Clipboard.setData(ClipboardData(text: message['message']));
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Text kopiert')),
-                );
-              },
-            ),
-            if (message['hasAudio'])
-              ListTile(
-                leading: CustomIconWidget(
-                  iconName: 'replay',
-                  color: Theme.of(context).colorScheme.primary,
-                  size: 24,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
-                title: const Text('Audio wiederholen'),
-                onTap: () {
-                  Navigator.pop(context);
-                  // Implement audio replay
-                },
-              ),
-            ListTile(
-              leading: CustomIconWidget(
-                iconName: 'report',
-                color: Theme.of(context).colorScheme.error,
-                size: 24,
-              ),
-              title: const Text('Problem melden'),
-              onTap: () {
-                Navigator.pop(context);
-                // Implement report issue
-              },
+                ListTile(
+                  leading: CustomIconWidget(
+                    iconName: 'content_copy',
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 24,
+                  ),
+                  title: const Text('Text kopieren'),
+                  onTap: () {
+                    Clipboard.setData(ClipboardData(text: message['message']));
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Text kopiert')),
+                    );
+                  },
+                ),
+                if (message['hasAudio'])
+                  ListTile(
+                    leading: CustomIconWidget(
+                      iconName: 'replay',
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 24,
+                    ),
+                    title: const Text('Audio wiederholen'),
+                    onTap: () {
+                      Navigator.pop(context);
+                      // Implement audio replay
+                    },
+                  ),
+                ListTile(
+                  leading: CustomIconWidget(
+                    iconName: 'report',
+                    color: Theme.of(context).colorScheme.error,
+                    size: 24,
+                  ),
+                  title: const Text('Problem melden'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    // Implement report issue
+                  },
+                ),
+                const SizedBox(height: 16),
+              ],
             ),
-            const SizedBox(height: 16),
-          ],
-        ),
-      ),
+          ),
     );
   }
 
@@ -275,8 +277,10 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
             if (_isOffline)
               Container(
                 width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 color: Theme.of(context).colorScheme.error,
                 child: Row(
                   children: [
@@ -316,22 +320,22 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'DriveChat AI Instructor',
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          'GetMyLappen',
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w600),
                         ),
                         Text(
                           _isConnected
                               ? 'Verbunden'
                               : 'Verbindung wird hergestellt...',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: _isConnected
-                                        ? Theme.of(context).colorScheme.primary
-                                        : Theme.of(context).colorScheme.error,
-                                  ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(
+                            color:
+                                _isConnected
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.error,
+                          ),
                         ),
                       ],
                     ),
@@ -339,10 +343,9 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
                   // Mode toggle
                   Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withValues(alpha: 0.1),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -352,11 +355,14 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
                           onTap: () => setState(() => _isVoiceMode = true),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 6),
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
                             decoration: BoxDecoration(
-                              color: _isVoiceMode
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Colors.transparent,
+                              color:
+                                  _isVoiceMode
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Colors.transparent,
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Row(
@@ -364,18 +370,24 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
                               children: [
                                 CustomIconWidget(
                                   iconName: 'mic',
-                                  color: _isVoiceMode
-                                      ? Colors.white
-                                      : Theme.of(context).colorScheme.primary,
+                                  color:
+                                      _isVoiceMode
+                                          ? Colors.white
+                                          : Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
                                   size: 16,
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
                                   'Sprache',
                                   style: TextStyle(
-                                    color: _isVoiceMode
-                                        ? Colors.white
-                                        : Theme.of(context).colorScheme.primary,
+                                    color:
+                                        _isVoiceMode
+                                            ? Colors.white
+                                            : Theme.of(
+                                              context,
+                                            ).colorScheme.primary,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -388,11 +400,14 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
                           onTap: () => setState(() => _isVoiceMode = false),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 6),
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
                             decoration: BoxDecoration(
-                              color: !_isVoiceMode
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Colors.transparent,
+                              color:
+                                  !_isVoiceMode
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Colors.transparent,
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Row(
@@ -400,18 +415,24 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
                               children: [
                                 CustomIconWidget(
                                   iconName: 'keyboard',
-                                  color: !_isVoiceMode
-                                      ? Colors.white
-                                      : Theme.of(context).colorScheme.primary,
+                                  color:
+                                      !_isVoiceMode
+                                          ? Colors.white
+                                          : Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
                                   size: 16,
                                 ),
                                 const SizedBox(width: 4),
                                 Text(
                                   'Text',
                                   style: TextStyle(
-                                    color: !_isVoiceMode
-                                        ? Colors.white
-                                        : Theme.of(context).colorScheme.primary,
+                                    color:
+                                        !_isVoiceMode
+                                            ? Colors.white
+                                            : Theme.of(
+                                              context,
+                                            ).colorScheme.primary,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -484,15 +505,16 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
                   ),
                 ],
               ),
-              child: _isVoiceMode
-                  ? VoiceRecordingWidget(
-                      isRecording: _isRecording,
-                      onToggleRecording: _toggleRecording,
-                    )
-                  : TextInputWidget(
-                      controller: _textController,
-                      onSend: _sendTextMessage,
-                    ),
+              child:
+                  _isVoiceMode
+                      ? VoiceRecordingWidget(
+                        isRecording: _isRecording,
+                        onToggleRecording: _toggleRecording,
+                      )
+                      : TextInputWidget(
+                        controller: _textController,
+                        onSend: _sendTextMessage,
+                      ),
             ),
           ],
         ),
@@ -505,12 +527,12 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
           BottomNavigationBarItem(
             icon: CustomIconWidget(
               iconName: 'chat',
-              color: _currentTabIndex == 0
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.6),
+              color:
+                  _currentTabIndex == 0
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
               size: 24,
             ),
             label: 'Unterhaltung',
@@ -518,12 +540,12 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
           BottomNavigationBarItem(
             icon: CustomIconWidget(
               iconName: 'history',
-              color: _currentTabIndex == 1
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.6),
+              color:
+                  _currentTabIndex == 1
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
               size: 24,
             ),
             label: 'Verlauf',
@@ -531,12 +553,12 @@ class _MainConversationInterfaceState extends State<MainConversationInterface>
           BottomNavigationBarItem(
             icon: CustomIconWidget(
               iconName: 'settings',
-              color: _currentTabIndex == 2
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.6),
+              color:
+                  _currentTabIndex == 2
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
               size: 24,
             ),
             label: 'Einstellungen',

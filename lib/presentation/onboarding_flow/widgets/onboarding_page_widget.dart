@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_image_widget.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
   final String title;
@@ -67,11 +67,7 @@ class OnboardingPageWidget extends StatelessWidget {
                     ),
 
                     // Animated icon overlay
-                    Positioned(
-                      bottom: 24,
-                      right: 24,
-                      child: animatedIcon,
-                    ),
+                    Positioned(bottom: 24, right: 24, child: animatedIcon),
                   ],
                 ),
               ),

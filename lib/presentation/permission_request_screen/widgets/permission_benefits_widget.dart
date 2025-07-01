@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class PermissionBenefitsWidget extends StatelessWidget {
   const PermissionBenefitsWidget({super.key});
@@ -53,12 +54,14 @@ class PermissionBenefitsWidget extends StatelessWidget {
             ),
           ),
           SizedBox(height: 3.h),
-          ...benefits.map((benefit) => _buildBenefitItem(
-                context,
-                benefit['icon'] as String,
-                benefit['title'] as String,
-                benefit['description'] as String,
-              )),
+          ...benefits.map(
+            (benefit) => _buildBenefitItem(
+              context,
+              benefit['icon'] as String,
+              benefit['title'] as String,
+              benefit['description'] as String,
+            ),
+          ),
         ],
       ),
     );
@@ -78,8 +81,9 @@ class PermissionBenefitsWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(2.w),
             decoration: BoxDecoration(
-              color: AppTheme.lightTheme.colorScheme.primary
-                  .withValues(alpha: 0.1),
+              color: AppTheme.lightTheme.colorScheme.primary.withValues(
+                alpha: 0.1,
+              ),
               borderRadius: BorderRadius.circular(8),
             ),
             child: CustomIconWidget(

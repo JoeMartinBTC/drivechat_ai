@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/security_settings_widget.dart
 
@@ -22,10 +23,7 @@ class SecuritySettingsWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.surfaceLight,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppTheme.borderLight,
-          width: 1,
-        ),
+        border: Border.all(color: AppTheme.borderLight, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,18 +63,16 @@ class SecuritySettingsWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppTheme.backgroundLight,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: AppTheme.borderLight,
-                width: 1,
-              ),
+              border: Border.all(color: AppTheme.borderLight, width: 1),
             ),
             child: Row(
               children: [
                 CustomIconWidget(
                   iconName: 'fingerprint',
-                  color: isBiometricEnabled
-                      ? AppTheme.successLight
-                      : AppTheme.textSecondaryLight,
+                  color:
+                      isBiometricEnabled
+                          ? AppTheme.successLight
+                          : AppTheme.textSecondaryLight,
                   size: 24,
                 ),
                 SizedBox(width: 3.w),
@@ -86,20 +82,16 @@ class SecuritySettingsWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Biometric Protection',
-                        style:
-                            AppTheme.lightTheme.textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.titleSmall
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       SizedBox(height: 0.5.h),
                       Text(
                         isBiometricEnabled
                             ? 'API key access requires biometric authentication'
                             : 'Enable Face ID/Touch ID/Fingerprint for API access',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color: AppTheme.textSecondaryLight,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(color: AppTheme.textSecondaryLight),
                       ),
                     ],
                   ),
@@ -149,12 +141,15 @@ class SecuritySettingsWidget extends StatelessWidget {
                 SizedBox(height: 1.h),
                 _buildSecurityFeature('AES-256 encryption for API key storage'),
                 _buildSecurityFeature(
-                    'Secure enclave storage (iOS) / Encrypted shared preferences (Android)'),
+                  'Secure enclave storage (iOS) / Encrypted shared preferences (Android)',
+                ),
                 _buildSecurityFeature(
-                    'No API key transmission to third parties'),
+                  'No API key transmission to third parties',
+                ),
                 _buildSecurityFeature('Local device storage only'),
                 _buildSecurityFeature(
-                    'Automatic key expiration options available'),
+                  'Automatic key expiration options available',
+                ),
               ],
             ),
           ),
@@ -195,11 +190,14 @@ class SecuritySettingsWidget extends StatelessWidget {
                 SizedBox(height: 1.h),
                 _buildSecurityTip('Never share your API key with others'),
                 _buildSecurityTip(
-                    'Regenerate API key if you suspect it\'s compromised'),
+                  'Regenerate API key if you suspect it\'s compromised',
+                ),
                 _buildSecurityTip(
-                    'Monitor your ElevenLabs usage dashboard regularly'),
+                  'Monitor your ElevenLabs usage dashboard regularly',
+                ),
                 _buildSecurityTip(
-                    'Enable biometric protection for enhanced security'),
+                  'Enable biometric protection for enhanced security',
+                ),
                 _buildSecurityTip('Keep your device secure with screen lock'),
               ],
             ),

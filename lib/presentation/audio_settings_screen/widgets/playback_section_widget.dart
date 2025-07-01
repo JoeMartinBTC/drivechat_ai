@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import '../../settings_screen/widgets/settings_item_widget.dart';
 import '../../settings_screen/widgets/settings_section_widget.dart';
 
@@ -195,45 +196,46 @@ class PlaybackSectionWidget extends StatelessWidget {
                 {
                   'speed': 0.5,
                   'label': '0.5x (Sehr langsam)',
-                  'description': 'Für komplexe Inhalte'
+                  'description': 'Für komplexe Inhalte',
                 },
                 {
                   'speed': 0.75,
                   'label': '0.75x (Langsam)',
-                  'description': 'Zum besseren Verstehen'
+                  'description': 'Zum besseren Verstehen',
                 },
                 {
                   'speed': 1.0,
                   'label': '1.0x (Normal)',
-                  'description': 'Standard-Geschwindigkeit'
+                  'description': 'Standard-Geschwindigkeit',
                 },
                 {
                   'speed': 1.25,
                   'label': '1.25x (Schnell)',
-                  'description': 'Leicht beschleunigt'
+                  'description': 'Leicht beschleunigt',
                 },
                 {
                   'speed': 1.5,
                   'label': '1.5x (Sehr schnell)',
-                  'description': 'Für Wiederholungen'
+                  'description': 'Für Wiederholungen',
                 },
                 {
                   'speed': 2.0,
                   'label': '2.0x (Doppelt)',
-                  'description': 'Maximale Geschwindigkeit'
+                  'description': 'Maximale Geschwindigkeit',
                 },
               ].map((item) {
                 double speed = item['speed'] as double;
                 return ListTile(
                   title: Text(item['label'] as String),
                   subtitle: Text(item['description'] as String),
-                  trailing: settingsData['playbackSpeed'] == speed
-                      ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.successLight,
-                          size: 20,
-                        )
-                      : null,
+                  trailing:
+                      settingsData['playbackSpeed'] == speed
+                          ? CustomIconWidget(
+                            iconName: 'check',
+                            color: AppTheme.successLight,
+                            size: 20,
+                          )
+                          : null,
                   onTap: () {
                     onSettingChanged('playbackSpeed', speed);
                     Navigator.pop(context);
@@ -292,14 +294,17 @@ class PlaybackSectionWidget extends StatelessWidget {
                   ),
                   Expanded(
                     child: Slider(
-                      value: (settingsData['volumeLevel'] as double)
-                          .clamp(0.0, 1.0),
+                      value: (settingsData['volumeLevel'] as double).clamp(
+                        0.0,
+                        1.0,
+                      ),
                       onChanged: (value) {
                         onSettingChanged('volumeLevel', value);
                       },
                       activeColor: AppTheme.primaryLight,
-                      inactiveColor:
-                          AppTheme.primaryLight.withValues(alpha: 0.3),
+                      inactiveColor: AppTheme.primaryLight.withValues(
+                        alpha: 0.3,
+                      ),
                     ),
                   ),
                   CustomIconWidget(
@@ -322,12 +327,14 @@ class PlaybackSectionWidget extends StatelessWidget {
         // Audio Device Selection
         SettingsItemWidget(
           title: 'Audio-Gerät',
-          subtitle:
-              _getAudioDeviceDisplayName(settingsData['audioDevice'] as String),
+          subtitle: _getAudioDeviceDisplayName(
+            settingsData['audioDevice'] as String,
+          ),
           leadingIcon: CustomIconWidget(
-            iconName: settingsData['audioDevice'] == 'speaker'
-                ? 'speaker'
-                : settingsData['audioDevice'] == 'headphones'
+            iconName:
+                settingsData['audioDevice'] == 'speaker'
+                    ? 'speaker'
+                    : settingsData['audioDevice'] == 'headphones'
                     ? 'headphones'
                     : 'bluetooth',
             color: AppTheme.primaryLight,
@@ -340,7 +347,8 @@ class PlaybackSectionWidget extends StatelessWidget {
         SettingsItemWidget(
           title: 'Wiedergabegeschwindigkeit',
           subtitle: _getPlaybackSpeedDisplayName(
-              settingsData['playbackSpeed'] as double),
+            settingsData['playbackSpeed'] as double,
+          ),
           leadingIcon: CustomIconWidget(
             iconName: 'speed',
             color: AppTheme.primaryLight,
@@ -414,19 +422,17 @@ class PlaybackSectionWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Automatisches Umschalten aktiv',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: AppTheme.primaryLight,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodyMedium
+                            ?.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: AppTheme.primaryLight,
+                            ),
                       ),
                       SizedBox(height: 0.5.h),
                       Text(
                         'Die App wechselt automatisch zu neu verbundenen Audio-Geräten',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color: AppTheme.primaryLight,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(color: AppTheme.primaryLight),
                       ),
                     ],
                   ),

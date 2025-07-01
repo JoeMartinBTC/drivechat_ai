@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final bool isSearching;
@@ -64,8 +64,10 @@ class EmptyStateWidget extends StatelessWidget {
                 ),
                 label: const Text('Erste Unterhaltung beginnen'),
                 style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16,
+                  ),
                 ),
               ),
             ],

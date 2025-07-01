@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/app_export.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/custom_icon_widget.dart';
 import './widgets/onboarding_page_widget.dart';
 import './widgets/page_indicator_widget.dart';
 
@@ -78,21 +78,16 @@ class _OnboardingFlowState extends State<OnboardingFlow>
       vsync: this,
     );
 
-    _micScaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.2,
-    ).animate(CurvedAnimation(
-      parent: _micAnimationController,
-      curve: Curves.easeInOut,
-    ));
+    _micScaleAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
+      CurvedAnimation(parent: _micAnimationController, curve: Curves.easeInOut),
+    );
 
-    _typingOpacityAnimation = Tween<double>(
-      begin: 0.3,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _typingAnimationController,
-      curve: Curves.easeInOut,
-    ));
+    _typingOpacityAnimation = Tween<double>(begin: 0.3, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _typingAnimationController,
+        curve: Curves.easeInOut,
+      ),
+    );
 
     _micAnimationController.repeat(reverse: true);
     _typingAnimationController.repeat(reverse: true);
@@ -364,9 +359,12 @@ class _OnboardingFlowState extends State<OnboardingFlow>
                         width: _currentPage == index ? 24 : 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: _currentPage == index
-                              ? AppTheme.primaryLight
-                              : AppTheme.primaryLight.withValues(alpha: 0.3),
+                          color:
+                              _currentPage == index
+                                  ? AppTheme.primaryLight
+                                  : AppTheme.primaryLight.withValues(
+                                    alpha: 0.3,
+                                  ),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -390,11 +388,11 @@ class _OnboardingFlowState extends State<OnboardingFlow>
                         _currentPage == _onboardingData.length - 1
                             ? 'Loslegen'
                             : 'Weiter',
-                        style:
-                            AppTheme.lightTheme.textTheme.labelLarge?.copyWith(
-                          color: AppTheme.backgroundLight,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.labelLarge
+                            ?.copyWith(
+                              color: AppTheme.backgroundLight,
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                     ),
                   ),
@@ -412,10 +410,8 @@ class _OnboardingFlowState extends State<OnboardingFlow>
                       },
                       child: Text(
                         'Zurück',
-                        style:
-                            AppTheme.lightTheme.textTheme.labelLarge?.copyWith(
-                          color: AppTheme.textSecondaryLight,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.labelLarge
+                            ?.copyWith(color: AppTheme.textSecondaryLight),
                       ),
                     ),
                 ],

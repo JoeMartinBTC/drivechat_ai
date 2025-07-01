@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../../../core/app_export.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
@@ -37,9 +35,9 @@ class TextInputWidget extends StatelessWidget {
               Text(
                 'Textmodus',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
@@ -54,10 +52,9 @@ class TextInputWidget extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(24),
                   border: Border.all(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .outline
-                        .withValues(alpha: 0.2),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.outline.withValues(alpha: 0.2),
                     width: 1,
                   ),
                 ),
@@ -74,11 +71,10 @@ class TextInputWidget extends StatelessWidget {
                       vertical: 12,
                     ),
                     hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withValues(alpha: 0.5),
-                        ),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.5),
+                    ),
                   ),
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
@@ -91,23 +87,23 @@ class TextInputWidget extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: controller.text.trim().isEmpty
-                      ? Theme.of(context)
-                          .colorScheme
-                          .outline
-                          .withValues(alpha: 0.3)
-                      : Theme.of(context).colorScheme.primary,
+                  color:
+                      controller.text.trim().isEmpty
+                          ? Theme.of(
+                            context,
+                          ).colorScheme.outline.withValues(alpha: 0.3)
+                          : Theme.of(context).colorScheme.primary,
                   shape: BoxShape.circle,
                 ),
                 child: Center(
                   child: CustomIconWidget(
                     iconName: 'send',
-                    color: controller.text.trim().isEmpty
-                        ? Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withValues(alpha: 0.5)
-                        : Colors.white,
+                    color:
+                        controller.text.trim().isEmpty
+                            ? Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: 0.5)
+                            : Colors.white,
                     size: 20,
                   ),
                 ),
@@ -122,11 +118,10 @@ class TextInputWidget extends StatelessWidget {
         Text(
           'Drücken Sie Enter zum Senden',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface
-                    .withValues(alpha: 0.6),
-              ),
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withValues(alpha: 0.6),
+          ),
           textAlign: TextAlign.center,
         ),
       ],

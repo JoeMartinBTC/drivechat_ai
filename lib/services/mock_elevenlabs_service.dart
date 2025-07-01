@@ -32,12 +32,12 @@ class MockElevenLabsService {
           'can_extend_character_limit': true,
           'allowed_to_extend_character_limit': true,
           'next_character_count_reset_unix': 1672531200,
-          'status': 'active'
+          'status': 'active',
         },
         'is_new_user': false,
         'xi_api_key': 'MOCK_API_KEY',
-        'can_use_delayed_payment_methods': true
-      }
+        'can_use_delayed_payment_methods': true,
+      },
     };
   }
 
@@ -67,8 +67,10 @@ class MockElevenLabsService {
     ];
   }
 
-  Future<Map<String, dynamic>> textToSpeech(String text,
-      {String? voiceId}) async {
+  Future<Map<String, dynamic>> textToSpeech(
+    String text, {
+    String? voiceId,
+  }) async {
     try {
       if (kDebugMode) {
         print('Mock TTS: $text');
@@ -118,9 +120,9 @@ class MockElevenLabsService {
           'tier': 'pro',
           'character_count': 50000,
           'character_limit': 100000,
-          'status': 'active'
+          'status': 'active',
         },
-      }
+      },
     };
   }
 

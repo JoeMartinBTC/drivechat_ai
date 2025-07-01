@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class SettingsItemWidget extends StatelessWidget {
   final String title;
@@ -32,16 +33,14 @@ class SettingsItemWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: enabled
-              ? Colors.transparent
-              : AppTheme.textSecondaryLight.withValues(alpha: 0.1),
+          color:
+              enabled
+                  ? Colors.transparent
+                  : AppTheme.textSecondaryLight.withValues(alpha: 0.1),
         ),
         child: Row(
           children: [
-            if (leadingIcon != null) ...[
-              leadingIcon!,
-              SizedBox(width: 3.w),
-            ],
+            if (leadingIcon != null) ...[leadingIcon!, SizedBox(width: 3.w)],
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,9 +49,10 @@ class SettingsItemWidget extends StatelessWidget {
                     title,
                     style: AppTheme.lightTheme.textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w500,
-                      color: enabled
-                          ? AppTheme.textPrimaryLight
-                          : AppTheme.textSecondaryLight,
+                      color:
+                          enabled
+                              ? AppTheme.textPrimaryLight
+                              : AppTheme.textSecondaryLight,
                     ),
                   ),
                   if (subtitle != null) ...[

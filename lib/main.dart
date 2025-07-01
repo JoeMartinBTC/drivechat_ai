@@ -25,15 +25,17 @@ class MyApp extends StatelessWidget {
           providers: [
             ChangeNotifierProvider(create: (_) => ApiConfigController()),
             ChangeNotifierProxyProvider<ApiConfigController, AudioController>(
-              create: (context) => AudioController(
-                Provider.of<ApiConfigController>(context, listen: false),
-              ),
-              update: (context, apiConfigController, previous) =>
-                  previous ?? AudioController(apiConfigController),
+              create:
+                  (context) => AudioController(
+                    Provider.of<ApiConfigController>(context, listen: false),
+                  ),
+              update:
+                  (context, apiConfigController, previous) =>
+                      previous ?? AudioController(apiConfigController),
             ),
           ],
           child: MaterialApp(
-            title: 'DriveChat AI',
+            title: 'GetMyLappen',
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: ThemeMode.light,

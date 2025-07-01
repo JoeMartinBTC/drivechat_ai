@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class SplashLoadingWidget extends StatefulWidget {
   final bool isLoading;
@@ -34,13 +34,9 @@ class _SplashLoadingWidgetState extends State<SplashLoadingWidget>
       duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
-    _pulseAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _pulseController,
-      curve: Curves.easeInOut,
-    ));
+    _pulseAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
 
     if (widget.isLoading) {
       _pulseController.repeat(reverse: true);

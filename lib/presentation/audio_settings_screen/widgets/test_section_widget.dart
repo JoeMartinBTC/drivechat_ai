@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import '../../settings_screen/widgets/settings_item_widget.dart';
 import '../../settings_screen/widgets/settings_section_widget.dart';
 
@@ -49,7 +50,9 @@ class _TestSectionWidgetState extends State<TestSectionWidget>
     );
     _pulseAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
-          parent: _microphoneTestController, curve: Curves.easeInOut),
+        parent: _microphoneTestController,
+        curve: Curves.easeInOut,
+      ),
     );
   }
 
@@ -94,11 +97,17 @@ class _TestSectionWidgetState extends State<TestSectionWidget>
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildTestResult('Mikrofon-Erkennung', true,
-                    'Mikrofon gefunden und funktionsfähig'),
+                _buildTestResult(
+                  'Mikrofon-Erkennung',
+                  true,
+                  'Mikrofon gefunden und funktionsfähig',
+                ),
                 SizedBox(height: 1.h),
                 _buildTestResult(
-                    'Audio-Aufnahme', true, 'Aufnahme erfolgreich'),
+                  'Audio-Aufnahme',
+                  true,
+                  'Aufnahme erfolgreich',
+                ),
                 SizedBox(height: 1.h),
                 _buildTestResult('Signal-Stärke', true, '92% - Ausgezeichnet'),
                 SizedBox(height: 1.h),
@@ -318,10 +327,7 @@ class _TestSectionWidgetState extends State<TestSectionWidget>
           ),
           SizedBox(width: 2.w),
           Expanded(
-            child: Text(
-              title,
-              style: AppTheme.lightTheme.textTheme.bodyMedium,
-            ),
+            child: Text(title, style: AppTheme.lightTheme.textTheme.bodyMedium),
           ),
         ],
       ),
@@ -427,11 +433,17 @@ class _TestSectionWidgetState extends State<TestSectionWidget>
               children: [
                 _buildTestResult('Internetverbindung', true, 'Stabil (WiFi)'),
                 SizedBox(height: 1.h),
-                _buildTestResult('Latenz', true,
-                    '${widget.settingsData['latencyMeasurement']} ms'),
+                _buildTestResult(
+                  'Latenz',
+                  true,
+                  '${widget.settingsData['latencyMeasurement']} ms',
+                ),
                 SizedBox(height: 1.h),
-                _buildTestResult('Signalstärke', true,
-                    '${(widget.settingsData['signalStrength'] * 100).round()}%'),
+                _buildTestResult(
+                  'Signalstärke',
+                  true,
+                  '${(widget.settingsData['signalStrength'] * 100).round()}%',
+                ),
                 SizedBox(height: 1.h),
                 _buildTestResult('Paketverlust', true, '0% - Perfekt'),
                 SizedBox(height: 2.h),
@@ -446,19 +458,17 @@ class _TestSectionWidgetState extends State<TestSectionWidget>
                     children: [
                       Text(
                         'Verbindungsqualität: Ausgezeichnet',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: AppTheme.successLight,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodyMedium
+                            ?.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: AppTheme.successLight,
+                            ),
                       ),
                       SizedBox(height: 0.5.h),
                       Text(
                         'Ihre Verbindung ist optimal für Echtzeit-Audio.',
-                        style:
-                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                          color: AppTheme.successLight,
-                        ),
+                        style: AppTheme.lightTheme.textTheme.bodySmall
+                            ?.copyWith(color: AppTheme.successLight),
                       ),
                     ],
                   ),
@@ -517,102 +527,123 @@ class _TestSectionWidgetState extends State<TestSectionWidget>
         // Microphone Test with Recording Playback
         SettingsItemWidget(
           title: 'Mikrofon-Test',
-          subtitle: _isMicrophoneTestRunning
-              ? 'Test läuft... Bitte sprechen Sie'
-              : 'Mikrofon und Aufnahmequalität testen',
+          subtitle:
+              _isMicrophoneTestRunning
+                  ? 'Test läuft... Bitte sprechen Sie'
+                  : 'Mikrofon und Aufnahmequalität testen',
           leadingIcon: AnimatedBuilder(
             animation: _microphoneTestController,
             builder: (context, child) {
               return CustomIconWidget(
                 iconName: 'mic',
-                color: _isMicrophoneTestRunning
-                    ? Color.lerp(AppTheme.primaryLight, AppTheme.errorLight,
-                            _pulseAnimation.value) ??
-                        AppTheme.primaryLight
-                    : AppTheme.primaryLight,
+                color:
+                    _isMicrophoneTestRunning
+                        ? Color.lerp(
+                              AppTheme.primaryLight,
+                              AppTheme.errorLight,
+                              _pulseAnimation.value,
+                            ) ??
+                            AppTheme.primaryLight
+                        : AppTheme.primaryLight,
                 size: 24,
               );
             },
           ),
-          trailing: _isMicrophoneTestRunning
-              ? SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(AppTheme.primaryLight),
-                  ),
-                )
-              : null,
+          trailing:
+              _isMicrophoneTestRunning
+                  ? SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppTheme.primaryLight,
+                      ),
+                    ),
+                  )
+                  : null,
           onTap: _isMicrophoneTestRunning ? null : _startMicrophoneTest,
         ),
 
         // Echo Cancellation Test
         SettingsItemWidget(
           title: 'Echo-Unterdrückung Test',
-          subtitle: _isEchoTestRunning
-              ? 'Echo-Test läuft...'
-              : 'Rückkopplung und Echo-Unterdrückung prüfen',
+          subtitle:
+              _isEchoTestRunning
+                  ? 'Echo-Test läuft...'
+                  : 'Rückkopplung und Echo-Unterdrückung prüfen',
           leadingIcon: AnimatedBuilder(
             animation: _echoTestController,
             builder: (context, child) {
               return CustomIconWidget(
                 iconName: 'vibration',
-                color: _isEchoTestRunning
-                    ? Color.lerp(AppTheme.primaryLight, AppTheme.successLight,
-                            _echoTestController.value) ??
-                        AppTheme.primaryLight
-                    : AppTheme.primaryLight,
+                color:
+                    _isEchoTestRunning
+                        ? Color.lerp(
+                              AppTheme.primaryLight,
+                              AppTheme.successLight,
+                              _echoTestController.value,
+                            ) ??
+                            AppTheme.primaryLight
+                        : AppTheme.primaryLight,
                 size: 24,
               );
             },
           ),
-          trailing: _isEchoTestRunning
-              ? SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(AppTheme.primaryLight),
-                  ),
-                )
-              : null,
+          trailing:
+              _isEchoTestRunning
+                  ? SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppTheme.primaryLight,
+                      ),
+                    ),
+                  )
+                  : null,
           onTap: _isEchoTestRunning ? null : _startEchoTest,
         ),
 
         // Connection Quality Test
         SettingsItemWidget(
           title: 'Verbindungsqualität Test',
-          subtitle: _isConnectionTestRunning
-              ? 'Verbindung wird getestet...'
-              : 'Latenz und Signalstärke messen',
+          subtitle:
+              _isConnectionTestRunning
+                  ? 'Verbindung wird getestet...'
+                  : 'Latenz und Signalstärke messen',
           leadingIcon: AnimatedBuilder(
             animation: _connectionTestController,
             builder: (context, child) {
               return CustomIconWidget(
                 iconName: 'network_check',
-                color: _isConnectionTestRunning
-                    ? Color.lerp(AppTheme.primaryLight, AppTheme.warningLight,
-                            _connectionTestController.value) ??
-                        AppTheme.primaryLight
-                    : AppTheme.primaryLight,
+                color:
+                    _isConnectionTestRunning
+                        ? Color.lerp(
+                              AppTheme.primaryLight,
+                              AppTheme.warningLight,
+                              _connectionTestController.value,
+                            ) ??
+                            AppTheme.primaryLight
+                        : AppTheme.primaryLight,
                 size: 24,
               );
             },
           ),
-          trailing: _isConnectionTestRunning
-              ? SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(AppTheme.primaryLight),
-                  ),
-                )
-              : null,
+          trailing:
+              _isConnectionTestRunning
+                  ? SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppTheme.primaryLight,
+                      ),
+                    ),
+                  )
+                  : null,
           onTap: _isConnectionTestRunning ? null : _startConnectionQualityTest,
         ),
 
@@ -626,10 +657,7 @@ class _TestSectionWidgetState extends State<TestSectionWidget>
             decoration: BoxDecoration(
               color: AppTheme.surfaceLight,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: AppTheme.borderLight,
-                width: 1,
-              ),
+              border: Border.all(color: AppTheme.borderLight, width: 1),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -665,9 +693,9 @@ class _TestSectionWidgetState extends State<TestSectionWidget>
                             '${widget.settingsData['latencyMeasurement']} ms',
                             style: AppTheme.lightTheme.textTheme.bodySmall
                                 ?.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: AppTheme.successLight,
-                            ),
+                                  fontWeight: FontWeight.w500,
+                                  color: AppTheme.successLight,
+                                ),
                           ),
                         ],
                       ),
@@ -684,9 +712,9 @@ class _TestSectionWidgetState extends State<TestSectionWidget>
                             '${(widget.settingsData['signalStrength'] * 100).round()}%',
                             style: AppTheme.lightTheme.textTheme.bodySmall
                                 ?.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: AppTheme.successLight,
-                            ),
+                                  fontWeight: FontWeight.w500,
+                                  color: AppTheme.successLight,
+                                ),
                           ),
                         ],
                       ),

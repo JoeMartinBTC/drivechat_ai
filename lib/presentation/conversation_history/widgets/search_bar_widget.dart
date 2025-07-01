@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class SearchBarWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -37,23 +37,27 @@ class SearchBarWidget extends StatelessWidget {
               size: 24,
             ),
           ),
-          suffixIcon: isSearching
-              ? IconButton(
-                  onPressed: onClear,
-                  icon: CustomIconWidget(
-                    iconName: 'clear',
-                    color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
-                    size: 24,
-                  ),
-                  tooltip: 'Suche löschen',
-                )
-              : null,
+          suffixIcon:
+              isSearching
+                  ? IconButton(
+                    onPressed: onClear,
+                    icon: CustomIconWidget(
+                      iconName: 'clear',
+                      color: AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                      size: 24,
+                    ),
+                    tooltip: 'Suche löschen',
+                  )
+                  : null,
           border: InputBorder.none,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 16,
+          ),
           hintStyle: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-            color: AppTheme.lightTheme.colorScheme.onSurfaceVariant
-                .withValues(alpha: 0.7),
+            color: AppTheme.lightTheme.colorScheme.onSurfaceVariant.withValues(
+              alpha: 0.7,
+            ),
           ),
         ),
         style: AppTheme.lightTheme.textTheme.bodyMedium,

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 
 class PrivacyAssuranceWidget extends StatelessWidget {
   const PrivacyAssuranceWidget({super.key});
@@ -14,8 +15,9 @@ class PrivacyAssuranceWidget extends StatelessWidget {
         color: AppTheme.lightTheme.colorScheme.tertiary.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color:
-              AppTheme.lightTheme.colorScheme.tertiary.withValues(alpha: 0.2),
+          color: AppTheme.lightTheme.colorScheme.tertiary.withValues(
+            alpha: 0.2,
+          ),
         ),
       ),
       child: Column(
@@ -26,8 +28,9 @@ class PrivacyAssuranceWidget extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(2.w),
                 decoration: BoxDecoration(
-                  color: AppTheme.lightTheme.colorScheme.tertiary
-                      .withValues(alpha: 0.1),
+                  color: AppTheme.lightTheme.colorScheme.tertiary.withValues(
+                    alpha: 0.1,
+                  ),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: CustomIconWidget(

@@ -75,7 +75,9 @@ class ApiValidationUtils {
     for (int i = 0; i < cleaned.length; i += 4) {
       if (i > 0) formatted += ' ';
       formatted += cleaned.substring(
-          i, (i + 4 < cleaned.length) ? i + 4 : cleaned.length);
+        i,
+        (i + 4 < cleaned.length) ? i + 4 : cleaned.length,
+      );
     }
 
     return formatted;
@@ -102,7 +104,8 @@ class ApiValidationUtils {
     if (kDebugMode) {
       String maskedKey = key.length > 8 ? '${key.substring(0, 8)}***' : '***';
       print(
-          'API Key Validation - Key: $maskedKey, Result: ${result ?? "Valid"}');
+        'API Key Validation - Key: $maskedKey, Result: ${result ?? "Valid"}',
+      );
     }
   }
 }

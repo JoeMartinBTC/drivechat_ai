@@ -1,4 +1,3 @@
-// lib/controllers/api_config_controller.dart
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,8 +18,7 @@ class ApiConfigController extends ChangeNotifier {
   bool _isConnected = false;
   bool _isLoading = false;
   String _connectionStatus = 'Not tested';
-  bool _useMockServices = false; // Set to false to use real API by default
-  bool _forceLiveApiMode = false; // New flag to force live API usage
+  bool _useMockServices = false; // Set to false to use real API
 
   // Getters
   bool get isInitialized => _isInitialized;
@@ -29,8 +27,6 @@ class ApiConfigController extends ChangeNotifier {
   String get connectionStatus => _connectionStatus;
   ElevenLabsConfig get config => _config;
   bool get useMockServices => _useMockServices;
-  bool get forceLiveApiMode => _forceLiveApiMode;
-  bool get isInDemoMode => _useMockServices && !_forceLiveApiMode;
 
   // Constructor
   ApiConfigController() {
@@ -44,15 +40,6 @@ class ApiConfigController extends ChangeNotifier {
       notifyListeners();
 
       final prefs = await SharedPreferences.getInstance();
-
-      // Load the API mode preference (defaults to live API)
-      _useMockServices = prefs.getBool('use_mock_services') ?? false;
-      _forceLiveApiMode = prefs.getBool('force_live_api_mode') ?? false;
-
-      // If force live API is enabled, override mock services
-      if (_forceLiveApiMode) {
-        _useMockServices = false;
-      }
 
       // Load configuration from SharedPreferences
       final Map<String, dynamic> prefsMap = {
@@ -70,10 +57,9 @@ class ApiConfigController extends ChangeNotifier {
       _config = ElevenLabsConfig.fromPrefs(prefsMap);
 
       // Initialize services
-      if (_useMockServices && !_forceLiveApiMode) {
+      if (_useMockServices) {
         await _mockElevenlabsService.initialize();
         _isConnected = true;
-        _connectionStatus = 'Connected to mock service (Demo Mode)';
       } else if (_config.hasValidCredentials) {
         // Initialize the real service if credentials exist
         _isConnected = await _elevenlabsService.initialize();
@@ -97,80 +83,16 @@ class ApiConfigController extends ChangeNotifier {
     }
   }
 
-  /// Enable force live API mode - this will always use live API regardless of toggle
-  Future<void> enableForceLiveApiMode() async {
-    _forceLiveApiMode = true;
-    _useMockServices = false;
-
-    // Save the preference
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('force_live_api_mode', true);
-    await prefs.setBool('use_mock_services', false);
-
-    if (kDebugMode) {
-      print(
-          'Force Live API Mode enabled - App will only use live ElevenLabs API');
-    }
-
-    notifyListeners();
-    _initialize(); // Re-initialize with the new setting
-  }
-
-  /// Disable force live API mode - allows normal toggle behavior
-  Future<void> disableForceLiveApiMode() async {
-    _forceLiveApiMode = false;
-
-    // Save the preference
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('force_live_api_mode', false);
-
-    if (kDebugMode) {
-      print(
-          'Force Live API Mode disabled - Normal API mode selection available');
-    }
-
-    notifyListeners();
-  }
-
   /// Set whether to use mock services (for development and testing)
-  /// This will be overridden if force live API mode is enabled
-  Future<void> setUseMockServices(bool useMock) async {
-    // If force live API is enabled, prevent switching to mock
-    if (_forceLiveApiMode && useMock) {
-      if (kDebugMode) {
-        print('Cannot enable mock services - Force Live API Mode is active');
-      }
-      return;
-    }
-
+  void setUseMockServices(bool useMock) {
     _useMockServices = useMock;
-
-    // Save the preference
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('use_mock_services', useMock);
-
     notifyListeners();
     _initialize(); // Re-initialize with the new setting
-  }
-
-  /// Force use of live API (useful for ensuring production mode)
-  Future<void> forceLiveApi() async {
-    if (_useMockServices || !_forceLiveApiMode) {
-      await enableForceLiveApiMode();
-      if (kDebugMode) {
-        print('Forced to live ElevenLabs API - Demo mode disabled');
-      }
-    }
   }
 
   /// Test the connection to the ElevenLabs API
   Future<bool> testConnection() async {
-    // If force live API is enabled, ensure we're not using mock services
-    if (_forceLiveApiMode) {
-      _useMockServices = false;
-    }
-
-    if (!_useMockServices && _config.apiKey.isEmpty) {
+    if (_config.apiKey.isEmpty) {
       _connectionStatus = 'API key is empty';
       _isConnected = false;
       notifyListeners();
@@ -183,10 +105,8 @@ class ApiConfigController extends ChangeNotifier {
       notifyListeners();
 
       Map<String, dynamic> result;
-      if (_useMockServices && !_forceLiveApiMode) {
+      if (_useMockServices) {
         result = await _mockElevenlabsService.testConnection();
-        _connectionStatus =
-            'Mock connection successful (Demo Mode) - Enable "Force Live API" for production use';
       } else {
         // Update service configuration with latest values
         _elevenlabsService.updateConfiguration(
@@ -199,17 +119,12 @@ class ApiConfigController extends ChangeNotifier {
         );
 
         result = await _elevenlabsService.testConnection();
-        if (result['success'] == true) {
-          _connectionStatus = _forceLiveApiMode
-              ? 'Live API connection successful (Force Live Mode)'
-              : 'Live API connection successful';
-        }
       }
 
       _isConnected = result['success'] == true;
-      if (!_isConnected && !_useMockServices) {
-        _connectionStatus = result['message'] ?? 'Connection failed';
-      }
+      _connectionStatus =
+          result['message'] ??
+          (_isConnected ? 'Connection successful' : 'Connection failed');
 
       return _isConnected;
     } catch (e) {
@@ -225,31 +140,24 @@ class ApiConfigController extends ChangeNotifier {
   /// Save the current configuration
   Future<bool> saveConfiguration(ElevenLabsConfig newConfig) async {
     try {
-      // If force live API is enabled, ensure we're not using mock services
-      if (_forceLiveApiMode) {
-        _useMockServices = false;
+      // Validate API key format
+      final apiKeyValidationError = ApiValidationUtils.validateElevenLabsApiKey(
+        newConfig.apiKey,
+      );
+      if (apiKeyValidationError != null) {
+        _connectionStatus = 'Invalid API key: $apiKeyValidationError';
+        notifyListeners();
+        return false;
       }
 
-      // Only validate if using live API
-      if (!_useMockServices) {
-        // Validate API key format
-        final apiKeyValidationError =
-            ApiValidationUtils.validateElevenLabsApiKey(newConfig.apiKey);
-        if (apiKeyValidationError != null) {
-          _connectionStatus = 'Invalid API key: $apiKeyValidationError';
-          notifyListeners();
-          return false;
-        }
-
-        // Validate agent number format
-        final agentNumberValidationError =
-            ApiValidationUtils.validateAgentNumber(newConfig.agentNumber);
-        if (agentNumberValidationError != null) {
-          _connectionStatus =
-              'Invalid agent number: $agentNumberValidationError';
-          notifyListeners();
-          return false;
-        }
+      // Validate agent number format
+      final agentNumberValidationError = ApiValidationUtils.validateAgentNumber(
+        newConfig.agentNumber,
+      );
+      if (agentNumberValidationError != null) {
+        _connectionStatus = 'Invalid agent number: $agentNumberValidationError';
+        notifyListeners();
+        return false;
       }
 
       // Update configuration
@@ -257,7 +165,7 @@ class ApiConfigController extends ChangeNotifier {
 
       // Test connection with new configuration
       final connectionSuccessful = await testConnection();
-      if (!connectionSuccessful && !_useMockServices) {
+      if (!connectionSuccessful) {
         return false;
       }
 
@@ -277,12 +185,8 @@ class ApiConfigController extends ChangeNotifier {
         }
       }
 
-      // Also save the API mode preferences
-      await prefs.setBool('use_mock_services', _useMockServices);
-      await prefs.setBool('force_live_api_mode', _forceLiveApiMode);
-
       // Update service configuration
-      if (_useMockServices && !_forceLiveApiMode) {
+      if (_useMockServices) {
         _mockElevenlabsService.updateConfiguration(
           apiKey: _config.apiKey,
           agentNumber: _config.agentNumber,
@@ -316,7 +220,7 @@ class ApiConfigController extends ChangeNotifier {
   Future<bool> resetConfiguration() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      // Clear API-related settings including the mock service preference
+      // Only clear API-related settings
       await prefs.remove('elevenlabs_api_key');
       await prefs.remove('elevenlabs_agent_number');
       await prefs.remove('selected_agent');
@@ -324,17 +228,10 @@ class ApiConfigController extends ChangeNotifier {
       await prefs.remove('response_speed');
       await prefs.remove('audio_quality');
       await prefs.remove('biometric_enabled');
-      await prefs.remove('use_mock_services');
-      await prefs.remove('force_live_api_mode');
 
       // Reset local config
-      _config = const ElevenLabsConfig(
-        apiKey: '',
-        agentNumber: '',
-      );
+      _config = const ElevenLabsConfig(apiKey: '', agentNumber: '');
 
-      _useMockServices = false; // Default to live API
-      _forceLiveApiMode = false; // Reset force mode
       _isConnected = false;
       _connectionStatus = 'Not tested';
 
@@ -351,7 +248,7 @@ class ApiConfigController extends ChangeNotifier {
   /// Get available voices from the ElevenLabs API
   Future<List<Map<String, dynamic>>> getAvailableVoices() async {
     try {
-      if (_useMockServices && !_forceLiveApiMode) {
+      if (_useMockServices) {
         return await _mockElevenlabsService.getVoices();
       } else {
         return await _elevenlabsService.getVoices();
@@ -367,7 +264,7 @@ class ApiConfigController extends ChangeNotifier {
   /// Get user information from the ElevenLabs API
   Future<Map<String, dynamic>> getUserInfo() async {
     try {
-      if (_useMockServices && !_forceLiveApiMode) {
+      if (_useMockServices) {
         return await _mockElevenlabsService.getUserInfo();
       } else {
         return await _elevenlabsService.getUserInfo();
@@ -376,17 +273,14 @@ class ApiConfigController extends ChangeNotifier {
       if (kDebugMode) {
         print('Error getting user info: $e');
       }
-      return {
-        'success': false,
-        'message': 'Failed to get user info: $e',
-      };
+      return {'success': false, 'message': 'Failed to get user info: $e'};
     }
   }
 
   /// Get remaining character quota
   Future<int> getRemainingCharacters() async {
     try {
-      if (_useMockServices && !_forceLiveApiMode) {
+      if (_useMockServices) {
         return await _mockElevenlabsService.getRemainingCharacters();
       } else {
         return await _elevenlabsService.getRemainingCharacters();

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import '../../settings_screen/widgets/settings_item_widget.dart';
 import '../../settings_screen/widgets/settings_section_widget.dart';
 
@@ -71,8 +72,9 @@ class AdvancedSettingsWidget extends StatelessWidget {
                 // Mock export functionality
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content:
-                        Text('Debug-Informationen in Zwischenablage kopiert'),
+                    content: Text(
+                      'Debug-Informationen in Zwischenablage kopiert',
+                    ),
                     backgroundColor: AppTheme.successLight,
                   ),
                 );
@@ -106,24 +108,22 @@ class AdvancedSettingsWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppTheme.surfaceLight,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: AppTheme.borderLight,
-              width: 1,
-            ),
+            border: Border.all(color: AppTheme.borderLight, width: 1),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: items.map((item) {
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 0.3.h),
-                child: Text(
-                  item,
-                  style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                    fontFamily: 'monospace',
-                  ),
-                ),
-              );
-            }).toList(),
+            children:
+                items.map((item) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 0.3.h),
+                    child: Text(
+                      item,
+                      style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                        fontFamily: 'monospace',
+                      ),
+                    ),
+                  );
+                }).toList(),
           ),
         ),
       ],
@@ -181,13 +181,14 @@ class AdvancedSettingsWidget extends StatelessWidget {
                   ),
                   title: Text(item['label'] as String),
                   subtitle: Text(item['description'] as String),
-                  trailing: settingsData['audioLatency'] == mode
-                      ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.successLight,
-                          size: 20,
-                        )
-                      : null,
+                  trailing:
+                      settingsData['audioLatency'] == mode
+                          ? CustomIconWidget(
+                            iconName: 'check',
+                            color: AppTheme.successLight,
+                            size: 20,
+                          )
+                          : null,
                   onTap: () {
                     onSettingChanged('audioLatency', mode);
                     Navigator.pop(context);
@@ -228,13 +229,14 @@ class AdvancedSettingsWidget extends StatelessWidget {
                 ),
                 title: Text('Exklusiv'),
                 subtitle: Text('App hat vollständige Audio-Kontrolle'),
-                trailing: settingsData['audioFocusMode'] == 'exclusive'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    settingsData['audioFocusMode'] == 'exclusive'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   onSettingChanged('audioFocusMode', 'exclusive');
                   Navigator.pop(context);
@@ -248,13 +250,14 @@ class AdvancedSettingsWidget extends StatelessWidget {
                 ),
                 title: Text('Geteilt'),
                 subtitle: Text('Audio kann mit anderen Apps geteilt werden'),
-                trailing: settingsData['audioFocusMode'] == 'shared'
-                    ? CustomIconWidget(
-                        iconName: 'check',
-                        color: AppTheme.successLight,
-                        size: 20,
-                      )
-                    : null,
+                trailing:
+                    settingsData['audioFocusMode'] == 'shared'
+                        ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                        : null,
                 onTap: () {
                   onSettingChanged('audioFocusMode', 'shared');
                   Navigator.pop(context);
@@ -374,10 +377,7 @@ class AdvancedSettingsWidget extends StatelessWidget {
               SizedBox(height: 1.h),
               Row(
                 children: [
-                  Text(
-                    'Klein',
-                    style: AppTheme.lightTheme.textTheme.bodySmall,
-                  ),
+                  Text('Klein', style: AppTheme.lightTheme.textTheme.bodySmall),
                   Expanded(
                     child: Slider(
                       value:
@@ -389,14 +389,12 @@ class AdvancedSettingsWidget extends StatelessWidget {
                         onSettingChanged('audioBufferSize', value.round());
                       },
                       activeColor: AppTheme.primaryLight,
-                      inactiveColor:
-                          AppTheme.primaryLight.withValues(alpha: 0.3),
+                      inactiveColor: AppTheme.primaryLight.withValues(
+                        alpha: 0.3,
+                      ),
                     ),
                   ),
-                  Text(
-                    'Groß',
-                    style: AppTheme.lightTheme.textTheme.bodySmall,
-                  ),
+                  Text('Groß', style: AppTheme.lightTheme.textTheme.bodySmall),
                 ],
               ),
               Text(
@@ -413,7 +411,8 @@ class AdvancedSettingsWidget extends StatelessWidget {
         SettingsItemWidget(
           title: 'Latenz-Modus',
           subtitle: _getLatencyModeDisplayName(
-              settingsData['audioLatency'] as String),
+            settingsData['audioLatency'] as String,
+          ),
           leadingIcon: CustomIconWidget(
             iconName: 'timer',
             color: AppTheme.primaryLight,
@@ -427,7 +426,8 @@ class AdvancedSettingsWidget extends StatelessWidget {
           SettingsItemWidget(
             title: 'Audio-Focus Modus',
             subtitle: _getAudioFocusModeDisplayName(
-                settingsData['audioFocusMode'] as String),
+              settingsData['audioFocusMode'] as String,
+            ),
             leadingIcon: CustomIconWidget(
               iconName: 'volume_up',
               color: AppTheme.primaryLight,
@@ -443,10 +443,7 @@ class AdvancedSettingsWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppTheme.surfaceLight,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: AppTheme.borderLight,
-              width: 1,
-            ),
+            border: Border.all(color: AppTheme.borderLight, width: 1),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -480,11 +477,11 @@ class AdvancedSettingsWidget extends StatelessWidget {
                         ),
                         Text(
                           '12% (Audio)',
-                          style:
-                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: AppTheme.successLight,
-                          ),
+                          style: AppTheme.lightTheme.textTheme.bodySmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppTheme.successLight,
+                              ),
                         ),
                       ],
                     ),
@@ -499,11 +496,11 @@ class AdvancedSettingsWidget extends StatelessWidget {
                         ),
                         Text(
                           '45 MB',
-                          style:
-                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: AppTheme.successLight,
-                          ),
+                          style: AppTheme.lightTheme.textTheme.bodySmall
+                              ?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: AppTheme.successLight,
+                              ),
                         ),
                       ],
                     ),

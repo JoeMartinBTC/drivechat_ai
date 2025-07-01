@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/app_export.dart';
@@ -44,29 +43,20 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
 
-    _logoScaleAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _logoController,
-      curve: Curves.elasticOut,
-    ));
+    _logoScaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(parent: _logoController, curve: Curves.elasticOut),
+    );
 
-    _logoFadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _logoController,
-      curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
-    ));
+    _logoFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _logoController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
+      ),
+    );
 
-    _loadingFadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _loadingController,
-      curve: Curves.easeIn,
-    ));
+    _loadingFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _loadingController, curve: Curves.easeIn),
+    );
 
     _logoController.forward();
     Future.delayed(const Duration(milliseconds: 800), () {
@@ -254,7 +244,7 @@ class _SplashScreenState extends State<SplashScreen>
                 Padding(
                   padding: const EdgeInsets.only(bottom: 24),
                   child: Text(
-                    'DriveChat AI v1.0.0',
+                    'GetMyLappen v1.0.0',
                     style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                       color: Colors.white.withValues(alpha: 0.8),
                       fontSize: 12,

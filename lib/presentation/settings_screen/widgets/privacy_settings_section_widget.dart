@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../theme/app_theme.dart';
+import '../../../widgets/custom_icon_widget.dart';
 import './settings_item_widget.dart';
 import './settings_section_widget.dart';
 
@@ -102,14 +103,22 @@ class PrivacySettingsSectionWidget extends StatelessWidget {
                   style: AppTheme.lightTheme.textTheme.titleMedium,
                 ),
                 SizedBox(height: 1.h),
-                _buildGdprRight('Recht auf Auskunft',
-                    'Sie können jederzeit Auskunft über Ihre gespeicherten Daten verlangen.'),
-                _buildGdprRight('Recht auf Berichtigung',
-                    'Sie können die Korrektur unrichtiger Daten verlangen.'),
-                _buildGdprRight('Recht auf Löschung',
-                    'Sie können die Löschung Ihrer Daten verlangen.'),
-                _buildGdprRight('Recht auf Datenübertragbarkeit',
-                    'Sie können Ihre Daten in einem strukturierten Format erhalten.'),
+                _buildGdprRight(
+                  'Recht auf Auskunft',
+                  'Sie können jederzeit Auskunft über Ihre gespeicherten Daten verlangen.',
+                ),
+                _buildGdprRight(
+                  'Recht auf Berichtigung',
+                  'Sie können die Korrektur unrichtiger Daten verlangen.',
+                ),
+                _buildGdprRight(
+                  'Recht auf Löschung',
+                  'Sie können die Löschung Ihrer Daten verlangen.',
+                ),
+                _buildGdprRight(
+                  'Recht auf Datenübertragbarkeit',
+                  'Sie können Ihre Daten in einem strukturierten Format erhalten.',
+                ),
                 SizedBox(height: 2.h),
                 Text(
                   'Datenspeicherung:',
@@ -295,7 +304,9 @@ class PrivacySettingsSectionWidget extends StatelessWidget {
                       _buildDataUsageItem('Speicherplatz:', '2.4 MB'),
                       _buildDataUsageItem('Letzte Aktivität:', 'Heute'),
                       _buildDataUsageItem(
-                          'Durchschnittliche Sitzungsdauer:', '15 Min'),
+                        'Durchschnittliche Sitzungsdauer:',
+                        '15 Min',
+                      ),
                     ],
                   ),
                   actions: [
@@ -319,10 +330,7 @@ class PrivacySettingsSectionWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            label,
-            style: AppTheme.lightTheme.textTheme.bodyMedium,
-          ),
+          Text(label, style: AppTheme.lightTheme.textTheme.bodyMedium),
           Text(
             value,
             style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
