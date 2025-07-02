@@ -1,4 +1,4 @@
-package com.flutter_template.app
+package com.getmylappen.app
 
 import io.flutter.embedding.android.FlutterActivity
 
