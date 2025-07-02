@@ -300,11 +300,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               size: 24,
             ),
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Hilfe-Funktion wird bald verfügbar sein'),
-                ),
-              );
+              Navigator.pushNamed(context, AppRoutes.helpScreen);
             },
           ),
         ],
