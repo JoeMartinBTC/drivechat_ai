@@ -10,7 +10,15 @@ import './theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+
+  // Handle .env file loading with error handling
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    // Continue without .env file if it doesn't exist
+    print('Warning: .env file not found or could not be loaded: $e');
+  }
+
   runApp(const MyApp());
 }
 
@@ -32,14 +40,19 @@ class MyApp extends StatelessWidget {
                   previous ?? AudioController(apiConfigController),
             ),
           ],
-          child: MaterialApp(
-            title: 'GetMyLappen',
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.light,
-            initialRoute: AppRoutes.splashScreen,
-            routes: AppRoutes.routes,
-            debugShowCheckedModeBanner: false,
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaler: TextScaler.linear(1.0),
+            ),
+            child: MaterialApp(
+              title: 'GetMyLappen',
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: ThemeMode.light,
+              initialRoute: AppRoutes.splashScreen,
+              routes: AppRoutes.routes,
+              debugShowCheckedModeBanner: false,
+            ),
           ),
         );
       },

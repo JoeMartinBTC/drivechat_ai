@@ -24,7 +24,15 @@ void main() async {
     _sendOverflowError(details);
   };
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+
+  // Handle .env file loading with error handling
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    // Continue without .env file if it doesn't exist
+    print('Warning: .env file not found or could not be loaded: $e');
+  }
+
   runApp(const MyApp());
 }
 
@@ -46,7 +54,11 @@ class MyApp extends StatelessWidget {
                   previous ?? AudioController(apiConfigController),
             ),
           ],
-          child: MaterialApp(
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaler: TextScaler.linear(1.0),
+            ),
+            child: MaterialApp(
         builder: (context, child) {
           return CustomWidgetInspector(
             child: TrackingWidget(
@@ -61,13 +73,14 @@ class MyApp extends StatelessWidget {
         },
         navigatorObservers: [routeObserver],
         title: 'GetMyLappen',
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.light,
-            initialRoute: AppRoutes.splashScreen,
-            routes: AppRoutes.routes,
-            debugShowCheckedModeBanner: false,
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: ThemeMode.light,
+              initialRoute: AppRoutes.splashScreen,
+              routes: AppRoutes.routes,
+              debugShowCheckedModeBanner: false,
       ),
+          ),
         );
       },
     );
