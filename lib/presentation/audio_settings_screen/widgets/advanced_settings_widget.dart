@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 import '../../settings_screen/widgets/settings_item_widget.dart';
 import '../../settings_screen/widgets/settings_section_widget.dart';
 
@@ -112,18 +109,17 @@ class AdvancedSettingsWidget extends StatelessWidget {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children:
-                items.map((item) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 0.3.h),
-                    child: Text(
-                      item,
-                      style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
-                        fontFamily: 'monospace',
-                      ),
-                    ),
-                  );
-                }).toList(),
+            children: items.map((item) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 0.3.h),
+                child: Text(
+                  item,
+                  style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                    fontFamily: 'monospace',
+                  ),
+                ),
+              );
+            }).toList(),
           ),
         ),
       ],
@@ -181,14 +177,13 @@ class AdvancedSettingsWidget extends StatelessWidget {
                   ),
                   title: Text(item['label'] as String),
                   subtitle: Text(item['description'] as String),
-                  trailing:
-                      settingsData['audioLatency'] == mode
-                          ? CustomIconWidget(
-                            iconName: 'check',
-                            color: AppTheme.successLight,
-                            size: 20,
-                          )
-                          : null,
+                  trailing: settingsData['audioLatency'] == mode
+                      ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                      : null,
                   onTap: () {
                     onSettingChanged('audioLatency', mode);
                     Navigator.pop(context);
@@ -229,14 +224,13 @@ class AdvancedSettingsWidget extends StatelessWidget {
                 ),
                 title: Text('Exklusiv'),
                 subtitle: Text('App hat vollständige Audio-Kontrolle'),
-                trailing:
-                    settingsData['audioFocusMode'] == 'exclusive'
-                        ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.successLight,
-                          size: 20,
-                        )
-                        : null,
+                trailing: settingsData['audioFocusMode'] == 'exclusive'
+                    ? CustomIconWidget(
+                        iconName: 'check',
+                        color: AppTheme.successLight,
+                        size: 20,
+                      )
+                    : null,
                 onTap: () {
                   onSettingChanged('audioFocusMode', 'exclusive');
                   Navigator.pop(context);
@@ -250,14 +244,13 @@ class AdvancedSettingsWidget extends StatelessWidget {
                 ),
                 title: Text('Geteilt'),
                 subtitle: Text('Audio kann mit anderen Apps geteilt werden'),
-                trailing:
-                    settingsData['audioFocusMode'] == 'shared'
-                        ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.successLight,
-                          size: 20,
-                        )
-                        : null,
+                trailing: settingsData['audioFocusMode'] == 'shared'
+                    ? CustomIconWidget(
+                        iconName: 'check',
+                        color: AppTheme.successLight,
+                        size: 20,
+                      )
+                    : null,
                 onTap: () {
                   onSettingChanged('audioFocusMode', 'shared');
                   Navigator.pop(context);
@@ -477,11 +470,11 @@ class AdvancedSettingsWidget extends StatelessWidget {
                         ),
                         Text(
                           '12% (Audio)',
-                          style: AppTheme.lightTheme.textTheme.bodySmall
-                              ?.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: AppTheme.successLight,
-                              ),
+                          style:
+                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: AppTheme.successLight,
+                          ),
                         ),
                       ],
                     ),
@@ -496,11 +489,11 @@ class AdvancedSettingsWidget extends StatelessWidget {
                         ),
                         Text(
                           '45 MB',
-                          style: AppTheme.lightTheme.textTheme.bodySmall
-                              ?.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: AppTheme.successLight,
-                              ),
+                          style:
+                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: AppTheme.successLight,
+                          ),
                         ),
                       ],
                     ),

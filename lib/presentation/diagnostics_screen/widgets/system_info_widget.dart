@@ -36,14 +36,14 @@ class SystemInfoWidget extends StatelessWidget {
             Platform.isAndroid
                 ? 'Android'
                 : Platform.isIOS
-                ? 'iOS'
-                : Platform.isWindows
-                ? 'Windows'
-                : Platform.isMacOS
-                ? 'macOS'
-                : Platform.isLinux
-                ? 'Linux'
-                : 'Unknown',
+                    ? 'iOS'
+                    : Platform.isWindows
+                        ? 'Windows'
+                        : Platform.isMacOS
+                            ? 'macOS'
+                            : Platform.isLinux
+                                ? 'Linux'
+                                : 'Unknown',
           ),
           _InfoItem(
             'Is Mobile',
@@ -104,9 +104,8 @@ class SystemInfoWidget extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: ElevatedButton.icon(
-            onPressed:
-                () =>
-                    _exportSystemReport(context, debugService, loggingService),
+            onPressed: () =>
+                _exportSystemReport(context, debugService, loggingService),
             icon: const Icon(Icons.download),
             label: const Text('Export System Report'),
             style: ElevatedButton.styleFrom(
@@ -242,17 +241,7 @@ Generated: $timestamp
 
 === Platform Information ===
 Operating System: ${platformInfo['operatingSystem']}
-Platform Type: ${Platform.isAndroid
-          ? 'Android'
-          : Platform.isIOS
-          ? 'iOS'
-          : Platform.isWindows
-          ? 'Windows'
-          : Platform.isMacOS
-          ? 'macOS'
-          : Platform.isLinux
-          ? 'Linux'
-          : 'Unknown'}
+Platform Type: ${Platform.isAndroid ? 'Android' : Platform.isIOS ? 'iOS' : Platform.isWindows ? 'Windows' : Platform.isMacOS ? 'macOS' : Platform.isLinux ? 'Linux' : 'Unknown'}
 Is Mobile: ${platformInfo['isMobile']}
 Debug Mode: ${platformInfo['debugMode']}
 

@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 
 import '../../core/app_export.dart';
-import '../../theme/app_theme.dart';
 import './widgets/splash_loading_widget.dart';
 import './widgets/splash_logo_widget.dart';
 

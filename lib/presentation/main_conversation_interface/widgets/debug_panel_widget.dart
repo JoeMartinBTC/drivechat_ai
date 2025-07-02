@@ -45,20 +45,19 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
         title: Text(
           'Debug Information',
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
-            color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.w600,
-          ),
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w600,
+              ),
         ),
         subtitle: Text(
           widget.conversationController.isUsingLiveApi
               ? 'Live ElevenLabs API Active'
               : 'Demo Mode (Mock Service)',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color:
-                widget.conversationController.isUsingLiveApi
+                color: widget.conversationController.isUsingLiveApi
                     ? Colors.green
                     : Colors.orange,
-          ),
+              ),
         ),
         initiallyExpanded: _expanded,
         onExpansionChanged: (expanded) => setState(() => _expanded = expanded),
@@ -101,14 +100,12 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
           Row(
             children: [
               CustomIconWidget(
-                iconName:
-                    widget.conversationController.isConnected
-                        ? 'check_circle'
-                        : 'error',
-                color:
-                    widget.conversationController.isConnected
-                        ? Colors.green
-                        : Colors.red,
+                iconName: widget.conversationController.isConnected
+                    ? 'check_circle'
+                    : 'error',
+                color: widget.conversationController.isConnected
+                    ? Colors.green
+                    : Colors.red,
                 size: 16,
               ),
               const SizedBox(width: 8),
@@ -143,9 +140,9 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
                     child: Text(
                       'Recent mobile connectivity issues detected (${mobileDiagnostics['recentMobileErrors']} errors)',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.orange,
-                        fontSize: 11,
-                      ),
+                            color: Colors.orange,
+                            fontSize: 11,
+                          ),
                     ),
                   ),
                 ],
@@ -168,9 +165,9 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
                     child: Text(
                       'Demo mode active - Enable Live API in settings',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.orange,
-                        fontSize: 11,
-                      ),
+                            color: Colors.orange,
+                            fontSize: 11,
+                          ),
                     ),
                   ),
                 ],
@@ -204,10 +201,10 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
                 child: Text(
                   'MOBILE',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 9,
-                  ),
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 9,
+                      ),
                 ),
               ),
             ],
@@ -261,10 +258,9 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
                   'Auth Errors',
                   debugSummary['authenticationErrors'].toString(),
                   Icons.security,
-                  color:
-                      debugSummary['authenticationErrors'] > 0
-                          ? Colors.red
-                          : null,
+                  color: debugSummary['authenticationErrors'] > 0
+                      ? Colors.red
+                      : null,
                 ),
               ),
               const SizedBox(width: 8),
@@ -284,10 +280,10 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
           Text(
             'Avg API Response: ${debugSummary['averageApiDuration'].toInt()}ms ${_debugService.isMobile ? "(Mobile)" : "(Desktop)"}',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.7),
-            ),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.7),
+                ),
           ),
       ],
     );
@@ -315,9 +311,9 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
           Text(
             value,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: cardColor,
-            ),
+                  fontWeight: FontWeight.bold,
+                  color: cardColor,
+                ),
           ),
           Text(
             label,
@@ -405,10 +401,9 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
                                 ? 'Mobile connection failed'
                                 : 'Connection failed'),
                       ),
-                      backgroundColor:
-                          widget.conversationController.isConnected
-                              ? Colors.green
-                              : Colors.red,
+                      backgroundColor: widget.conversationController.isConnected
+                          ? Colors.green
+                          : Colors.red,
                     ),
                   );
                 }
@@ -469,10 +464,10 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
           Text(
             'No API calls yet',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Theme.of(
-                context,
-              ).colorScheme.onSurface.withValues(alpha: 0.6),
-            ),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
+                ),
           ),
         ],
       );
@@ -520,20 +515,20 @@ class _DebugPanelWidgetState extends State<DebugPanelWidget> {
                 subtitle: Text(
                   '${log['duration']}ms${isSuccess ? '' : ' - ${log['error']}'}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontSize: 10,
-                    color: isSuccess ? Colors.green : Colors.red,
-                  ),
+                        fontSize: 10,
+                        color: isSuccess ? Colors.green : Colors.red,
+                      ),
                 ),
                 trailing: Text(
                   DateTime.parse(
                     log['timestamp'],
                   ).toLocal().toString().substring(11, 19),
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    fontSize: 9,
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withValues(alpha: 0.5),
-                  ),
+                        fontSize: 9,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.5),
+                      ),
                 ),
               );
             },

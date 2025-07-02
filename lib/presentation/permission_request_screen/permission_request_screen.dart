@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
-import '../../theme/app_theme.dart';
-import '../../widgets/custom_icon_widget.dart';
 import './widgets/permission_actions_widget.dart';
 import './widgets/permission_benefits_widget.dart';
 import './widgets/permission_illustration_widget.dart';
@@ -69,11 +66,11 @@ class _PermissionRequestScreenState extends State<PermissionRequestScreen> {
                   // Headline
                   Text(
                     'Mikrofon für Sprachlernen',
-                    style: AppTheme.lightTheme.textTheme.headlineMedium
-                        ?.copyWith(
-                          color: AppTheme.lightTheme.colorScheme.onSurface,
-                          fontWeight: FontWeight.w700,
-                        ),
+                    style:
+                        AppTheme.lightTheme.textTheme.headlineMedium?.copyWith(
+                      color: AppTheme.lightTheme.colorScheme.onSurface,
+                      fontWeight: FontWeight.w700,
+                    ),
                     textAlign: TextAlign.center,
                   ),
 

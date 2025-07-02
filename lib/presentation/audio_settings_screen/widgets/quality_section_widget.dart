@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 import '../../settings_screen/widgets/settings_item_widget.dart';
 import '../../settings_screen/widgets/settings_section_widget.dart';
 
@@ -67,14 +64,13 @@ class QualitySectionWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                trailing:
-                    settingsData['sampleRate'] == '16kHz'
-                        ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.successLight,
-                          size: 20,
-                        )
-                        : null,
+                trailing: settingsData['sampleRate'] == '16kHz'
+                    ? CustomIconWidget(
+                        iconName: 'check',
+                        color: AppTheme.successLight,
+                        size: 20,
+                      )
+                    : null,
                 onTap: () {
                   onSettingChanged('sampleRate', '16kHz');
                   Navigator.pop(context);
@@ -111,14 +107,13 @@ class QualitySectionWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                trailing:
-                    settingsData['sampleRate'] == '44.1kHz'
-                        ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.successLight,
-                          size: 20,
-                        )
-                        : null,
+                trailing: settingsData['sampleRate'] == '44.1kHz'
+                    ? CustomIconWidget(
+                        iconName: 'check',
+                        color: AppTheme.successLight,
+                        size: 20,
+                      )
+                    : null,
                 onTap: () {
                   onSettingChanged('sampleRate', '44.1kHz');
                   Navigator.pop(context);
@@ -160,14 +155,13 @@ class QualitySectionWidget extends StatelessWidget {
                 subtitle: Text(
                   'Optimiert für ElevenLabs • Geringere Dateigröße',
                 ),
-                trailing:
-                    settingsData['audioFormat'] == 'compressed'
-                        ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.successLight,
-                          size: 20,
-                        )
-                        : null,
+                trailing: settingsData['audioFormat'] == 'compressed'
+                    ? CustomIconWidget(
+                        iconName: 'check',
+                        color: AppTheme.successLight,
+                        size: 20,
+                      )
+                    : null,
                 onTap: () {
                   onSettingChanged('audioFormat', 'compressed');
                   Navigator.pop(context);
@@ -181,14 +175,13 @@ class QualitySectionWidget extends StatelessWidget {
                 ),
                 title: Text('Unkomprimiert (WAV)'),
                 subtitle: Text('Beste Qualität • Größere Dateien'),
-                trailing:
-                    settingsData['audioFormat'] == 'uncompressed'
-                        ? CustomIconWidget(
-                          iconName: 'check',
-                          color: AppTheme.successLight,
-                          size: 20,
-                        )
-                        : null,
+                trailing: settingsData['audioFormat'] == 'uncompressed'
+                    ? CustomIconWidget(
+                        iconName: 'check',
+                        color: AppTheme.successLight,
+                        size: 20,
+                      )
+                    : null,
                 onTap: () {
                   onSettingChanged('audioFormat', 'uncompressed');
                   Navigator.pop(context);
@@ -252,14 +245,13 @@ class QualitySectionWidget extends StatelessWidget {
                   ),
                   title: Text(item['label'] as String),
                   subtitle: Text(item['description'] as String),
-                  trailing:
-                      settingsData['bitrateQuality'] == quality
-                          ? CustomIconWidget(
-                            iconName: 'check',
-                            color: AppTheme.successLight,
-                            size: 20,
-                          )
-                          : null,
+                  trailing: settingsData['bitrateQuality'] == quality
+                      ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                      : null,
                   onTap: () {
                     onSettingChanged('bitrateQuality', quality);
                     Navigator.pop(context);
@@ -489,14 +481,13 @@ class QualitySectionWidget extends StatelessWidget {
                           settingsData['sampleRate'] == '16kHz'
                               ? '~0.5 MB'
                               : '~1.4 MB',
-                          style: AppTheme.lightTheme.textTheme.bodySmall
-                              ?.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color:
-                                    settingsData['sampleRate'] == '16kHz'
-                                        ? AppTheme.successLight
-                                        : AppTheme.warningLight,
-                              ),
+                          style:
+                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: settingsData['sampleRate'] == '16kHz'
+                                ? AppTheme.successLight
+                                : AppTheme.warningLight,
+                          ),
                         ),
                       ],
                     ),
@@ -513,19 +504,17 @@ class QualitySectionWidget extends StatelessWidget {
                           settingsData['bitrateQuality'] == 'low'
                               ? 'Niedrig'
                               : settingsData['bitrateQuality'] == 'medium'
-                              ? 'Mittel'
-                              : 'Hoch',
-                          style: AppTheme.lightTheme.textTheme.bodySmall
-                              ?.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color:
-                                    settingsData['bitrateQuality'] == 'low'
-                                        ? AppTheme.successLight
-                                        : settingsData['bitrateQuality'] ==
-                                            'medium'
-                                        ? AppTheme.primaryLight
-                                        : AppTheme.warningLight,
-                              ),
+                                  ? 'Mittel'
+                                  : 'Hoch',
+                          style:
+                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: settingsData['bitrateQuality'] == 'low'
+                                ? AppTheme.successLight
+                                : settingsData['bitrateQuality'] == 'medium'
+                                    ? AppTheme.primaryLight
+                                    : AppTheme.warningLight,
+                          ),
                         ),
                       ],
                     ),

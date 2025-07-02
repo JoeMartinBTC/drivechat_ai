@@ -54,16 +54,14 @@ class _OfflineModeWidgetState extends State<OfflineModeWidget> {
             width: double.infinity,
             padding: EdgeInsets.all(4.w),
             decoration: BoxDecoration(
-              color:
-                  widget.isOfflineModeEnabled
-                      ? Colors.orange.withValues(alpha: 0.1)
-                      : Colors.grey.shade50,
+              color: widget.isOfflineModeEnabled
+                  ? Colors.orange.withValues(alpha: 0.1)
+                  : Colors.grey.shade50,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color:
-                    widget.isOfflineModeEnabled
-                        ? Colors.orange.withValues(alpha: 0.3)
-                        : Colors.grey.shade300,
+                color: widget.isOfflineModeEnabled
+                    ? Colors.orange.withValues(alpha: 0.3)
+                    : Colors.grey.shade300,
               ),
             ),
             child: Column(
@@ -73,15 +71,13 @@ class _OfflineModeWidgetState extends State<OfflineModeWidget> {
                 Row(
                   children: [
                     CustomIconWidget(
-                      iconName:
-                          widget.isOfflineModeEnabled
-                              ? 'cloud_off'
-                              : 'cloud_queue',
+                      iconName: widget.isOfflineModeEnabled
+                          ? 'cloud_off'
+                          : 'cloud_queue',
                       size: 20,
-                      color:
-                          widget.isOfflineModeEnabled
-                              ? Colors.orange
-                              : Colors.grey.shade600,
+                      color: widget.isOfflineModeEnabled
+                          ? Colors.orange
+                          : Colors.grey.shade600,
                     ),
                     SizedBox(width: 3.w),
                     Expanded(
@@ -90,19 +86,17 @@ class _OfflineModeWidgetState extends State<OfflineModeWidget> {
                         style: GoogleFonts.inter(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
-                          color:
-                              widget.isOfflineModeEnabled
-                                  ? Colors.orange.shade700
-                                  : Colors.grey.shade800,
+                          color: widget.isOfflineModeEnabled
+                              ? Colors.orange.shade700
+                              : Colors.grey.shade800,
                         ),
                       ),
                     ),
                     Switch(
                       value: widget.isOfflineModeEnabled,
-                      onChanged:
-                          widget.onToggleOfflineMode != null
-                              ? (value) => widget.onToggleOfflineMode!()
-                              : null,
+                      onChanged: widget.onToggleOfflineMode != null
+                          ? (value) => widget.onToggleOfflineMode!()
+                          : null,
                       activeColor: Colors.orange,
                       inactiveThumbColor: Colors.grey.shade400,
                       inactiveTrackColor: Colors.grey.shade300,
@@ -235,21 +229,20 @@ class _OfflineModeWidgetState extends State<OfflineModeWidget> {
                       ),
                       elevation: 2,
                     ),
-                    icon:
-                        _isContactingSuppport
-                            ? SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
-                            )
-                            : CustomIconWidget(
-                              iconName: 'email',
-                              size: 18,
+                    icon: _isContactingSuppport
+                        ? SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
                               color: Colors.white,
                             ),
+                          )
+                        : CustomIconWidget(
+                            iconName: 'email',
+                            size: 18,
+                            color: Colors.white,
+                          ),
                     label: Text(
                       _isContactingSuppport
                           ? 'Opening Email...'

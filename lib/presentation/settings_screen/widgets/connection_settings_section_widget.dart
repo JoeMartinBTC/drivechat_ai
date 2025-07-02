@@ -1,9 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../routes/app_routes.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 import './settings_item_widget.dart';
 import './settings_section_widget.dart';
 
@@ -184,11 +180,10 @@ class ConnectionSettingsSectionWidget extends StatelessWidget {
         // API Key Configuration (Simplified)
         SettingsItemWidget(
           title: 'ElevenLabs API-Schlüssel',
-          subtitle:
-              settingsData['apiKey'] != null &&
-                      (settingsData['apiKey'] as String).isNotEmpty
-                  ? '••••••••${(settingsData['apiKey'] as String).substring((settingsData['apiKey'] as String).length - 4)}'
-                  : 'Nicht konfiguriert',
+          subtitle: settingsData['apiKey'] != null &&
+                  (settingsData['apiKey'] as String).isNotEmpty
+              ? '••••••••${(settingsData['apiKey'] as String).substring((settingsData['apiKey'] as String).length - 4)}'
+              : 'Nicht konfiguriert',
           leadingIcon: CustomIconWidget(
             iconName: 'key',
             color: AppTheme.primaryLight,

@@ -145,10 +145,10 @@ class ConversationController extends ChangeNotifier {
 
     _loggingService
         .logEvent('ConversationController', 'Connection status updated', {
-          'isConnected': _isConnected,
-          'connectionStatus': _connectionStatus,
-          'hasActiveConnectionIssues': _hasActiveConnectionIssues,
-        });
+      'isConnected': _isConnected,
+      'connectionStatus': _connectionStatus,
+      'hasActiveConnectionIssues': _hasActiveConnectionIssues,
+    });
 
     notifyListeners();
   }
@@ -510,8 +510,7 @@ class ConversationController extends ChangeNotifier {
     if (messageIndex == -1) return;
 
     final messageData = _conversationHistory[messageIndex];
-    final originalText =
-        messageData['originalText'] as String? ??
+    final originalText = messageData['originalText'] as String? ??
         messageData['message'] as String;
 
     // Reset error state

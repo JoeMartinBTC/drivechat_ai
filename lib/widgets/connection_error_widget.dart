@@ -364,21 +364,20 @@ class _ConnectionErrorWidgetState extends State<ConnectionErrorWidget>
           padding: EdgeInsets.symmetric(vertical: 1.5.h),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
-        icon:
-            _isRetrying
-                ? SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                )
-                : CustomIconWidget(
-                  iconName: 'refresh',
-                  size: 16,
-                  color: Colors.white,
+        icon: _isRetrying
+            ? SizedBox(
+                width: 16,
+                height: 16,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
+              )
+            : CustomIconWidget(
+                iconName: 'refresh',
+                size: 16,
+                color: Colors.white,
+              ),
         label: Text(
           _isRetrying ? 'Wird wiederholt...' : 'Erneut versuchen',
           style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500),

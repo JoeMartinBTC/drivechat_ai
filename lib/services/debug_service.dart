@@ -259,21 +259,18 @@ class DebugService {
       'aiMessages': aiMessages,
       'messagesWithAudio': messagesWithAudio,
       'networkLogs': _networkLogs.length,
-      'averageApiDuration':
-          _apiLogs.isNotEmpty
-              ? _apiLogs
-                      .map((log) => log['duration'] as int)
-                      .reduce((a, b) => a + b) /
-                  _apiLogs.length
-              : 0,
-      'lastAuthError':
-          authErrors > 0
-              ? _apiLogs.lastWhere((log) => log['isAuthError'] == true)
-              : null,
-      'lastMobileError':
-          mobileErrors > 0
-              ? _apiLogs.lastWhere((log) => log['isMobileError'] == true)
-              : null,
+      'averageApiDuration': _apiLogs.isNotEmpty
+          ? _apiLogs
+                  .map((log) => log['duration'] as int)
+                  .reduce((a, b) => a + b) /
+              _apiLogs.length
+          : 0,
+      'lastAuthError': authErrors > 0
+          ? _apiLogs.lastWhere((log) => log['isAuthError'] == true)
+          : null,
+      'lastMobileError': mobileErrors > 0
+          ? _apiLogs.lastWhere((log) => log['isMobileError'] == true)
+          : null,
     };
   }
 
@@ -374,13 +371,11 @@ class DebugService {
 
     final recentMobileErrors = getRecentMobileErrors(limit: 10);
     final hasRecentMobileIssues = hasRecentMobileFailures();
-    final authErrorsOnMobile =
-        _apiLogs
-            .where(
-              (log) =>
-                  log['platform'] == 'mobile' && log['isAuthError'] == true,
-            )
-            .length;
+    final authErrorsOnMobile = _apiLogs
+        .where(
+          (log) => log['platform'] == 'mobile' && log['isAuthError'] == true,
+        )
+        .length;
 
     return {
       'isMobile': true,

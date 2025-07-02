@@ -1,5 +1,4 @@
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
 
 class PageIndicatorWidget extends StatelessWidget {
   final int currentPage;
@@ -23,10 +22,9 @@ class PageIndicatorWidget extends StatelessWidget {
           width: currentPage == index ? 20 : 8,
           height: 8,
           decoration: BoxDecoration(
-            color:
-                currentPage == index
-                    ? AppTheme.primaryLight
-                    : AppTheme.primaryLight.withValues(alpha: 0.3),
+            color: currentPage == index
+                ? AppTheme.primaryLight
+                : AppTheme.primaryLight.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(4),
           ),
         ),

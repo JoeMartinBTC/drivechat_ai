@@ -1,9 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
-import '../../routes/app_routes.dart';
-import '../../theme/app_theme.dart';
-import '../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/agent_selection_screen/agent_selection_screen.dart
 
@@ -107,7 +103,7 @@ class _AgentSelectionScreenState extends State<AgentSelectionScreen> {
                   border: Border.all(color: AppTheme.borderLight, width: 1),
                 ),
                 child: Text(
-                  '"Welcome to DriveChat AI. Today we\'ll practice highway merging techniques. Remember to check your mirrors and signal early for safe lane changes."',
+                  '"Welcome to GetMyLappen. Today we\'ll practice highway merging techniques. Remember to check your mirrors and signal early for safe lane changes."',
                   style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
                     fontStyle: FontStyle.italic,
                   ),
@@ -221,10 +217,9 @@ class _AgentSelectionScreenState extends State<AgentSelectionScreen> {
                         color: AppTheme.backgroundLight,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color:
-                              isSelected
-                                  ? AppTheme.primaryLight
-                                  : AppTheme.borderLight,
+                          color: isSelected
+                              ? AppTheme.primaryLight
+                              : AppTheme.borderLight,
                           width: isSelected ? 2 : 1,
                         ),
                         boxShadow: [
@@ -249,26 +244,24 @@ class _AgentSelectionScreenState extends State<AgentSelectionScreen> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color:
-                                        isSelected
-                                            ? AppTheme.primaryLight
-                                            : AppTheme.borderLight,
+                                    color: isSelected
+                                        ? AppTheme.primaryLight
+                                        : AppTheme.borderLight,
                                     width: 2,
                                   ),
                                 ),
-                                child:
-                                    isSelected
-                                        ? Center(
-                                          child: Container(
-                                            width: 3.w,
-                                            height: 3.w,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: AppTheme.primaryLight,
-                                            ),
+                                child: isSelected
+                                    ? Center(
+                                        child: Container(
+                                          width: 3.w,
+                                          height: 3.w,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: AppTheme.primaryLight,
                                           ),
-                                        )
-                                        : null,
+                                        ),
+                                      )
+                                    : null,
                               ),
 
                               SizedBox(width: 3.w),
@@ -284,19 +277,14 @@ class _AgentSelectionScreenState extends State<AgentSelectionScreen> {
                                         Expanded(
                                           child: Text(
                                             agent['name'],
-                                            style: AppTheme
-                                                .lightTheme
-                                                .textTheme
+                                            style: AppTheme.lightTheme.textTheme
                                                 .titleMedium
                                                 ?.copyWith(
-                                                  fontWeight: FontWeight.w600,
-                                                  color:
-                                                      isSelected
-                                                          ? AppTheme
-                                                              .primaryLight
-                                                          : AppTheme
-                                                              .textPrimaryLight,
-                                                ),
+                                              fontWeight: FontWeight.w600,
+                                              color: isSelected
+                                                  ? AppTheme.primaryLight
+                                                  : AppTheme.textPrimaryLight,
+                                            ),
                                           ),
                                         ),
                                         if (agent['isRecommended'])
@@ -318,16 +306,13 @@ class _AgentSelectionScreenState extends State<AgentSelectionScreen> {
                                             ),
                                             child: Text(
                                               'RECOMMENDED',
-                                              style: AppTheme
-                                                  .lightTheme
-                                                  .textTheme
-                                                  .bodySmall
+                                              style: AppTheme.lightTheme
+                                                  .textTheme.bodySmall
                                                   ?.copyWith(
-                                                    color:
-                                                        AppTheme.successLight,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 10,
-                                                  ),
+                                                color: AppTheme.successLight,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 10,
+                                              ),
                                             ),
                                           ),
                                       ],
@@ -339,12 +324,10 @@ class _AgentSelectionScreenState extends State<AgentSelectionScreen> {
                                     Text(
                                       agent['description'],
                                       style: AppTheme
-                                          .lightTheme
-                                          .textTheme
-                                          .bodyMedium
+                                          .lightTheme.textTheme.bodyMedium
                                           ?.copyWith(
-                                            color: AppTheme.textSecondaryLight,
-                                          ),
+                                        color: AppTheme.textSecondaryLight,
+                                      ),
                                     ),
 
                                     SizedBox(height: 0.5.h),
@@ -362,15 +345,12 @@ class _AgentSelectionScreenState extends State<AgentSelectionScreen> {
                                           child: Text(
                                             agent['voiceDescription'],
                                             style: AppTheme
-                                                .lightTheme
-                                                .textTheme
-                                                .bodySmall
+                                                .lightTheme.textTheme.bodySmall
                                                 ?.copyWith(
-                                                  color:
-                                                      AppTheme
-                                                          .textSecondaryLight,
-                                                  fontStyle: FontStyle.italic,
-                                                ),
+                                              color:
+                                                  AppTheme.textSecondaryLight,
+                                              fontStyle: FontStyle.italic,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -405,15 +385,14 @@ class _AgentSelectionScreenState extends State<AgentSelectionScreen> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed:
-                      _selectedAgentId != null
-                          ? _continueWithSelectedAgent
-                          : null,
+                  onPressed: _selectedAgentId != null
+                      ? _continueWithSelectedAgent
+                      : null,
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 2.h),
                     backgroundColor: AppTheme.primaryLight,
-                    disabledBackgroundColor: AppTheme.textSecondaryLight
-                        .withAlpha(77),
+                    disabledBackgroundColor:
+                        AppTheme.textSecondaryLight.withAlpha(77),
                   ),
                   child: Text(
                     'Continue',

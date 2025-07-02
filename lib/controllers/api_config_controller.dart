@@ -122,8 +122,7 @@ class ApiConfigController extends ChangeNotifier {
       }
 
       _isConnected = result['success'] == true;
-      _connectionStatus =
-          result['message'] ??
+      _connectionStatus = result['message'] ??
           (_isConnected ? 'Connection successful' : 'Connection failed');
 
       return _isConnected;

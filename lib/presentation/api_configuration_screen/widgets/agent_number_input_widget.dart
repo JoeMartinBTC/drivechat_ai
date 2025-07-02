@@ -1,10 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
 import '../../../core/utils/api_validation_utils.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/agent_number_input_widget.dart
 
@@ -81,23 +78,20 @@ class AgentNumberInputWidget extends StatelessWidget {
                   size: 20,
                 ),
               ),
-              suffixIcon:
-                  controller.text.isNotEmpty
-                      ? Padding(
-                        padding: EdgeInsets.only(right: 2.w),
-                        child: CustomIconWidget(
-                          iconName:
-                              _validateAgentNumber(controller.text) == null
-                                  ? 'check_circle'
-                                  : 'error',
-                          color:
-                              _validateAgentNumber(controller.text) == null
-                                  ? AppTheme.successLight
-                                  : AppTheme.errorLight,
-                          size: 20,
-                        ),
-                      )
-                      : null,
+              suffixIcon: controller.text.isNotEmpty
+                  ? Padding(
+                      padding: EdgeInsets.only(right: 2.w),
+                      child: CustomIconWidget(
+                        iconName: _validateAgentNumber(controller.text) == null
+                            ? 'check_circle'
+                            : 'error',
+                        color: _validateAgentNumber(controller.text) == null
+                            ? AppTheme.successLight
+                            : AppTheme.errorLight,
+                        size: 20,
+                      ),
+                    )
+                  : null,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(color: AppTheme.borderLight, width: 1),

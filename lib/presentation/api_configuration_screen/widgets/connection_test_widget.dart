@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/connection_test_widget.dart
 
@@ -103,10 +100,9 @@ class ConnectionTestWidget extends StatelessWidget {
                   )
                 else
                   CustomIconWidget(
-                    iconName:
-                        isConnected
-                            ? 'check_circle'
-                            : connectionStatus.contains('failed')
+                    iconName: isConnected
+                        ? 'check_circle'
+                        : connectionStatus.contains('failed')
                             ? 'error'
                             : 'help_outline',
                     color: _getStatusColor(),
@@ -124,11 +120,11 @@ class ConnectionTestWidget extends StatelessWidget {
                       ),
                       Text(
                         connectionStatus,
-                        style: AppTheme.lightTheme.textTheme.bodySmall
-                            ?.copyWith(
-                              color: _getStatusColor(),
-                              fontWeight: FontWeight.w500,
-                            ),
+                        style:
+                            AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                          color: _getStatusColor(),
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   ),
@@ -145,57 +141,55 @@ class ConnectionTestWidget extends StatelessWidget {
             child: ElevatedButton(
               onPressed: isLoading ? null : onTestConnection,
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    isLoading
-                        ? AppTheme.textSecondaryLight
-                        : AppTheme.primaryLight,
+                backgroundColor: isLoading
+                    ? AppTheme.textSecondaryLight
+                    : AppTheme.primaryLight,
                 padding: EdgeInsets.symmetric(vertical: 1.5.h),
               ),
-              child:
-                  isLoading
-                      ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                AppTheme.backgroundLight,
-                              ),
+              child: isLoading
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              AppTheme.backgroundLight,
                             ),
                           ),
-                          SizedBox(width: 2.w),
-                          Text(
-                            'Testing Connection...',
-                            style: AppTheme.lightTheme.textTheme.titleMedium
-                                ?.copyWith(
-                                  color: AppTheme.backgroundLight,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                          ),
-                        ],
-                      )
-                      : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomIconWidget(
-                            iconName: 'sync',
+                        ),
+                        SizedBox(width: 2.w),
+                        Text(
+                          'Testing Connection...',
+                          style: AppTheme.lightTheme.textTheme.titleMedium
+                              ?.copyWith(
                             color: AppTheme.backgroundLight,
-                            size: 16,
+                            fontWeight: FontWeight.w500,
                           ),
-                          SizedBox(width: 2.w),
-                          Text(
-                            'Test Connection',
-                            style: AppTheme.lightTheme.textTheme.titleMedium
-                                ?.copyWith(
-                                  color: AppTheme.backgroundLight,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomIconWidget(
+                          iconName: 'sync',
+                          color: AppTheme.backgroundLight,
+                          size: 16,
+                        ),
+                        SizedBox(width: 2.w),
+                        Text(
+                          'Test Connection',
+                          style: AppTheme.lightTheme.textTheme.titleMedium
+                              ?.copyWith(
+                            color: AppTheme.backgroundLight,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ),
             ),
           ),
 

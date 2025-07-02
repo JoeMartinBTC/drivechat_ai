@@ -1,6 +1,4 @@
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 class SplashLogoWidget extends StatelessWidget {
   const SplashLogoWidget({super.key});

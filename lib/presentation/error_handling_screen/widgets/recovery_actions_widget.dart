@@ -247,17 +247,16 @@ class _RecoveryActionsWidgetState extends State<RecoveryActionsWidget> {
                   shape: BoxShape.circle,
                 ),
                 child: Center(
-                  child:
-                      isLoading
-                          ? SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: color,
-                            ),
-                          )
-                          : Icon(icon, color: color, size: 6.w),
+                  child: isLoading
+                      ? SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: color,
+                          ),
+                        )
+                      : Icon(icon, color: color, size: 6.w),
                 ),
               ),
               SizedBox(width: 4.w),

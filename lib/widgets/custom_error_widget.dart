@@ -1,6 +1,4 @@
 import '../core/app_export.dart';
-import '../routes/app_routes.dart';
-import '../theme/app_theme.dart';
 
 // custom_error_widget.dart
 

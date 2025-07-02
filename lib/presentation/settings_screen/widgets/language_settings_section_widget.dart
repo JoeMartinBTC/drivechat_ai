@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 import './settings_item_widget.dart';
 import './settings_section_widget.dart';
 
@@ -49,14 +46,13 @@ class LanguageSettingsSectionWidget extends StatelessWidget {
                     style: TextStyle(fontSize: 24),
                   ),
                   title: Text(language['name']!),
-                  trailing:
-                      settingsData['languageCode'] == language['code']
-                          ? CustomIconWidget(
-                            iconName: 'check',
-                            color: AppTheme.successLight,
-                            size: 20,
-                          )
-                          : null,
+                  trailing: settingsData['languageCode'] == language['code']
+                      ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                      : null,
                   onTap: () {
                     onSettingChanged('languageCode', language['code']);
                     Navigator.pop(context);

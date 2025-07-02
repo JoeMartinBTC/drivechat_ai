@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 class PermissionActionsWidget extends StatelessWidget {
   final VoidCallback onAllowMicrophone;
@@ -36,52 +33,49 @@ class PermissionActionsWidget extends StatelessWidget {
                 return AppTheme.lightTheme.colorScheme.primary;
               }),
             ),
-            child:
-                isLoading
-                    ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 4.w,
-                          height: 4.w,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              AppTheme.lightTheme.colorScheme.onPrimary,
-                            ),
+            child: isLoading
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 4.w,
+                        height: 4.w,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppTheme.lightTheme.colorScheme.onPrimary,
                           ),
                         ),
-                        SizedBox(width: 3.w),
-                        Text(
-                          'Berechtigung wird angefragt...',
-                          style: AppTheme.lightTheme.textTheme.labelLarge
-                              ?.copyWith(
-                                color:
-                                    AppTheme.lightTheme.colorScheme.onPrimary,
-                              ),
-                        ),
-                      ],
-                    )
-                    : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomIconWidget(
-                          iconName: 'mic',
+                      ),
+                      SizedBox(width: 3.w),
+                      Text(
+                        'Berechtigung wird angefragt...',
+                        style:
+                            AppTheme.lightTheme.textTheme.labelLarge?.copyWith(
                           color: AppTheme.lightTheme.colorScheme.onPrimary,
-                          size: 5.w,
                         ),
-                        SizedBox(width: 3.w),
-                        Text(
-                          'Mikrofon erlauben',
-                          style: AppTheme.lightTheme.textTheme.labelLarge
-                              ?.copyWith(
-                                color:
-                                    AppTheme.lightTheme.colorScheme.onPrimary,
-                                fontWeight: FontWeight.w600,
-                              ),
+                      ),
+                    ],
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomIconWidget(
+                        iconName: 'mic',
+                        color: AppTheme.lightTheme.colorScheme.onPrimary,
+                        size: 5.w,
+                      ),
+                      SizedBox(width: 3.w),
+                      Text(
+                        'Mikrofon erlauben',
+                        style:
+                            AppTheme.lightTheme.textTheme.labelLarge?.copyWith(
+                          color: AppTheme.lightTheme.colorScheme.onPrimary,
+                          fontWeight: FontWeight.w600,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
           ),
         ),
 
@@ -121,22 +115,20 @@ class PermissionActionsWidget extends StatelessWidget {
               children: [
                 CustomIconWidget(
                   iconName: 'keyboard',
-                  color:
-                      isLoading
-                          ? AppTheme.lightTheme.colorScheme.onSurfaceVariant
-                              .withValues(alpha: 0.5)
-                          : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                  color: isLoading
+                      ? AppTheme.lightTheme.colorScheme.onSurfaceVariant
+                          .withValues(alpha: 0.5)
+                      : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                   size: 5.w,
                 ),
                 SizedBox(width: 3.w),
                 Text(
                   'Nur Text verwenden',
                   style: AppTheme.lightTheme.textTheme.labelLarge?.copyWith(
-                    color:
-                        isLoading
-                            ? AppTheme.lightTheme.colorScheme.onSurfaceVariant
-                                .withValues(alpha: 0.5)
-                            : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
+                    color: isLoading
+                        ? AppTheme.lightTheme.colorScheme.onSurfaceVariant
+                            .withValues(alpha: 0.5)
+                        : AppTheme.lightTheme.colorScheme.onSurfaceVariant,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

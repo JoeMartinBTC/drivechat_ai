@@ -55,9 +55,8 @@ class _DiagnosticInfoWidgetState extends State<DiagnosticInfoWidget> {
   String _generateErrorCode() {
     final typeCode =
         widget.errorDetails.type.toString().split('.').last.toUpperCase();
-    final timestamp = DateTime.now().millisecondsSinceEpoch
-        .toString()
-        .substring(8);
+    final timestamp =
+        DateTime.now().millisecondsSinceEpoch.toString().substring(8);
     return 'ERR-$typeCode-$timestamp';
   }
 
@@ -98,8 +97,7 @@ class _DiagnosticInfoWidgetState extends State<DiagnosticInfoWidget> {
   }
 
   void _copyDiagnostics() {
-    final diagnosticsText =
-        '''
+    final diagnosticsText = '''
 Error Code: $_errorCode
 Timestamp: $_timestamp
 Error Type: ${widget.errorDetails.type.toString()}
@@ -107,7 +105,8 @@ Message: ${widget.errorDetails.message}
 Network Status: ${_getNetworkStatusText()}
 Can Retry: ${widget.errorDetails.canRetry}
 ${widget.errorDetails.technicalDetails != null ? 'Technical Details: ${widget.errorDetails.technicalDetails}' : ''}
-    '''.trim();
+    '''
+        .trim();
 
     Clipboard.setData(ClipboardData(text: diagnosticsText));
 

@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/agent_selection_widget.dart
 
@@ -74,16 +71,14 @@ class AgentSelectionWidget extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(3.w),
                   decoration: BoxDecoration(
-                    color:
-                        isSelected
-                            ? AppTheme.primaryLight.withValues(alpha: 0.1)
-                            : AppTheme.backgroundLight,
+                    color: isSelected
+                        ? AppTheme.primaryLight.withValues(alpha: 0.1)
+                        : AppTheme.backgroundLight,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color:
-                          isSelected
-                              ? AppTheme.primaryLight
-                              : AppTheme.borderLight,
+                      color: isSelected
+                          ? AppTheme.primaryLight
+                          : AppTheme.borderLight,
                       width: isSelected ? 2 : 1,
                     ),
                   ),
@@ -96,25 +91,22 @@ class AgentSelectionWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color:
-                                isSelected
-                                    ? AppTheme.primaryLight
-                                    : AppTheme.borderLight,
+                            color: isSelected
+                                ? AppTheme.primaryLight
+                                : AppTheme.borderLight,
                             width: 2,
                           ),
-                          color:
-                              isSelected
-                                  ? AppTheme.primaryLight
-                                  : Colors.transparent,
+                          color: isSelected
+                              ? AppTheme.primaryLight
+                              : Colors.transparent,
                         ),
-                        child:
-                            isSelected
-                                ? Icon(
-                                  Icons.check,
-                                  size: 12,
-                                  color: AppTheme.backgroundLight,
-                                )
-                                : null,
+                        child: isSelected
+                            ? Icon(
+                                Icons.check,
+                                size: 12,
+                                color: AppTheme.backgroundLight,
+                              )
+                            : null,
                       ),
 
                       SizedBox(width: 3.w),
@@ -130,16 +122,13 @@ class AgentSelectionWidget extends StatelessWidget {
                                   child: Text(
                                     agent['name']!,
                                     style: AppTheme
-                                        .lightTheme
-                                        .textTheme
-                                        .titleSmall
+                                        .lightTheme.textTheme.titleSmall
                                         ?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          color:
-                                              isSelected
-                                                  ? AppTheme.primaryLight
-                                                  : AppTheme.textPrimaryLight,
-                                        ),
+                                      fontWeight: FontWeight.w600,
+                                      color: isSelected
+                                          ? AppTheme.primaryLight
+                                          : AppTheme.textPrimaryLight,
+                                    ),
                                   ),
                                 ),
                                 if (agent['id'] == 'agent_1')
@@ -163,14 +152,12 @@ class AgentSelectionWidget extends StatelessWidget {
                                     child: Text(
                                       'RECOMMENDED',
                                       style: AppTheme
-                                          .lightTheme
-                                          .textTheme
-                                          .bodySmall
+                                          .lightTheme.textTheme.bodySmall
                                           ?.copyWith(
-                                            color: AppTheme.successLight,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 10,
-                                          ),
+                                        color: AppTheme.successLight,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 10,
+                                      ),
                                     ),
                                   ),
                               ],
@@ -180,8 +167,8 @@ class AgentSelectionWidget extends StatelessWidget {
                               agent['description']!,
                               style: AppTheme.lightTheme.textTheme.bodySmall
                                   ?.copyWith(
-                                    color: AppTheme.textSecondaryLight,
-                                  ),
+                                color: AppTheme.textSecondaryLight,
+                              ),
                             ),
                             SizedBox(height: 0.5.h),
                             Row(
@@ -196,13 +183,11 @@ class AgentSelectionWidget extends StatelessWidget {
                                   child: Text(
                                     agent['voice']!,
                                     style: AppTheme
-                                        .lightTheme
-                                        .textTheme
-                                        .bodySmall
+                                        .lightTheme.textTheme.bodySmall
                                         ?.copyWith(
-                                          color: AppTheme.textSecondaryLight,
-                                          fontStyle: FontStyle.italic,
-                                        ),
+                                      color: AppTheme.textSecondaryLight,
+                                      fontStyle: FontStyle.italic,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -262,7 +247,7 @@ class AgentSelectionWidget extends StatelessWidget {
                   border: Border.all(color: AppTheme.borderLight, width: 1),
                 ),
                 child: Text(
-                  '"Welcome to DriveChat AI. Today we\'ll practice highway merging techniques. Remember to check your mirrors and signal early for safe lane changes."',
+                  '"Welcome to GetMyLappen. Today we\'ll practice highway merging techniques. Remember to check your mirrors and signal early for safe lane changes."',
                   style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
                     fontStyle: FontStyle.italic,
                   ),

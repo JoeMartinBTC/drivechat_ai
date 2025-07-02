@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 import './settings_item_widget.dart';
 import './settings_section_widget.dart';
 
@@ -321,14 +318,13 @@ class NotificationSettingsSectionWidget extends StatelessWidget {
                             color: AppTheme.primaryLight,
                             size: 20,
                           ),
-                          trailing:
-                              sound == 'Standard'
-                                  ? CustomIconWidget(
-                                    iconName: 'check',
-                                    color: AppTheme.successLight,
-                                    size: 20,
-                                  )
-                                  : null,
+                          trailing: sound == 'Standard'
+                              ? CustomIconWidget(
+                                  iconName: 'check',
+                                  color: AppTheme.successLight,
+                                  size: 20,
+                                )
+                              : null,
                           onTap: () {
                             Navigator.pop(context);
                             ScaffoldMessenger.of(context).showSnackBar(

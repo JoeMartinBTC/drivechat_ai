@@ -1,11 +1,8 @@
-import 'package:sizer/sizer.dart';
 
 import '../../controllers/api_config_controller.dart';
 import '../../core/app_export.dart';
 import '../../core/utils/api_validation_utils.dart';
 import '../../models/elevenlabs_config.dart';
-import '../../theme/app_theme.dart';
-import '../../widgets/custom_icon_widget.dart';
 import './widgets/advanced_settings_widget.dart';
 import './widgets/agent_number_input_widget.dart';
 import './widgets/agent_selection_widget.dart';
@@ -371,8 +368,7 @@ class _ApiConfigurationScreenState extends State<ApiConfigurationScreen> {
               leading: IconButton(
                 icon: CustomIconWidget(
                   iconName: 'arrow_back',
-                  color:
-                      AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
+                  color: AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
                       AppTheme.textPrimaryLight,
                   size: 24,
                 ),
@@ -463,11 +459,10 @@ class _ApiConfigurationScreenState extends State<ApiConfigurationScreen> {
                                   : 'Using mock API (for testing only)',
                               style: AppTheme.lightTheme.textTheme.bodySmall
                                   ?.copyWith(
-                                    color:
-                                        _useLiveApi
-                                            ? AppTheme.successLight
-                                            : AppTheme.warningLight,
-                                  ),
+                                color: _useLiveApi
+                                    ? AppTheme.successLight
+                                    : AppTheme.warningLight,
+                              ),
                             ),
                             value: _useLiveApi,
                             onChanged: (value) {
@@ -503,13 +498,11 @@ class _ApiConfigurationScreenState extends State<ApiConfigurationScreen> {
                                     child: Text(
                                       'Mock mode uses simulated responses and doesn\'t consume API credits',
                                       style: AppTheme
-                                          .lightTheme
-                                          .textTheme
-                                          .bodySmall
+                                          .lightTheme.textTheme.bodySmall
                                           ?.copyWith(
-                                            color: AppTheme.warningLight,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                        color: AppTheme.warningLight,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -624,37 +617,32 @@ class _ApiConfigurationScreenState extends State<ApiConfigurationScreen> {
                         onPressed:
                             _hasUnsavedChanges ? _saveConfiguration : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              _hasUnsavedChanges
-                                  ? AppTheme.primaryLight
-                                  : AppTheme.textSecondaryLight,
+                          backgroundColor: _hasUnsavedChanges
+                              ? AppTheme.primaryLight
+                              : AppTheme.textSecondaryLight,
                           padding: EdgeInsets.symmetric(vertical: 2.h),
                         ),
-                        child:
-                            apiConfigController.isLoading
-                                ? SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      AppTheme.backgroundLight,
-                                    ),
+                        child: apiConfigController.isLoading
+                            ? SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppTheme.backgroundLight,
                                   ),
-                                )
-                                : Text(
-                                  _hasUnsavedChanges
-                                      ? 'Save Configuration'
-                                      : 'Configuration Saved',
-                                  style: AppTheme
-                                      .lightTheme
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                        color: AppTheme.backgroundLight,
-                                        fontWeight: FontWeight.w600,
-                                      ),
                                 ),
+                              )
+                            : Text(
+                                _hasUnsavedChanges
+                                    ? 'Save Configuration'
+                                    : 'Configuration Saved',
+                                style: AppTheme.lightTheme.textTheme.titleMedium
+                                    ?.copyWith(
+                                  color: AppTheme.backgroundLight,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                       ),
                     ),
 

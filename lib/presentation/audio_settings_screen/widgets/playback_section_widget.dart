@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 import '../../settings_screen/widgets/settings_item_widget.dart';
 import '../../settings_screen/widgets/settings_section_widget.dart';
 
@@ -228,14 +225,13 @@ class PlaybackSectionWidget extends StatelessWidget {
                 return ListTile(
                   title: Text(item['label'] as String),
                   subtitle: Text(item['description'] as String),
-                  trailing:
-                      settingsData['playbackSpeed'] == speed
-                          ? CustomIconWidget(
-                            iconName: 'check',
-                            color: AppTheme.successLight,
-                            size: 20,
-                          )
-                          : null,
+                  trailing: settingsData['playbackSpeed'] == speed
+                      ? CustomIconWidget(
+                          iconName: 'check',
+                          color: AppTheme.successLight,
+                          size: 20,
+                        )
+                      : null,
                   onTap: () {
                     onSettingChanged('playbackSpeed', speed);
                     Navigator.pop(context);
@@ -331,10 +327,9 @@ class PlaybackSectionWidget extends StatelessWidget {
             settingsData['audioDevice'] as String,
           ),
           leadingIcon: CustomIconWidget(
-            iconName:
-                settingsData['audioDevice'] == 'speaker'
-                    ? 'speaker'
-                    : settingsData['audioDevice'] == 'headphones'
+            iconName: settingsData['audioDevice'] == 'speaker'
+                ? 'speaker'
+                : settingsData['audioDevice'] == 'headphones'
                     ? 'headphones'
                     : 'bluetooth',
             color: AppTheme.primaryLight,
@@ -422,11 +417,11 @@ class PlaybackSectionWidget extends StatelessWidget {
                     children: [
                       Text(
                         'Automatisches Umschalten aktiv',
-                        style: AppTheme.lightTheme.textTheme.bodyMedium
-                            ?.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: AppTheme.primaryLight,
-                            ),
+                        style:
+                            AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: AppTheme.primaryLight,
+                        ),
                       ),
                       SizedBox(height: 0.5.h),
                       Text(

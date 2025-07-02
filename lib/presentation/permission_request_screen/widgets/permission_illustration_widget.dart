@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 class PermissionIllustrationWidget extends StatefulWidget {
   const PermissionIllustrationWidget({super.key});
@@ -13,8 +10,7 @@ class PermissionIllustrationWidget extends StatefulWidget {
 }
 
 class _PermissionIllustrationWidgetState
-    extends State<PermissionIllustrationWidget>
-    with TickerProviderStateMixin {
+    extends State<PermissionIllustrationWidget> with TickerProviderStateMixin {
   late AnimationController _pulseController;
   late AnimationController _waveController;
   late Animation<double> _pulseAnimation;
@@ -102,11 +98,10 @@ class _PermissionIllustrationWidgetState
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppTheme.lightTheme.colorScheme.primary
-                            .withValues(
-                              alpha:
-                                  (0.6 - (index * 0.2)) * (1 - animationValue),
-                            ),
+                        color:
+                            AppTheme.lightTheme.colorScheme.primary.withValues(
+                          alpha: (0.6 - (index * 0.2)) * (1 - animationValue),
+                        ),
                         width: 2,
                       ),
                     ),

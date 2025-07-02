@@ -1,8 +1,6 @@
 import 'package:flutter/services.dart';
 
 import '../../core/app_export.dart';
-import '../../theme/app_theme.dart';
-import '../../widgets/custom_icon_widget.dart';
 import './widgets/onboarding_page_widget.dart';
 import './widgets/page_indicator_widget.dart';
 
@@ -359,12 +357,11 @@ class _OnboardingFlowState extends State<OnboardingFlow>
                         width: _currentPage == index ? 24 : 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color:
-                              _currentPage == index
-                                  ? AppTheme.primaryLight
-                                  : AppTheme.primaryLight.withValues(
-                                    alpha: 0.3,
-                                  ),
+                          color: _currentPage == index
+                              ? AppTheme.primaryLight
+                              : AppTheme.primaryLight.withValues(
+                                  alpha: 0.3,
+                                ),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -388,11 +385,11 @@ class _OnboardingFlowState extends State<OnboardingFlow>
                         _currentPage == _onboardingData.length - 1
                             ? 'Loslegen'
                             : 'Weiter',
-                        style: AppTheme.lightTheme.textTheme.labelLarge
-                            ?.copyWith(
-                              color: AppTheme.backgroundLight,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        style:
+                            AppTheme.lightTheme.textTheme.labelLarge?.copyWith(
+                          color: AppTheme.backgroundLight,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),

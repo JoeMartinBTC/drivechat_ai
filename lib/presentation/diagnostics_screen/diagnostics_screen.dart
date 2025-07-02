@@ -113,40 +113,39 @@ $debugLogs''';
   void _clearAllLogs() {
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Clear All Logs'),
-            content: const Text(
-              'Are you sure you want to clear all diagnostic logs? This action cannot be undone.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  _loggingService.clearAllLogs();
-                  _debugService.clearLogs();
-
-                  Navigator.pop(context);
-                  setState(() {});
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('All logs cleared'),
-                      backgroundColor: Colors.orange,
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                ),
-                child: const Text('Clear'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Clear All Logs'),
+        content: const Text(
+          'Are you sure you want to clear all diagnostic logs? This action cannot be undone.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              _loggingService.clearAllLogs();
+              _debugService.clearLogs();
+
+              Navigator.pop(context);
+              setState(() {});
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('All logs cleared'),
+                  backgroundColor: Colors.orange,
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Clear'),
+          ),
+        ],
+      ),
     );
   }
 
@@ -164,21 +163,20 @@ $debugLogs''';
         actions: [
           IconButton(
             onPressed: _isRefreshing ? null : _refresh,
-            icon:
-                _isRefreshing
-                    ? SizedBox(
-                      width: 20.sp,
-                      height: 20.sp,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    )
-                    : CustomIconWidget(
-                      iconName: 'refresh',
+            icon: _isRefreshing
+                ? SizedBox(
+                    width: 20.sp,
+                    height: 20.sp,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
                       color: Theme.of(context).colorScheme.primary,
-                      size: 24.sp,
                     ),
+                  )
+                : CustomIconWidget(
+                    iconName: 'refresh',
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 24.sp,
+                  ),
           ),
           PopupMenuButton<String>(
             onSelected: (value) {
@@ -191,29 +189,28 @@ $debugLogs''';
                   break;
               }
             },
-            itemBuilder:
-                (context) => [
-                  const PopupMenuItem(
-                    value: 'export',
-                    child: Row(
-                      children: [
-                        Icon(Icons.download),
-                        SizedBox(width: 8),
-                        Text('Export Logs'),
-                      ],
-                    ),
-                  ),
-                  const PopupMenuItem(
-                    value: 'clear',
-                    child: Row(
-                      children: [
-                        Icon(Icons.clear_all, color: Colors.red),
-                        SizedBox(width: 8),
-                        Text('Clear Logs', style: TextStyle(color: Colors.red)),
-                      ],
-                    ),
-                  ),
-                ],
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'export',
+                child: Row(
+                  children: [
+                    Icon(Icons.download),
+                    SizedBox(width: 8),
+                    Text('Export Logs'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'clear',
+                child: Row(
+                  children: [
+                    Icon(Icons.clear_all, color: Colors.red),
+                    SizedBox(width: 8),
+                    Text('Clear Logs', style: TextStyle(color: Colors.red)),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
         bottom: TabBar(
@@ -354,10 +351,7 @@ $debugLogs''';
                 ),
               ),
               SizedBox(height: 8.sp),
-              ...(_loggingService
-                  .getCriticalErrors()
-                  .take(3)
-                  .map(
+              ...(_loggingService.getCriticalErrors().take(3).map(
                     (error) => Container(
                       margin: EdgeInsets.only(bottom: 8.sp),
                       padding: EdgeInsets.all(12.sp),
@@ -510,55 +504,54 @@ $debugLogs''';
 
     return RefreshIndicator(
       onRefresh: _refresh,
-      child:
-          recentErrors.isEmpty
-              ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomIconWidget(
-                      iconName: 'check_circle',
-                      size: 48.sp,
+      child: recentErrors.isEmpty
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomIconWidget(
+                    iconName: 'check_circle',
+                    size: 48.sp,
+                    color: Colors.green,
+                  ),
+                  SizedBox(height: 16.sp),
+                  Text(
+                    'No Errors Found',
+                    style: GoogleFonts.inter(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
                       color: Colors.green,
                     ),
-                    SizedBox(height: 16.sp),
-                    Text(
-                      'No Errors Found',
-                      style: GoogleFonts.inter(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.green,
-                      ),
+                  ),
+                  Text(
+                    'The app is running smoothly',
+                    style: GoogleFonts.inter(
+                      fontSize: 14.sp,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.7),
                     ),
-                    Text(
-                      'The app is running smoothly',
-                      style: GoogleFonts.inter(
-                        fontSize: 14.sp,
-                        color: Theme.of(
-                          context,
-                        ).colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-              : ListView.builder(
-                padding: EdgeInsets.all(16.sp),
-                itemCount: recentErrors.length,
-                itemBuilder: (context, index) {
-                  return ErrorLogCardWidget(
-                    errorLog: recentErrors[index],
-                    onRetry: () {
-                      // TODO: Implement retry logic based on error type
-                      _loggingService.logUserInteraction(
-                        'retry_error',
-                        screen: 'diagnostics',
-                        data: {'errorId': recentErrors[index]['id']},
-                      );
-                    },
-                  );
-                },
+                  ),
+                ],
               ),
+            )
+          : ListView.builder(
+              padding: EdgeInsets.all(16.sp),
+              itemCount: recentErrors.length,
+              itemBuilder: (context, index) {
+                return ErrorLogCardWidget(
+                  errorLog: recentErrors[index],
+                  onRetry: () {
+                    // TODO: Implement retry logic based on error type
+                    _loggingService.logUserInteraction(
+                      'retry_error',
+                      screen: 'diagnostics',
+                      data: {'errorId': recentErrors[index]['id']},
+                    );
+                  },
+                );
+              },
+            ),
     );
   }
 

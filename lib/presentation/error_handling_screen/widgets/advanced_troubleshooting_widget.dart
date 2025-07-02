@@ -125,7 +125,8 @@ System Information:
 
 Technical Details:
 ${widget.errorDetails.technicalDetails ?? 'No additional technical details available'}
-    '''.trim();
+    '''
+        .trim();
   }
 
   @override
@@ -334,43 +335,42 @@ ${widget.errorDetails.technicalDetails ?? 'No additional technical details avail
       childAspectRatio: 2.5,
       crossAxisSpacing: 2.w,
       mainAxisSpacing: 1.h,
-      children:
-          _mockConnectionMetrics.entries.map((entry) {
-            return Container(
-              padding: EdgeInsets.all(3.w),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade50,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade200),
+      children: _mockConnectionMetrics.entries.map((entry) {
+        return Container(
+          padding: EdgeInsets.all(3.w),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade50,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.grey.shade200),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                entry.key
+                    .replaceAllMapped(
+                      RegExp(r'([A-Z])'),
+                      (match) => ' ${match.group(1)}',
+                    )
+                    .trim(),
+                style: GoogleFonts.inter(
+                  fontSize: 11.sp,
+                  color: Colors.grey.shade600,
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    entry.key
-                        .replaceAllMapped(
-                          RegExp(r'([A-Z])'),
-                          (match) => ' ${match.group(1)}',
-                        )
-                        .trim(),
-                    style: GoogleFonts.inter(
-                      fontSize: 11.sp,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                  Text(
-                    entry.value.toString(),
-                    style: GoogleFonts.inter(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey.shade800,
-                    ),
-                  ),
-                ],
+              Text(
+                entry.value.toString(),
+                style: GoogleFonts.inter(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey.shade800,
+                ),
               ),
-            );
-          }).toList(),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 
@@ -401,10 +401,9 @@ ${widget.errorDetails.technicalDetails ?? 'No additional technical details avail
         itemCount: mockLogs.length,
         itemBuilder: (context, index) {
           final log = mockLogs[index];
-          final levelColor =
-              log['level'] == 'ERROR'
-                  ? Colors.red
-                  : log['level'] == 'WARN'
+          final levelColor = log['level'] == 'ERROR'
+              ? Colors.red
+              : log['level'] == 'WARN'
                   ? Colors.orange
                   : Colors.white;
 

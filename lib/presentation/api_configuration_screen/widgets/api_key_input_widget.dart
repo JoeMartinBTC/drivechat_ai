@@ -1,10 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
 import '../../../core/utils/api_validation_utils.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/api_key_input_widget.dart
 
@@ -95,10 +92,9 @@ class ApiKeyInputWidget extends StatelessWidget {
                 }),
             ],
             decoration: InputDecoration(
-              hintText:
-                  isVisible
-                      ? 'sk_1234 5678 9012 3456...'
-                      : '••••••••••••••••••••',
+              hintText: isVisible
+                  ? 'sk_1234 5678 9012 3456...'
+                  : '••••••••••••••••••••',
               hintStyle: TextStyle(
                 fontFamily: 'Courier New',
                 fontSize: isVisible ? 14 : 16,
@@ -121,14 +117,12 @@ class ApiKeyInputWidget extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(right: 2.w),
                       child: CustomIconWidget(
-                        iconName:
-                            _validateApiKey(controller.text) == null
-                                ? 'check_circle'
-                                : 'error',
-                        color:
-                            _validateApiKey(controller.text) == null
-                                ? AppTheme.successLight
-                                : AppTheme.errorLight,
+                        iconName: _validateApiKey(controller.text) == null
+                            ? 'check_circle'
+                            : 'error',
+                        color: _validateApiKey(controller.text) == null
+                            ? AppTheme.successLight
+                            : AppTheme.errorLight,
                         size: 20,
                       ),
                     ),
@@ -263,11 +257,11 @@ class ApiKeyInputWidget extends StatelessWidget {
                         SizedBox(width: 1.w),
                         Text(
                           'Valid format',
-                          style: AppTheme.lightTheme.textTheme.bodySmall
-                              ?.copyWith(
-                                color: AppTheme.successLight,
-                                fontWeight: FontWeight.w500,
-                              ),
+                          style:
+                              AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
+                            color: AppTheme.successLight,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),

@@ -1,5 +1,4 @@
 import '../../../core/app_export.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 class AudioControlsWidget extends StatelessWidget {
   final double volume;
@@ -94,10 +93,10 @@ class AudioControlsWidget extends StatelessWidget {
                 Text(
                   isMuted ? 'Stumm' : '${(volume * 100).round()}%',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.7),
+                      ),
                 ),
               ],
             ),
@@ -111,22 +110,20 @@ class AudioControlsWidget extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color:
-                    isMuted
-                        ? Theme.of(
-                          context,
-                        ).colorScheme.error.withValues(alpha: 0.1)
-                        : Theme.of(
-                          context,
-                        ).colorScheme.primary.withValues(alpha: 0.1),
+                color: isMuted
+                    ? Theme.of(
+                        context,
+                      ).colorScheme.error.withValues(alpha: 0.1)
+                    : Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: CustomIconWidget(
                 iconName: isMuted ? 'volume_off' : 'volume_up',
-                color:
-                    isMuted
-                        ? Theme.of(context).colorScheme.error
-                        : Theme.of(context).colorScheme.primary,
+                color: isMuted
+                    ? Theme.of(context).colorScheme.error
+                    : Theme.of(context).colorScheme.primary,
                 size: 20,
               ),
             ),

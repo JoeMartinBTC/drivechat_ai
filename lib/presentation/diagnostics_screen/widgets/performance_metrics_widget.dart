@@ -95,44 +95,43 @@ class PerformanceMetricsWidget extends StatelessWidget {
                 ).colorScheme.outline.withValues(alpha: 0.2),
               ),
             ),
-            child:
-                errorCategories.length == 1
-                    ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomIconWidget(
-                            iconName: 'pie_chart',
-                            size: 48.sp,
-                            color: Theme.of(context).colorScheme.primary,
+            child: errorCategories.length == 1
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomIconWidget(
+                          iconName: 'pie_chart',
+                          size: 48.sp,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        SizedBox(height: 8.sp),
+                        Text(
+                          errorCategories.keys.first,
+                          style: GoogleFonts.inter(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
                           ),
-                          SizedBox(height: 8.sp),
-                          Text(
-                            errorCategories.keys.first,
-                            style: GoogleFonts.inter(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
+                        ),
+                        Text(
+                          '${errorCategories.values.first} errors',
+                          style: GoogleFonts.inter(
+                            fontSize: 12.sp,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: 0.7),
                           ),
-                          Text(
-                            '${errorCategories.values.first} errors',
-                            style: GoogleFonts.inter(
-                              fontSize: 12.sp,
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.onSurface.withValues(alpha: 0.7),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                    : PieChart(
-                      PieChartData(
-                        sections: _buildPieChartSections(errorCategories),
-                        centerSpaceRadius: 40.sp,
-                        sectionsSpace: 2,
-                      ),
+                        ),
+                      ],
                     ),
+                  )
+                : PieChart(
+                    PieChartData(
+                      sections: _buildPieChartSections(errorCategories),
+                      centerSpaceRadius: 40.sp,
+                      sectionsSpace: 2,
+                    ),
+                  ),
           ),
           SizedBox(height: 16.sp),
 
@@ -140,36 +139,35 @@ class PerformanceMetricsWidget extends StatelessWidget {
           Wrap(
             spacing: 16.sp,
             runSpacing: 8.sp,
-            children:
-                errorCategories.entries.map((entry) {
-                  final color = _getCategoryColor(
-                    entry.key,
-                    errorCategories.keys.toList().indexOf(entry.key),
-                  );
-                  return Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 12.sp,
-                        height: 12.sp,
-                        decoration: BoxDecoration(
-                          color: color,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(width: 4.sp),
-                      Text(
-                        '${entry.key} (${entry.value})',
-                        style: GoogleFonts.inter(
-                          fontSize: 12.sp,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.onSurface.withValues(alpha: 0.8),
-                        ),
-                      ),
-                    ],
-                  );
-                }).toList(),
+            children: errorCategories.entries.map((entry) {
+              final color = _getCategoryColor(
+                entry.key,
+                errorCategories.keys.toList().indexOf(entry.key),
+              );
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 12.sp,
+                    height: 12.sp,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  SizedBox(width: 4.sp),
+                  Text(
+                    '${entry.key} (${entry.value})',
+                    style: GoogleFonts.inter(
+                      fontSize: 12.sp,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.8),
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
           ),
         ] else ...[
           Container(
@@ -231,66 +229,61 @@ class PerformanceMetricsWidget extends StatelessWidget {
               ).colorScheme.outline.withValues(alpha: 0.2),
             ),
           ),
-          child:
-              loggingService.performanceLogs.isEmpty
-                  ? Padding(
-                    padding: EdgeInsets.all(24.sp),
-                    child: Center(
-                      child: Text(
-                        'No performance data available',
+          child: loggingService.performanceLogs.isEmpty
+              ? Padding(
+                  padding: EdgeInsets.all(24.sp),
+                  child: Center(
+                    child: Text(
+                      'No performance data available',
+                      style: GoogleFonts.inter(
+                        fontSize: 14.sp,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withValues(alpha: 0.6),
+                      ),
+                    ),
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: loggingService.performanceLogs.length,
+                  reverse: true,
+                  itemBuilder: (context, index) {
+                    final log = loggingService.performanceLogs[
+                        loggingService.performanceLogs.length - 1 - index];
+                    final timestamp = DateTime.parse(log['timestamp']);
+
+                    return ListTile(
+                      dense: true,
+                      leading: CircleAvatar(
+                        radius: 12.sp,
+                        backgroundColor: Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.2),
+                        child: CustomIconWidget(
+                          iconName: 'timeline',
+                          size: 12.sp,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                      title: Text(
+                        '[${log['category']}] ${log['event']}',
                         style: GoogleFonts.inter(
-                          fontSize: 14.sp,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      trailing: Text(
+                        '${timestamp.hour.toString().padLeft(2, '0')}:${timestamp.minute.toString().padLeft(2, '0')}',
+                        style: GoogleFonts.inter(
+                          fontSize: 10.sp,
                           color: Theme.of(
                             context,
                           ).colorScheme.onSurface.withValues(alpha: 0.6),
                         ),
                       ),
-                    ),
-                  )
-                  : ListView.builder(
-                    itemCount: loggingService.performanceLogs.length,
-                    reverse: true,
-                    itemBuilder: (context, index) {
-                      final log =
-                          loggingService.performanceLogs[loggingService
-                                  .performanceLogs
-                                  .length -
-                              1 -
-                              index];
-                      final timestamp = DateTime.parse(log['timestamp']);
-
-                      return ListTile(
-                        dense: true,
-                        leading: CircleAvatar(
-                          radius: 12.sp,
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.primary.withValues(alpha: 0.2),
-                          child: CustomIconWidget(
-                            iconName: 'timeline',
-                            size: 12.sp,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                        title: Text(
-                          '[${log['category']}] ${log['event']}',
-                          style: GoogleFonts.inter(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        trailing: Text(
-                          '${timestamp.hour.toString().padLeft(2, '0')}:${timestamp.minute.toString().padLeft(2, '0')}',
-                          style: GoogleFonts.inter(
-                            fontSize: 10.sp,
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.onSurface.withValues(alpha: 0.6),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                    );
+                  },
+                ),
         ),
       ],
     );

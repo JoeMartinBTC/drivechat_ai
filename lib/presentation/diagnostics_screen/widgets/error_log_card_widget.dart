@@ -149,10 +149,9 @@ ${widget.errorLog['stackTrace'] != null ? 'Stack Trace: ${widget.errorLog['stack
                     Row(
                       children: [
                         CustomIconWidget(
-                          iconName:
-                              widget.errorLog['isMobile'] == true
-                                  ? 'smartphone'
-                                  : 'computer',
+                          iconName: widget.errorLog['isMobile'] == true
+                              ? 'smartphone'
+                              : 'computer',
                           size: 14.sp,
                           color: Theme.of(context).colorScheme.primary,
                         ),
@@ -254,7 +253,9 @@ ${widget.errorLog['stackTrace'] != null ? 'Stack Trace: ${widget.errorLog['stack
                                 suggestion.toString(),
                                 style: GoogleFonts.inter(
                                   fontSize: 12.sp,
-                                  color: Theme.of(context).colorScheme.onSurface
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSurface
                                       .withValues(alpha: 0.8),
                                 ),
                               ),

@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/security_settings_widget.dart
 
@@ -69,10 +66,9 @@ class SecuritySettingsWidget extends StatelessWidget {
               children: [
                 CustomIconWidget(
                   iconName: 'fingerprint',
-                  color:
-                      isBiometricEnabled
-                          ? AppTheme.successLight
-                          : AppTheme.textSecondaryLight,
+                  color: isBiometricEnabled
+                      ? AppTheme.successLight
+                      : AppTheme.textSecondaryLight,
                   size: 24,
                 ),
                 SizedBox(width: 3.w),
@@ -238,7 +234,7 @@ class SecuritySettingsWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 1.h),
                 Text(
-                  'Your API key is stored locally on your device using industry-standard encryption. DriveChat AI does not transmit, store, or have access to your ElevenLabs API key on our servers. All voice processing is handled directly between your device and ElevenLabs.',
+                  'Your API key is stored locally on your device using industry-standard encryption. GetMyLappen does not transmit, store, or have access to your ElevenLabs API key on our servers. All voice processing is handled directly between your device and ElevenLabs.',
                   style: AppTheme.lightTheme.textTheme.bodySmall?.copyWith(
                     color: AppTheme.textSecondaryLight,
                     height: 1.4,

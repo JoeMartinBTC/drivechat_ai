@@ -182,19 +182,18 @@ class _ErrorHandlingScreenState extends State<ErrorHandlingScreen>
     // For now, we'll show a dialog with network information
     showDialog(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Network Settings'),
-            content: const Text(
-              'Please check your network settings in the system settings app.',
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('Network Settings'),
+        content: const Text(
+          'Please check your network settings in the system settings app.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
           ),
+        ],
+      ),
     );
   }
 
@@ -256,21 +255,20 @@ Please describe your issue and any steps you've already tried.
       // Show instructions to user
       showDialog(
         context: context,
-        builder:
-            (context) => AlertDialog(
-              title: const Text('Contact Support'),
-              content: const Text(
-                'Diagnostic information has been copied to your clipboard. '
-                'Please email support@getmylappen.com and paste this information '
-                'along with your description of the issue.',
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('OK'),
-                ),
-              ],
+        builder: (context) => AlertDialog(
+          title: const Text('Contact Support'),
+          content: const Text(
+            'Diagnostic information has been copied to your clipboard. '
+            'Please email support@getmylappen.com and paste this information '
+            'along with your description of the issue.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
             ),
+          ],
+        ),
       );
     } catch (e) {
       // Handle clipboard error

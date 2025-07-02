@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
-import '../../theme/app_theme.dart';
-import '../../widgets/custom_icon_widget.dart';
 import './widgets/advanced_settings_widget.dart';
 import './widgets/playback_section_widget.dart';
 import './widgets/quality_section_widget.dart';
@@ -274,8 +271,7 @@ class _AudioSettingsScreenState extends State<AudioSettingsScreen> {
         leading: IconButton(
           icon: CustomIconWidget(
             iconName: 'arrow_back',
-            color:
-                AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
+            color: AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
                 AppTheme.textPrimaryLight,
             size: 24,
           ),
@@ -285,8 +281,7 @@ class _AudioSettingsScreenState extends State<AudioSettingsScreen> {
           IconButton(
             icon: CustomIconWidget(
               iconName: 'battery_info',
-              color:
-                  AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
+              color: AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
                   AppTheme.textPrimaryLight,
               size: 24,
             ),
@@ -295,8 +290,7 @@ class _AudioSettingsScreenState extends State<AudioSettingsScreen> {
           IconButton(
             icon: CustomIconWidget(
               iconName: 'restore',
-              color:
-                  AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
+              color: AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
                   AppTheme.textPrimaryLight,
               size: 24,
             ),

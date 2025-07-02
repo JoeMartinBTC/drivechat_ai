@@ -1,5 +1,4 @@
 import '../../../core/app_export.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 class VoiceRecordingWidget extends StatefulWidget {
   final bool isRecording;
@@ -85,13 +84,12 @@ class _VoiceRecordingWidgetState extends State<VoiceRecordingWidget>
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: List.generate(20, (index) {
-                    final height =
-                        (20 +
-                            (40 *
-                                (0.5 +
-                                    0.5 *
-                                        (1 + (index % 3 - 1) * 0.3) *
-                                        (0.5 + 0.5 * _waveAnimation.value))));
+                    final height = (20 +
+                        (40 *
+                            (0.5 +
+                                0.5 *
+                                    (1 + (index % 3 - 1) * 0.3) *
+                                    (0.5 + 0.5 * _waveAnimation.value))));
 
                     return Container(
                       width: 3,
@@ -99,8 +97,8 @@ class _VoiceRecordingWidgetState extends State<VoiceRecordingWidget>
                       margin: const EdgeInsets.symmetric(horizontal: 1),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.primary.withValues(
-                          alpha: 0.3 + (0.7 * _waveAnimation.value),
-                        ),
+                              alpha: 0.3 + (0.7 * _waveAnimation.value),
+                            ),
                         borderRadius: BorderRadius.circular(2),
                       ),
                     );
@@ -123,10 +121,9 @@ class _VoiceRecordingWidgetState extends State<VoiceRecordingWidget>
                   height: 80,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color:
-                        widget.isRecording
-                            ? Theme.of(context).colorScheme.error
-                            : Theme.of(context).colorScheme.primary,
+                    color: widget.isRecording
+                        ? Theme.of(context).colorScheme.error
+                        : Theme.of(context).colorScheme.primary,
                     boxShadow: [
                       BoxShadow(
                         color: (widget.isRecording
@@ -159,10 +156,10 @@ class _VoiceRecordingWidgetState extends State<VoiceRecordingWidget>
               ? 'Aufnahme läuft... Tippen zum Stoppen'
               : 'Tippen und halten zum Sprechen',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Theme.of(
-              context,
-            ).colorScheme.onSurface.withValues(alpha: 0.7),
-          ),
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.7),
+              ),
           textAlign: TextAlign.center,
         ),
 
@@ -187,9 +184,9 @@ class _VoiceRecordingWidgetState extends State<VoiceRecordingWidget>
               Text(
                 'Sprachmodus',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.w500,
-                ),
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             ],
           ),

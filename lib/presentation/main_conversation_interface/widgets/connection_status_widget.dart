@@ -63,10 +63,9 @@ class _ConnectionStatusWidgetState extends State<ConnectionStatusWidget>
             width: 12,
             height: 12,
             decoration: BoxDecoration(
-              color:
-                  widget.isConnected
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.error,
+              color: widget.isConnected
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.error,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(

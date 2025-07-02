@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
-import '../../theme/app_theme.dart';
-import '../../widgets/custom_icon_widget.dart';
 import './widgets/audio_settings_section_widget.dart';
 import './widgets/connection_settings_section_widget.dart';
 import './widgets/language_settings_section_widget.dart';
@@ -288,8 +285,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         leading: IconButton(
           icon: CustomIconWidget(
             iconName: 'arrow_back',
-            color:
-                AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
+            color: AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
                 AppTheme.textPrimaryLight,
             size: 24,
           ),
@@ -299,8 +295,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           IconButton(
             icon: CustomIconWidget(
               iconName: 'help_outline',
-              color:
-                  AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
+              color: AppTheme.lightTheme.appBarTheme.iconTheme?.color ??
                   AppTheme.textPrimaryLight,
               size: 24,
             ),
@@ -337,22 +332,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     size: 20,
                   ),
                 ),
-                suffixIcon:
-                    _searchQuery.isNotEmpty
-                        ? IconButton(
-                          icon: CustomIconWidget(
-                            iconName: 'clear',
-                            color: AppTheme.textSecondaryLight,
-                            size: 20,
-                          ),
-                          onPressed: () {
-                            _searchController.clear();
-                            setState(() {
-                              _searchQuery = '';
-                            });
-                          },
-                        )
-                        : null,
+                suffixIcon: _searchQuery.isNotEmpty
+                    ? IconButton(
+                        icon: CustomIconWidget(
+                          iconName: 'clear',
+                          color: AppTheme.textSecondaryLight,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          _searchController.clear();
+                          setState(() {
+                            _searchQuery = '';
+                          });
+                        },
+                      )
+                    : null,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(color: AppTheme.borderLight, width: 1),
@@ -384,45 +378,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
               padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children:
-                    _getFilteredSections().isEmpty
-                        ? [
-                          SizedBox(height: 10.h),
-                          Center(
-                            child: Column(
-                              children: [
-                                CustomIconWidget(
-                                  iconName: 'search_off',
+                children: _getFilteredSections().isEmpty
+                    ? [
+                        SizedBox(height: 10.h),
+                        Center(
+                          child: Column(
+                            children: [
+                              CustomIconWidget(
+                                iconName: 'search_off',
+                                color: AppTheme.textSecondaryLight,
+                                size: 48,
+                              ),
+                              SizedBox(height: 2.h),
+                              Text(
+                                'Keine Einstellungen gefunden',
+                                style: AppTheme.lightTheme.textTheme.titleMedium
+                                    ?.copyWith(
                                   color: AppTheme.textSecondaryLight,
-                                  size: 48,
                                 ),
-                                SizedBox(height: 2.h),
-                                Text(
-                                  'Keine Einstellungen gefunden',
-                                  style: AppTheme
-                                      .lightTheme
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                        color: AppTheme.textSecondaryLight,
-                                      ),
+                              ),
+                              SizedBox(height: 1.h),
+                              Text(
+                                'Versuchen Sie einen anderen Suchbegriff',
+                                style: AppTheme.lightTheme.textTheme.bodyMedium
+                                    ?.copyWith(
+                                  color: AppTheme.textSecondaryLight,
                                 ),
-                                SizedBox(height: 1.h),
-                                Text(
-                                  'Versuchen Sie einen anderen Suchbegriff',
-                                  style: AppTheme
-                                      .lightTheme
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                        color: AppTheme.textSecondaryLight,
-                                      ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ]
-                        : _getFilteredSections(),
+                        ),
+                      ]
+                    : _getFilteredSections(),
               ),
             ),
           ),

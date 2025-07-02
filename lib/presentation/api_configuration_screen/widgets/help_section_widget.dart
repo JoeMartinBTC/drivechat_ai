@@ -1,8 +1,5 @@
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../theme/app_theme.dart';
-import '../../../widgets/custom_icon_widget.dart';
 
 // lib/presentation/api_configuration_screen/widgets/help_section_widget.dart
 
@@ -109,7 +106,7 @@ class HelpSectionWidget extends StatelessWidget {
               _showInformationDialog(
                 context,
                 'Privacy & Security',
-                'DriveChat AI takes your privacy seriously:\n\n'
+                'GetMyLappen takes your privacy seriously:\n\n'
                     '• Your API key is stored securely on your device only\n'
                     '• Your agent number is stored locally and never shared\n'
                     '• Voice recordings are processed temporarily and not permanently stored\n'
@@ -129,8 +126,8 @@ class HelpSectionWidget extends StatelessWidget {
               _showInformationDialog(
                 context,
                 'Contact Support',
-                'For assistance with DriveChat AI:\n\n'
-                    'Email: support@drivechat-ai.com\n'
+                'For assistance with GetMyLappen:\n\n'
+                    'Email: support@getmylappen.com\n'
                     'Hours: Monday-Friday, 9AM-5PM CET\n\n'
                     'Please include the following in your support request:\n'
                     '• Your device model\n'

@@ -64,10 +64,9 @@ class MobileDiagnosticsWidget extends StatelessWidget {
             'Recent Mobile Errors',
             mobileDiagnostics['recentMobileErrors'].toString(),
             Icons.error_outline,
-            valueColor:
-                mobileDiagnostics['recentMobileErrors'] > 0
-                    ? Colors.red
-                    : Colors.green,
+            valueColor: mobileDiagnostics['recentMobileErrors'] > 0
+                ? Colors.red
+                : Colors.green,
           ),
 
           _buildInfoRow(
@@ -75,10 +74,9 @@ class MobileDiagnosticsWidget extends StatelessWidget {
             'Auth Errors on Mobile',
             mobileDiagnostics['authErrorsOnMobile'].toString(),
             Icons.security,
-            valueColor:
-                mobileDiagnostics['authErrorsOnMobile'] > 0
-                    ? Colors.red
-                    : Colors.green,
+            valueColor: mobileDiagnostics['authErrorsOnMobile'] > 0
+                ? Colors.red
+                : Colors.green,
           ),
 
           _buildInfoRow(
